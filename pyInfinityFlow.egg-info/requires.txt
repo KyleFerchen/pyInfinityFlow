@@ -1,0 +1,5 @@
+umap-learn>=0.5
+xgboost>=1.6
+scanpy>=1.9
+pyarrow>=9.0
+leidenalg

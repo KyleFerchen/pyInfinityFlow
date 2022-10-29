@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command Line Tools &mdash; pyInfinityFlow 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyInfinityFlow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyinfinityflow">pyInfinityFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simple">Simple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#all-arguments">All Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#required-arguments">Required Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-arguments">Optional Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyinfinityflow-list-channels">pyInfinityFlow-list_channels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyInfinityFlow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Command Line Tools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/command_line_tools.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="command-line-tools">
+<h1>Command Line Tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h1>
+<section id="pyinfinityflow">
+<h2>pyInfinityFlow<a class="headerlink" href="#pyinfinityflow" title="Permalink to this headline">¶</a></h2>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<section id="simple">
+<h4>Simple<a class="headerlink" href="#simple" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="all-arguments">
+<h4>All Arguments<a class="headerlink" href="#all-arguments" title="Permalink to this headline">¶</a></h4>
+<p>Here is an example of calling the command line program to run the pipeline specifying every argument. This is intended to be useful for quick copying and pasting of all command arguments to later remove selected and update values of modified arguments. The settings of the arguments here attempt to replicate how the original author’s processed their published<a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><sup>1</sup></a> mouse lung <a class="reference external" href="https://flowrepository.org/id/FR-FCM-Z2LP">dataset</a> using the BioLegend Murine LEGENDScreen kit (Eg. use 50% of all measured events from InfinityMarker files and pool 10,000 cells from each InfinityMarker final into the final InfinityFlow object):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pyInfinityFlow --data_dir &quot;pyInfinityFlow/data/fcs_files/&quot; \</span>
+<span class="go">                --outdir &quot;pyInfinityFlow/output_dir/&quot; \</span>
+<span class="go">                --backbone_annotation &quot;pyInfinityFlow/data/small_test_dataset_backbone_anno.csv&quot; \</span>
+<span class="go">                --infinity_marker_annotation &quot;pyInfinityFlow/data/small_test_dataset_infinity_marker_anno.csv&quot; \</span>
+<span class="go">                --random_state 7 \</span>
+<span class="go">                --use_logicle_scaling True \</span>
+<span class="go">                --normalization_method &quot;zscore&quot; \</span>
+<span class="go">                --n_events_train 0 \</span>
+<span class="go">                --n_events_validate 0 \</span>
+<span class="go">                --ratio_for_validation 0.5 \</span>
+<span class="go">                --separate_backbone_reference None \</span>
+<span class="go">                --n_events_combine 10000 \</span>
+<span class="go">                --n_final 0 \</span>
+<span class="go">                --add_umap True \</span>
+<span class="go">                --find_clusters True \</span>
+<span class="go">                --find_markers True \</span>
+<span class="go">                --make_feature_plots True \</span>
+<span class="go">                --use_pca True \</span>
+<span class="go">                --n_pc 15 \</span>
+<span class="go">                --n_pc_plot_qc 50 \</span>
+<span class="go">                --save_h5ad True \</span>
+<span class="go">                --save_feather True \</span>
+<span class="go">                --save_file_handler True \</span>
+<span class="go">                --save_regression_models True \</span>
+<span class="go">                --verbosity 1 \</span>
+<span class="go">                --n_cores 12</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="required-arguments">
+<h3>Required Arguments<a class="headerlink" href="#required-arguments" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--data_dir</span></code> <em><strong>(str)</strong></em>: Directory in which the .fcs files are contained. Each InfinityMarker must be associated with an .fcs file in this directory. Each .fcs file must have the channel names present in the backbone_annotation file. It is expected that the values of the .fcs data are already compensated and don’t require adjustment with spillover. For example, the “export compensated values” feature from FlowJo could be used to export compensated Flow Cytometry data.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--outdir</span></code> <em><strong>(str)</strong></em>: Directory in which to save the outputs.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--backbone_annotation</span></code> <em><strong>(str)</strong></em>: Path to the backbone annotation file. It can be either a CSV (.csv) or TSV (.tsv or .txt) file with a header that annotates the column names. Each subsequent line annotates a backbone channel for the regression models, which will be used as predictors for the targets (InfinityMarkers). For each backbone channel, the following columns are annotated:</p>
+<ol class="arabic simple">
+<li><p><strong>Reference_Backbone:</strong> the name of the backbone channel as it appears in the <code class="docutils literal notranslate"><span class="pre">--separate_backbone_reference</span></code> file (if a separate reference is used) or the InfinityMarker files if <code class="docutils literal notranslate"><span class="pre">--n_events_combine</span></code> is used to pool events from InfinityMarkers into a final InfinityFlow object</p></li>
+<li><p><strong>Query_Backbone:</strong> the name of the backbone channel as it is written in the InfinityMarker files (if the channel name of backbone parameters is different between InfinityMarker files, the pipeline must be run multiple times for each backbone channel layout)</p></li>
+<li><p><strong>Final_Name:</strong> the desired name parameter in the final InfinityFlow object</p></li>
+</ol>
+<p><em>It is recommended to build this file in Excel and export as a .csv file. Here is an example of the structure of a “backbone_annotation” file:</em></p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Reference_Backbone</p></th>
+<th class="head"><p>Query_Backbone</p></th>
+<th class="head"><p>Final_Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><font size="1">FJComp-APC-A</font></p></td>
+<td><p><font size="1">FJComp-APC-A</font></p></td>
+<td><p><font size="1">CD69-CD301b</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">FJComp-AlexaFluor700-A</font></p></td>
+<td><p><font size="1">FJComp-AlexaFluor700-A</font></p></td>
+<td><p><font size="1">MHCII</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">FJComp-BUV395-A</font></p></td>
+<td><p><font size="1">FJComp-BUV395-A</font></p></td>
+<td><p><font size="1">CD4</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">FJComp-BUV737-A</font></p></td>
+<td><p><font size="1">FJComp-BUV737-A</font></p></td>
+<td><p><font size="1">CD44</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">FJComp-BV421-A</font></p></td>
+<td><p><font size="1">FJComp-BV421-A</font></p></td>
+<td><p><font size="1">CD8</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">FJComp-BV510-A</font></p></td>
+<td><p><font size="1">FJComp-BV510-A</font></p></td>
+<td><p><font size="1">CD11c</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">FJComp-BV605-A</font></p></td>
+<td><p><font size="1">FJComp-BV605-A</font></p></td>
+<td><p><font size="1">CD11b</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">FJComp-BV650-A</font></p></td>
+<td><p><font size="1">FJComp-BV650-A</font></p></td>
+<td><p><font size="1">F480</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">FJComp-BV711-A</font></p></td>
+<td><p><font size="1">FJComp-BV711-A</font></p></td>
+<td><p><font size="1">Ly6C</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">FJComp-BV786-A</font></p></td>
+<td><p><font size="1">FJComp-BV786-A</font></p></td>
+<td><p><font size="1">Lineage</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">FJComp-GFP-A</font></p></td>
+<td><p><font size="1">FJComp-GFP-A</font></p></td>
+<td><p><font size="1">CD45a488</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">FJComp-PE-Cy7(yg)-A</font></p></td>
+<td><p><font size="1">FJComp-PE-Cy7(yg)-A</font></p></td>
+<td><p><font size="1">CD24</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">FJComp-PerCP-Cy5-5-A</font></p></td>
+<td><p><font size="1">FJComp-PerCP-Cy5-5-A</font></p></td>
+<td><p><font size="1">CD103</font></p></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--infinity_marker_annotation</span></code> <em><strong>(str)</strong></em>: The path to the file which annotates each InfinityMarker. It can be either a CSV (.csv) or TSV (.tsv or .txt) file with a header that annotates the column names. Each subsequent line of the file annotates an InfinityMarker with the following columns:</p>
+<ol class="arabic simple">
+<li><p><strong>File:</strong> the name of the file as it is saved in the <code class="docutils literal notranslate"><span class="pre">--data_dir</span></code></p></li>
+<li><p><strong>Channel:</strong> the name of the channel, as it is written in the .fcs File</p></li>
+<li><p><strong>Name:</strong> the desired name to give to the channel in the final InfinityFlow object (should be unique)</p></li>
+<li><p><strong>Isotype:</strong> <em><strong>(OPTIONAL)</strong></em> the InfinityMarker that serves as the isotype for the given InfinityMarker (must match one of the <strong>other</strong> Name values in the third column)</p></li>
+</ol>
+<p><em>It is recommended to build this file in Excel and export as a .csv file. Here is an example of the structure of an “infinity_marker_annotation” file:</em></p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Channel</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Isotype<br /><em>(Optional)</em></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><font size="1">backbone_Plate1_Specimen_001_A11_A11_011_target_CD11b.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD11b</font></p></td>
+<td><p><font size="1">rIgG2b</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate1_Specimen_001_A12_A12_012_target_CD11c.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD11c</font></p></td>
+<td><p><font size="1">AHIgG</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">backbone_Plate1_Specimen_001_B11_B11_023_target_CD27.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD27</font></p></td>
+<td><p><font size="1">AHIgG</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate1_Specimen_001_B2_B02_014_target_CD16-32.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD16-32</font></p></td>
+<td><p><font size="1">rIgG2a</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">backbone_Plate1_Specimen_001_D2_D02_038_target_CD45R-B220.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD45R-B220</font></p></td>
+<td><p><font size="1">rIgG2a</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate1_Specimen_001_E12_E12_060_target_CD71.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD71</font></p></td>
+<td><p><font size="1">rIgG2a</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">backbone_Plate1_Specimen_001_E2_E02_050_target_CD55.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD55</font></p></td>
+<td><p><font size="1">AHIgG</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate1_Specimen_001_G10_G10_082_target_CD117 (c-kit).fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">CD117</font></p></td>
+<td><p><font size="1">rIgG2b</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">backbone_Plate3_Specimen_001_B3_B03_015_target_Ly-6C.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">Ly-6C</font></p></td>
+<td><p><font size="1">rIgG2c</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate3_Specimen_001_B5_B05_017_target_Ly-6G.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">Ly-6G</font></p></td>
+<td><p><font size="1">rIgG2a</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">backbone_Plate3_Specimen_001_F11_F11_071_target_Isotype_rIgG2a.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">rIgG2a</font></p></td>
+<td><p><font size="1">rIgG2a</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate3_Specimen_001_F12_F12_072_target_Isotype_rIgG2b.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">rIgG2b</font></p></td>
+<td><p><font size="1">rIgG2b</font></p></td>
+</tr>
+<tr class="row-even"><td><p><font size="1">backbone_Plate3_Specimen_001_G1_G01_073_target_Isotype_rIgG2c.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">rIgG2c</font></p></td>
+<td><p><font size="1">rIgG2c</font></p></td>
+</tr>
+<tr class="row-odd"><td><p><font size="1">backbone_Plate3_Specimen_001_F4_F04_064_target_Isotype_AHIgG.fcs</font></p></td>
+<td><p><font size="1">FJComp-PE(yg)-A</font></p></td>
+<td><p><font size="1">AHIgG</font></p></td>
+<td><p><font size="1">AHIgG</font></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="optional-arguments">
+<h3>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--random_state</span></code> <em><strong>(int|None)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">None</span></code>):</strong> Integer to specify the random_state of sampling, regression, and UMAP to make results more reproducible.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--use_logicle_scaling</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">True</span></code>)</strong>: Whether or not to apply logicle scaling to features that are typically fluorescence channels in Flow Cytometry and not common linear features (Eg. FSC-A, SSC-A, …)</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--normalization_method</span></code> <em><strong>(“zscore”|None)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">&quot;zscore&quot;</span></code>)</strong>: Method used for normalizing backbone feature values before regression in an effort to reduce sample to sample batch effects.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_events_train</span></code> <em><strong>(int)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">0</span></code>)</strong>: Integer to specify the number events to use for training. <code class="docutils literal notranslate"><span class="pre">0</span></code> is a special case in which all events from the file will be used, in which case, <code class="docutils literal notranslate"><span class="pre">--n_events_validate</span></code> must also be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">--ratio_for_validation</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">0</span></code> and less than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. The sum of <code class="docutils literal notranslate"><span class="pre">--n_events_train</span></code> and <code class="docutils literal notranslate"><span class="pre">--n_events_validate</span></code> must not exceed the number of events in any of the InfinityMarker .fcs files annotated in the <code class="docutils literal notranslate"><span class="pre">--infinity_marker_annotation</span></code> file.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_events_validate</span></code> <em><strong>(int)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">0</span></code>)</strong>: Integer to specify the number events to use for validation. <code class="docutils literal notranslate"><span class="pre">0</span></code> is a special case in which all events from the file will be used, in which case, <code class="docutils literal notranslate"><span class="pre">--n_events_train</span></code> must also be set to <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">--ratio_for_validation</span></code> must be greater than <code class="docutils literal notranslate"><span class="pre">0</span></code> and less than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. The sum of <code class="docutils literal notranslate"><span class="pre">--n_events_train</span></code> and <code class="docutils literal notranslate"><span class="pre">--n_events_validate</span></code> must not exceed the number of events in any of the InfinityMarker .fcs files annotated in the <code class="docutils literal notranslate"><span class="pre">--infinity_marker_annotation</span></code> file.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--ratio_for_validation</span></code> <em><strong>(0 &lt; float &lt; 1)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">0.2</span></code>)</strong>: If <code class="docutils literal notranslate"><span class="pre">--n_events_train</span></code> and <code class="docutils literal notranslate"><span class="pre">--n_events_validate</span></code> are both 0, then all of the events from the fcs file will be used and this argument will will specify what percentage of the dataset should be used for validation and the remainder will be used for training.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--separate_backbone_reference</span></code> <em><strong>(str | None)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">None</span></code>)</strong>: The .fcs file passed as a file path string. This can be used as an alternative to <code class="docutils literal notranslate"><span class="pre">--n_events_combine</span></code>. The regression will then be applied to the events in this file. Each of the Infinity Markers specified in the infinity_marker_annotation file and the original channel values for this <code class="docutils literal notranslate"><span class="pre">--separate_backbone_reference</span></code> will be in the final output.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_events_combine</span></code> <em><strong>(int|None)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">None</span></code>)</strong>: As an alternative to using a separate, external, reference .fcs file, the <code class="docutils literal notranslate"><span class="pre">--n_events_combine</span></code> argument can be used to pool events from the InfinityMarker input .fcs files specified in the <code class="docutils literal notranslate"><span class="pre">--infinity_marker_annotation</span></code> file to sample events for the final InfinityFlow object. The <code class="docutils literal notranslate"><span class="pre">--random_state</span></code> argument will set the seed for this sampling. The resulting InfinityFlow object will be made up of an even sample of <code class="docutils literal notranslate"><span class="pre">--n_events_combine</span></code> from each unique InfinityMarker file. <code class="docutils literal notranslate"><span class="pre">0</span></code> is a special case in which all events from the InfinityMarker files will be pooled together.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_final</span></code> <em><strong>(int)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">0</span></code>)</strong>: Specifies the number of events to include in the final InfinityFlow object. This will either sample from the <code class="docutils literal notranslate"><span class="pre">--separate_backbone_reference</span></code> file (if not set to None), in which case the value needs to be &lt;= the number of events in that file; or from the pooled cells specified by <code class="docutils literal notranslate"><span class="pre">--n_events_combine</span></code>, in which case it needs to be less than the sum of the pooled events.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--add_umap</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify if UMAP dimensionality reduction should be carried out on the final InfinityFlow object to reduce to 2 dimensions for visualization.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--find_clusters</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify clustering should be done using Leiden clustering implemented through the Scanpy package.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--find_markers</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify if MarkerFinder should be applied to find optimal markers for clusters. <code class="docutils literal notranslate"><span class="pre">--find_clusters</span></code> must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to use this feature.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--make_feature_plots</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify if each feature in the final InfinityFlow object should be plotted over the 2D UMAP embedding.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--use_pca</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">True</span></code>)</strong>: Boolean to specify if principal component ananlysis should be used to reduce the feature space prior to UMAP and clustering. This is suggested to save computation time.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_pc</span></code> <em><strong>(int)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">15</span></code>)</strong>: Integer to specify the number principal components to use for UMAP and clustering. It is recommended to look at the PC-elbo curve in the outputs to refine the optimal number of principal components to use. This value must be less than the total number of features in the final InfinityFlow object (InfinityMarkers + backbone channels) defined in the <code class="docutils literal notranslate"><span class="pre">--infinity_marker_annotation</span></code> file and <code class="docutils literal notranslate"><span class="pre">--backbone_annotation</span></code> file.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_pc_plot_qc</span></code> <em><strong>(int)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">50</span></code>)</strong>: Integer to specify the number principal components to plot in the elbo curve. Helpful for estimating the number of principal components to use downstream.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--save_h5ad</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify if the final InfinityFlow object should be saved as an h5ad file. Useful for quick loading of the data into a Python anndata.AnnData object for downstream analyses with Scanpy.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--save_feather</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify if the final InfinityFlow object should be saved as a DataFrame in a feather file. Useful for quick loading of the data into a Python Pandas DataFrame.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--save_file_handler</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify whether or not to save the intermediate pyInfinityFlow.file_handler object, which stores data on how each of the InfinityMarker .fcs files were processed.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--save_regression_models</span></code> <em><strong>(True|False)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">False</span></code>)</strong>: Boolean to specify whether or not to save the intermediate pyInfinityFlow.regression_models object, which stores the regression models and validation metrics for each InfinityMarker feature.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--verbosity</span></code> <em><strong>(0|1|2|3)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">1</span></code>)</strong>: The level of verbosity with which to write to std-out. <code class="docutils literal notranslate"><span class="pre">0</span></code> = no print statements, to <code class="docutils literal notranslate"><span class="pre">3</span></code> = all debug print statements.</p>
+<hr />
+<p><code class="docutils literal notranslate"><span class="pre">--n_cores</span></code> <em><strong>(int)</strong></em> <strong>(Default=<code class="docutils literal notranslate"><span class="pre">1</span></code>)</strong>: The number of cores to use, which can increase the speed of regression fitting, UMAP dimensionality reduction, and Leiden clustering.</p>
+</section>
+<section id="outputs">
+<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
+<p>The outputs of the pipeline are written to the path specified by the <code class="docutils literal notranslate"><span class="pre">--outdir</span></code> argument in the following tree structure:</p>
+<hr class="docutils" />
+</section>
+</section>
+<hr class="docutils" />
+<section id="pyinfinityflow-list-channels">
+<h2>pyInfinityFlow-list_channels<a class="headerlink" href="#pyinfinityflow-list-channels" title="Permalink to this headline">¶</a></h2>
+<p>This command line tool will list out the existing channels in a given FCS file.</p>
+<p>This is useful for building the InfinityMarker and Backbone annotation files, so that you can use the correct format and spelling for the name of a given channel.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pyInfinityFlow-list_channels --fcs_file &quot;&quot; \</span>
+<span class="go">    --add_user_defined_names</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kyle Ferchen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

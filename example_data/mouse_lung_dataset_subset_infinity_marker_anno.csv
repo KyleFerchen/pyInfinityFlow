@@ -1,0 +1,16 @@
+File,Channel,Name,Isotype
+backbone_Plate2_Specimen_001_G1_G01_073_target_33D1.fcs,FJComp-PE(yg)-A,33D1,Isotype_rIgG2b
+backbone_Plate2_Specimen_001_F7_F07_067_target_Allergin-1.fcs,FJComp-PE(yg)-A,Allergin-1,Isotype_mIgG1
+backbone_Plate2_Specimen_001_F8_F08_068_target_B7-H4.fcs,FJComp-PE(yg)-A,B7-H4,Isotype_AHIgG
+backbone_Plate1_Specimen_001_A2_A02_002_target_CD1.fcs,FJComp-PE(yg)-A,CD1d,Isotype_rIgG2b
+backbone_Plate1_Specimen_001_G4_G04_076_target_CD103.fcs,FJComp-PE(yg)-A,CD103,Isotype_AHIgG
+backbone_Plate1_Specimen_001_G5_G05_077_target_CD105.fcs,FJComp-PE(yg)-A,CD105,Isotype_rIgG2a
+backbone_Plate1_Specimen_001_G6_G06_078_target_CD106.fcs,FJComp-PE(yg)-A,CD106,Isotype_rIgG2a
+backbone_Plate1_Specimen_001_G7_G07_079_target_CD107a (Lamp-1).fcs,FJComp-PE(yg)-A,CD107a (Lamp-1),Isotype_rIgG2a
+backbone_Plate1_Specimen_001_G8_G08_080_target_CD107b (Mac-3).fcs,FJComp-PE(yg)-A,CD107b (Mac-3),Isotype_rIgG1
+backbone_Plate1_Specimen_001_G9_G09_081_target_CD115.fcs,FJComp-PE(yg)-A,CD115,Isotype_rIgG2a
+backbone_Plate3_Specimen_001_F12_F12_072_target_Isotype_rIgG2b.fcs,FJComp-PE(yg)-A,Isotype_rIgG2b,Isotype_rIgG2b
+backbone_Plate3_Specimen_001_F6_F06_066_target_Isotype_mIgG1.fcs,FJComp-PE(yg)-A,Isotype_mIgG1,Isotype_mIgG1
+backbone_Plate3_Specimen_001_F4_F04_064_target_Isotype_AHIgG.fcs,FJComp-PE(yg)-A,Isotype_AHIgG,Isotype_AHIgG
+backbone_Plate3_Specimen_001_F11_F11_071_target_Isotype_rIgG2a.fcs,FJComp-PE(yg)-A,Isotype_rIgG2a,Isotype_rIgG2a
+backbone_Plate3_Specimen_001_F10_F10_070_target_Isotype_rIgG1.fcs,FJComp-PE(yg)-A,Isotype_rIgG1,Isotype_rIgG1

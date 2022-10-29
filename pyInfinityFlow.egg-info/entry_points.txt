@@ -1,0 +1,3 @@
+[console_scripts]
+pyInfinityFlow = pyInfinityFlow.pyInfinityFlow:main
+pyInfinityFlow-list_channels = pyInfinityFlow.pyInfinityFlow_list_channels:main

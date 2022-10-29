@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: pyInfinityFlow
+Version: 0.1
+Summary: Impute Flow Cytometry values between overlapping panels with XGBoost regression.
+Home-page: http://github.com/
+Author: Kyle Ferchen
+Author-email: Kyle Ferchen <ferchenkyle@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/
+Project-URL: Bug Tracker, https://github.com/
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# pyInfinityFlow
+
+**pyInfinityFlow** is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression. It is an adaptation of the [original implementation in R](https://github.com/ebecht/infinityFlow) [<sup>1</sup>](https://www.science.org/doi/full/10.1126/sciadv.abg0505) with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline. 
+
+The package includes tools to read and write FCS files, following the FCS3.1 file standard
+
+Downstream analyses
+
+
+## Graphical Summary
+![graphical summary of pyinfinityflow workflow](images/graphical_summary.png "Graphical Summary")
+
+## Recommended Installation
+
+## Quickstart
+
+```console
+
+```
+
+## Selected References
+[<font size="2"><sup>1</sup> Becht, E., Tolstrup, D., Dutertre, C. A., Morawski, P. A., Campbell, D. J., Ginhoux, F., ... & Headley, M. B. (2021). High-throughput single-cell quantification of hundreds of proteins using conventional flow cytometry and machine learning. Science advances, 7(39), eabg0505. </font>](https://www.science.org/doi/full/10.1126/sciadv.abg0505)

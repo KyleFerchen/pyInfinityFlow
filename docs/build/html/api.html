@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API &mdash; pyInfinityFlow 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Command Line Tools" href="command_line_tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyInfinityFlow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#infinityflow-utilities">InfinityFlow_Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#infinityflow-utilities-classes">InfinityFlow_Utilities: Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#infinityflow-utilities-general-tools">InfinityFlow_Utilities: General Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#infinityflow-utilities-analysis-pipeline-functions">InfinityFlow_Utilities: Analysis Pipeline Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#transformations">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fcs-io">fcs_io</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fcsfileobject-class">FCSFileObject Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fcs-io-functions">fcs_io: Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting-utilities">Plotting_Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyInfinityFlow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>The pyInfinityFlow API is designed to give the user more control over what parameters are used in the InfinityFlow pipeline. It also allows for any FCS file to be processed with any step of the pipeline.</p>
+<section id="infinityflow-utilities">
+<h2>InfinityFlow_Utilities<a class="headerlink" href="#infinityflow-utilities" title="Permalink to this headline">¶</a></h2>
+<section id="infinityflow-utilities-classes">
+<h3>InfinityFlow_Utilities: Classes<a class="headerlink" href="#infinityflow-utilities-classes" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">InfinityFlowFileHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordered_reference_backbone</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to specify how to handle InfinityMarker files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ordered_reference_backbone</strong> (<em>numpy.Array</em><em>[</em><em>str</em><em>]</em>) – Array of backbone channel names</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.list_infinity_markers">
+<span class="sig-name descname"><span class="pre">list_infinity_markers</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.list_infinity_markers" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of the InfinityMarker names that the object can handle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.handles">
+<span class="sig-name descname"><span class="pre">handles</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary with a key for every InfinityMarker. Each key stores a
+dictionary with the following values to specify how to handle the given
+InfinityMarker:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[“name”]: (str) InfinityMarker name</p></li>
+<li><p>[“file_name”]: (str) .fcs file name for the InfinityMarker</p></li>
+<li><p>[“directory”]: (str) path to the directory where the .fcs file is saved</p></li>
+<li><p>[“reference_backbone_channels”]: (list[str]) list of the channel             names to use for the backbone in the reference .fcs file (the events             used for prediction)</p></li>
+<li><p>[“backbone_channels”]: (list[str]) list of the channel names to             use for the backbone in the reference .fcs file (the events used             for XGBoost regression model fitting)</p></li>
+<li><p>[“prediction_channel”]: (str) channel name of the InfinityMarker,             the channel name to predict</p></li>
+<li><p>[“train_indices”]: (numpy.Array[int]) indices of the InfinityMarker             .fcs file to use for fitting</p></li>
+<li><p>[“test_indices”]: (numpy.Array[int]) indices of the InfinityMarker             .fcs file to use for validation</p></li>
+<li><p>[“pool_indices”]: (numpy.Array[int]) indices of the InfinityMarker             .fcs file to use for pooling into the reference to use</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{dicts}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.use_isotype_controls">
+<span class="sig-name descname"><span class="pre">use_isotype_controls</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.use_isotype_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, pipeline functions will require Isotype controls</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.isotype_control_names">
+<span class="sig-name descname"><span class="pre">isotype_control_names</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.isotype_control_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of InfinityMarker names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>numpy.Array[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.ordered_reference_backbone">
+<span class="sig-name descname"><span class="pre">ordered_reference_backbone</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.ordered_reference_backbone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of backbone channel names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>numpy.Array[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.add_handle">
+<span class="sig-name descname"><span class="pre">add_handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_backbone_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backbone_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_indices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler.add_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new InfinityMarker handle to the InfinityFlowFileHandler</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the InfinityMarker (Required)</p></li>
+<li><p><strong>file_name</strong> (<em>str</em>) – The .fcs file name for the InfinityMarker (Required)</p></li>
+<li><p><strong>directory</strong> (<em>str</em>) – The path to the directory where the .fcs file is saved (Required)</p></li>
+<li><p><strong>reference_backbone_channels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of the channel names to use for the backbone in the reference             .fcs file (the events used for prediction)</p></li>
+<li><p><strong>backbone_channels</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – list of the channel names to use for the backbone in the reference             .fcs file (the events used for XGBoost regression model fitting)</p></li>
+<li><p><strong>prediction_channel</strong> (<em>str</em>) – The channel name of the InfinityMarker, the channel name to predict</p></li>
+<li><p><strong>train_indices</strong> (<em>numpy.Array</em><em>[</em><em>int</em><em>]</em>) – The indices of the InfinityMarker .fcs file to use for fitting</p></li>
+<li><p><strong>test_indices</strong> (<em>numpy.Array</em><em>[</em><em>int</em><em>]</em>) – The indices of the InfinityMarker .fcs file to use for validation</p></li>
+<li><p><strong>pool_indices</strong> (<em>numpy.Array</em><em>[</em><em>int</em><em>]</em>) – The indices of the InfinityMarker .fcs file to use for pooling into             the reference to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Adds the given InfinityMarker handle to InfinityFlowFileHandler,             where handles is a dictionary, and each entry, named by the             InfinityMarker name is a dictionary with the following keys:</dt><dd><ul class="simple">
+<li><p>[“name”]</p></li>
+<li><p>[“file_name”]</p></li>
+<li><p>[“directory”]</p></li>
+<li><p>[“reference_backbone_channels”]</p></li>
+<li><p>[“backbone_channels”]</p></li>
+<li><p>[“prediction_channel”]</p></li>
+<li><p>[“train_indices”]</p></li>
+<li><p>[“test_indices”]</p></li>
+<li><p>[“pool_indices”]</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">CombinedRegressionModels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordered_training_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_annotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinity_markers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regression_models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter_annotations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinity_channels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to store XGBoost regression models, the settings used to fit the
+model, and the validation metrics from testing.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.ordered_training_channels">
+<span class="sig-name descname"><span class="pre">ordered_training_channels</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.ordered_training_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The features used to train each of the regression models</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>numpy.Array[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.var_annotations">
+<span class="sig-name descname"><span class="pre">var_annotations</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.var_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>The feature parameters for the training features of backbone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.infinity_markers">
+<span class="sig-name descname"><span class="pre">infinity_markers</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.infinity_markers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The response variables the regression models can predict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>numpy.Array[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.regression_models">
+<span class="sig-name descname"><span class="pre">regression_models</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.regression_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of response variable to regression model for prediction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{InfinityMarker: xgboost.XGBRegressor}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.parameter_annotations">
+<span class="sig-name descname"><span class="pre">parameter_annotations</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.parameter_annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of Series to specify the feature parameter (was logicle         applied to the response varialble)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{InfinityMarker: Series}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.infinity_channels">
+<span class="sig-name descname"><span class="pre">infinity_channels</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.infinity_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>The channel name for the InfinityMarker (“Response Variable”)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{InfinityMarker: str}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.validation_metrics">
+<span class="sig-name descname"><span class="pre">validation_metrics</span></span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels.validation_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide validation metrics as an object with each InfinityMarker as a key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{InfinityMarker: dict}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="infinityflow-utilities-general-tools">
+<h3>InfinityFlow_Utilities: General Tools<a class="headerlink" href="#infinityflow-utilities-general-tools" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.read_annotation_table">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">read_annotation_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.read_annotation_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read in an annotation file. Annotation files are used to dictate how to
+carry out the regression models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<em>str</em>) – The path to the file containing the annotation information. (Should be
+either comma separated (.csv) or tab separated (.tsv or .txt))
+(Required)</p></li>
+<li><p><strong>use_raw_feature_names</strong> (<em>bool</em>) – Optional argument. If True, only use the raw feature names from
+input_anndata.var.index. If False, add the “name” values for the
+features in input_anndata.var.index, formatted as &lt;index&gt;:&lt;name&gt;.
+(Default: True)</p></li>
+<li><p><strong>add_index_names</strong> (<em>bool</em>) – Optional argument. If True, will add the input_anndata.obs.index as the
+index of the returned DataFrame. If False, the index will simply be the
+integers from range(len(input_anndata.obs.shape[0]))</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of the annotation table</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.anndata_to_df">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">anndata_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_anndata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_raw_feature_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_index_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.anndata_to_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to quickly convert an AnnData object containing pyInfinityFlow
+formatted flow cytometry data to a pandas DataFrame object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – AnnData object for which to generate a DataFrame (Required)</p></li>
+<li><p><strong>use_raw_feature_names</strong> (<em>bool</em>) – Optional argument. If True, only use the raw feature names from
+input_anndata.var.index. If False, add the “name” values for the
+features in input_anndata.var.index, formatted as &lt;index&gt;:&lt;name&gt;.
+(Default: True)</p></li>
+<li><p><strong>add_index_names</strong> (<em>bool</em>) – Optional argument. If True, will add the input_anndata.obs.index as the
+index of the returned DataFrame. If False, the index will simply be the
+integers from range(len(input_anndata.obs.shape[0]))</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of the AnnData object’s X attribute</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.marker_finder">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">marker_finder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.marker_finder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to find which features in input_df correspond best to which groups
+annotating the observations in input_df. The function will perform a
+Pearson correlation of the input_df feature values to an “idealized”
+group specific expression vector, where each observation in a given group
+is set to a value of 1, and the observations in other groups are set to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_df</strong> (<em>pandas.DataFrame</em>) – DataFrame with observations as index and features as columns (Required)</p></li>
+<li><p><strong>groups</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List-like of specified groups corresponding to observations from the
+input_df. The order of groups should match the order in input_df.index
+(Required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of the Pearson correlation test results. Each feature is
+assigned the cluster for which the test resulted in the highest Pearson
+correlation coefficient. The columns of the DataFrame will be
+[“marker”, “top_cluster”, “pearson_r”, “p_value”]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.read_fcs_into_anndata">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">read_fcs_into_anndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcs_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.read_fcs_into_anndata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads an .fcs file into an AnnData object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcs_file_path</strong> (<em>str</em>) – Path to the .fcs file (Required)</p></li>
+<li><p><strong>obs_prefix</strong> (<em>str</em>) – String to append to the index values of the output
+anndata.AnnData.obs.index (Default=””)</p></li>
+<li><p><strong>batch_key</strong> (<em>str</em>) – If len(batch_key) &gt; 0, this str will be added as a value to a “batch”
+feature in the returned AnnData.obs Data.Frame (Default=””)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An AnnData object with the DATA segment of the .fcs file saved to the X
+attribute.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>anndata.AnnData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.write_anndata_to_fcs">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">write_anndata_to_fcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_anndata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fcs_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_umap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.write_anndata_to_fcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a given pyInfinityFlow structured AnnData object to an .fcs file
+according to the FCS3.1 file standard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – The pyInfinityFlow formatted AnnData object to save to an .fcs file
+(Required)</p></li>
+<li><p><strong>fcs_file_path</strong> (<em>str</em>) – The path to which the .fcs file should be written. (Required)</p></li>
+<li><p><strong>add_umap</strong> (<em>bool</em>) – Specifies whether the 2D-UMAP coordinates should be written to the DATA
+segment of the .fcs file. This expects the features “umap-x” and
+“umap-y” are in the input_anndata.obs.columns. (Default=False)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – The level of verbosity with which to print debug statements.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The file will be saved to fcs_file_path.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.apply_logicle_to_anndata">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">apply_logicle_to_anndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_anndata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_place</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.apply_logicle_to_anndata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the Logicle transformation function to the given input_anndata
+object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The T, W, M, and A parameters are specified in the input_anndata.var.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – The pyInfinityFlow formatted AnnData object on which to carry out
+Logicle normalization (Required)</p></li>
+<li><p><strong>in_place</strong> (<em>bool</em>) – Specifies whether the function should act on the input_anndata in-place
+(Default=True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The AnnData object with logicle normalization applied or None if
+in_place=True</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>anndata.AnnData or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.apply_inverse_logicle_to_anndata">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">apply_inverse_logicle_to_anndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_anndata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_place</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.apply_inverse_logicle_to_anndata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the inverse Logicle transformation function to the given
+input_anndata object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – The pyInfinityFlow formatted AnnData object on which to carry out
+Logicle normalization (Required)</p></li>
+<li><p><strong>in_place</strong> (<em>bool</em>) – Specifies whether the function should act on the input_anndata in-place
+(Default=True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The AnnData object with logicle normalization applied or None if
+in_place=True</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>anndata.AnnData or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.move_features_to_silent">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">move_features_to_silent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_anndata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.move_features_to_silent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will “silence” a set of feature values by moving them out of
+the AnnData.X array, and move them into a DataFrame stored in the
+AnnData.obsm[“silent”] key. The DataFrame in AnnData.var corresponding to
+the features is moved to the AnnData.uns[“silent_var”] key. This is useful
+when you want to keep some features out of the data for downstream analyses.
+For example, the “Time” parameter stored in .fcs files is not meaningful to
+cell state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object. (Required)</p></li>
+<li><p><strong>features</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The features (must be present in AnnData.var.index) to move to ‘silent’.
+(Required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pyInfinityFlow formatted AnnData object. The ‘silent’ feature values
+are moved to AnnData.obsm[“silent”], and the ‘silent’ feature var
+DataFrame values are moved to AnnData.uns[“silent_var”]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>anndata.AnnData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.move_features_out_of_silent">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">move_features_out_of_silent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_anndata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.move_features_out_of_silent" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will move the features that were “silenced” by pyInfinityFlow.
+InfinityFlow_Utilities.move_features_to_silent back into the AnnData.X and
+AnnData.var values.</p>
+<p>It is required that AnnData.obsm[“silent”] and AnnData.uns[“silent_var”]
+exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object. (Required)</p></li>
+<li><p><strong>features</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The features (must be present in AnnData.var.index) to move out of
+‘silent’. (Required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pyInfinityFlow formatted AnnData object. The features values are moved
+out of silent and back into AnnData.X and AnnData.var.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>anndata.AnnData</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.make_pca_elbo_plot">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">make_pca_elbo_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_p_adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_paths</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.make_pca_elbo_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will make a PCA elbo curve plot to show the variance explained
+by each principal component. Requires that scanpy.tl.pca has been run on the
+sub_p_adata object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_anndata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object that has the sub_p_adata.uns
+[‘pca’][‘variance’] attribute. (Required)</p></li>
+<li><p><strong>output_paths</strong> (<em>dict</em>) – The output_paths dictionary created by the pyInfinityFlow.
+InfinityFlow_Utilities.setup_output_directories function (Required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="infinityflow-utilities-analysis-pipeline-functions">
+<h3>InfinityFlow_Utilities: Analysis Pipeline Functions<a class="headerlink" href="#infinityflow-utilities-analysis-pipeline-functions" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">check_infinity_flow_annotation_dataframes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone_annotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinity_marker_annotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_events_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_events_validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_events_combine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio_for_validation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separate_backbone_reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_fcs_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function prepares the FileHandler object to control how the pipeline
+will handle each .fcs file for the indicated regression model. Both the
+backbone_annotation table and the infinity_marker_annotation table are
+checked for validity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>backbone_annotation</strong> (<em>pandas.DataFrame</em>) – The first column is the backbone features as they appear in the channel
+names of the fcs file for the reference data. The second column is the
+channel names as they appear in the query file, which is used to build
+the regression model. The last column is the final name to give to the
+user defined channel parameter of fcs file. (Required)</p></li>
+<li><p><strong>infinity_marker_annotation</strong> (<em>pandas.DataFrame</em>) – The first column is the fcs file name. The second column is the channel
+name in fcs file to use as the response variable in the regression model.
+The third column is the desired name to give to the final channel in the
+output. The fourth column, which is optional, is the name of the isotype
+background control antibody as it appears in the third column.</p></li>
+<li><p><strong>n_events_train</strong> (<em>int</em>) – The number of events in each fcs file that should be considered</p></li>
+<li><p><strong>n_events_validate</strong> (<em>int</em>) – The number of events to use to validate each regression model</p></li>
+<li><p><strong>n_events_combine</strong> (<em>int</em><em> or </em><em>None</em>) – If pooling events from each file to merge into a final dataset, this
+variable specifies how many events from each file will be taken from
+each file to combine into a final object to  use as the reference for
+regression.</p></li>
+<li><p><strong>ratio_for_validation</strong> (<em>float from 0 to 1</em>) – If n_events_train and n_events_validate are set to 0, then all events
+from the fcs file will be used and this parameter will specify what
+ratio of the fcs events will be used for validation. The remainder will
+be used for training.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em>) – Integer to give for sampling indices from fcs file so that sampling
+indices from fcs files can be reproduced.</p></li>
+<li><p><strong>input_fcs_dir</strong> (<em>str</em>) – The path to the directory that holds all of the fcs files in column 1
+of the infinity_marker_annotation DataFrame</p></li>
+<li><p><strong>exclusive_train_and_validate</strong> (<em>bool</em>) – If true, the program will be forced to use separate events for training
+and validation, n_events_combine will be taken from validation but
+cannot be taken from training.</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instance of InfinityFlowFileHandler, which is an object to specify
+how input .fcs files should be treated during the regression pipeline.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler">pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.setup_output_directories">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">setup_output_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.setup_output_directories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up the output directories for the InfinityFlow Regression workflow</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_dir</strong> (<em>str</em>) – The directory to which the pipeline outputs should be saved. (Required)</p></li>
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A dictionary that stores the output directories as strings:</dt><dd><ul class="simple">
+<li><p>[“output_regression_path”]</p></li>
+<li><p>[“output_umap_feature_plot_path”]</p></li>
+<li><p>[“clustering”]</p></li>
+<li><p>[“qc”]</p></li>
+<li><p>[“output_umap_bc_feature_plot_path”]</p></li>
+</ul>
+</dd>
+</dl>
+<p>The function will check if each of the output directory paths can be
+created and make them if they don’t exist.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.single_chunk_training">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">single_chunk_training</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cores_to_use</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xgb_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_logicle_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.single_chunk_training" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function carries out fitting of XGBoost regression models. It will
+read the data using the file_handler object to specify which events will be
+used for fitting. It will then carry out optional Logicle data normalization
+and batch normalization before fitting the model. It will then save the
+settings of the XGBoost regression models to the output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.</p></li>
+<li><p><strong>cores_to_use</strong> (<em>int</em>) – The number of cores to use for XGBoost model fitting. (Default=1)</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em>) – Integer to specify the random state for XGBoost model fitting in an
+attempt to make the regression more reproducible, or None to not use
+a random seed. (Default=None)</p></li>
+<li><p><strong>xgb_params</strong> (<em>dict</em>) – Dictionary of keyword-argument value pairs to pass to the XGBoost model
+instantiation. (Default={})</p></li>
+<li><p><strong>use_logicle_scaling</strong> (<em>bool</em>) – Whether or not to use Logicle scaling before model fitting.
+(Default=True)</p></li>
+<li><p><strong>normalization_method</strong> (<em>None</em><em> or </em><em>&quot;zscore&quot;</em>) – The method for normalizing the backbone of different samples in an
+attempt to remove batch effects. (Default=None)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels</dt><dd><p>An object to track the state of XGBoost Regression models as well
+as the models themselves.</p>
+</dd>
+<dt>timings_dict</dt><dd><p>A dictionary that saves how much time each step of function takes.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels" title="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels">CombinedRegressionModels</a>, timings_dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.single_chunk_testing">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">single_chunk_testing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regression_models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_logicle_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.single_chunk_testing" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function carries out validation of XGBoost regression models. It will
+read the data using the file_handler object to specify which events will be
+used for validation. It will then predict the InfinityMarker signal on held
+out data from its .fcs file. Then it will save metrics to the
+regression_models object and return it, along with a dictionary to track
+timings for steps of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.
+(Required)</p></li>
+<li><p><strong>regression_models</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels" title="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels"><em>pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels</em></a>) – The CombinedRegressionModels that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.single_chunk_training function. (Required)</p></li>
+<li><p><strong>use_logicle_scaling</strong> (<em>bool</em>) – Whether or not to use Logicle scaling before model fitting.
+(Default=True)</p></li>
+<li><p><strong>normalization_method</strong> (<em>None</em><em> or </em><em>&quot;zscore&quot;</em>) – The method for normalizing the backbone of different samples in an
+attempt to remove batch effects. (Default=None)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl>
+<dt>pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels</dt><dd><p>An object to track the state of XGBoost Regression models as well
+as the models themselves. The .validation_metrics attribute will be
+filled with a dictionary that provides the following validation
+data:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[“pred”] - predicted values</p></li>
+<li><p>[“true”] - real values</p></li>
+<li><p>[“r2_score”] - r2_score provided by sklearn.metrics.r2_score</p></li>
+<li><p>[“mean_squared_error”] - provided by sklearn.metrics.mean_squared_error</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>timings_dict</dt><dd><p>A dictionary that saves how much time each step of function takes.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels" title="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels">CombinedRegressionModels</a>, timings_dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.make_flow_regression_predictions">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">make_flow_regression_predictions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regression_models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separate_backbone_reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_logicle_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.make_flow_regression_predictions" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function carries out prediction using XGBoost regression models. It will
+use either a separate_backbone_reference .fcs file onto which to make
+predictions of the InfinityMarker signals, or it will use a subset of the
+validation cells from the InfinityMarker .fcs files themselves. The output
+will be an AnnData object containing the backbone features and the predicted
+signals from the InfinityMarker regression models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.
+(Required)</p></li>
+<li><p><strong>regression_models</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels" title="pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels"><em>pyInfinityFlow.InfinityFlow_Utilities.CombinedRegressionModels</em></a>) – The CombinedRegressionModels that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.single_chunk_training function. (Required)</p></li>
+<li><p><strong>separate_backbone_reference</strong> (<em>str</em><em> or </em><em>None</em>) – If not None, this defines the path to the .fcs file onto which to make
+predictions for the InfinityMarker signals.</p></li>
+<li><p><strong>use_logicle_scaling</strong> (<em>bool</em>) – Whether or not to use Logicle scaling before model fitting.
+(Default=True)</p></li>
+<li><p><strong>normalization_method</strong> (<em>None</em><em> or </em><em>&quot;zscore&quot;</em>) – The method for normalizing the backbone of different samples in an
+attempt to remove batch effects. (Default=None)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>AnnData</dt><dd><p>A pyInfinityFlow formatted AnnData object with the original parameter
+values as well as the imputed InfinityMarker values.</p>
+</dd>
+<dt>timings_dict</dt><dd><p>A dictionary that saves how much time each step of function takes.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple (AnnData, timings_dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.perform_background_correction">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">perform_background_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_p_adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infinity_marker_annotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cores_to_use</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.perform_background_correction" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function carries out background correction on the signal of a given
+InfinityMarker if that InfinityMarker has a corresponding Isotype
+InfinityMarker. A linear model is applied to regress-out the background
+antibody binding from the theoretical true signal of the InfinityMarker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_p_adata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object with the original parameter
+values as well as the imputed InfinityMarker values. The Isotype
+controls must be included as InfinityMarkers and annotated in the
+infinity_marker_annotation DataFrame. (Required)</p></li>
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.
+(Required)</p></li>
+<li><p><strong>infinity_marker_annotation</strong> (<em>pandas.DataFrame</em>) – The annotation DataFrame that specifies the File, Channel to predict,
+Name of final InfinityMarker, and Isotype InfinityMarker Name for each
+InfinityMarker. This DataFrame must have 4 columns if background
+correction is to be done. Each of the values in the last column (Isotype)
+must be present in the third column (Name of InfinityMarker) as
+InfinityMarkers. (Required)</p></li>
+<li><p><strong>cores_to_use</strong> (<em>int</em>) – The number of cores to use for fitting the sklearn.linear_model.
+LinearRegression model. (Default=1)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>background_corrected_data</dt><dd><p>A DataFrame specifying the background corrected data, with event
+names as the index and channel names as columns.</p>
+</dd>
+<dt>background_corrected_var</dt><dd><p>A DataFrame of the .var field that corresponds to the features in
+the background_corrected_data.</p>
+</dd>
+<dt>timings_dict</dt><dd><p>A dictionary that saves how much time each step of function takes.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple (background_corrected_data, background_corrected_var, timings_dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.find_markers_from_anndata">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">find_markers_from_anndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_p_adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups_to_colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'leiden'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.find_markers_from_anndata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to associate each of the clusters present in the AnnData
+object with the Backbone and InfinityMarkers in the dataset. It applies
+MarkerFinder to these clusters, generates a marker table, and plots a
+heatmap with the clustered events as columns and Markers as rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_p_adata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object with the original parameter
+values as well as the imputed InfinityMarker values. Clusters must be
+defined in the sub_p_adata.obs DataFrame. (Required)</p></li>
+<li><p><strong>output_paths</strong> (<em>dict</em>) – The output_paths dictionary created by the pyInfinityFlow.
+InfinityFlow_Utilities.setup_output_directories function (Required)</p></li>
+<li><p><strong>groups_to_colors</strong> (<em>dict</em>) – Dictionary to specify what color should be used for each cluster in
+sub_p_adata.obs[cluster_key]. (Eg. {‘c1’:’red’, ‘c2’: ‘blue’, …})
+(Required)</p></li>
+<li><p><strong>cluster_key</strong> (<em>str</em>) – The key in sub_p_adata.obs to use for cluster assignments. By default,
+it will look for “leiden”. (Default=”leiden”)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl>
+<dt>markers_df</dt><dd><p>A DataFrame of which cluster for which each feature is a best marker
+by Pearson correlation using MarkerFinder. The columns of the
+DataFrame will be [“marker”, “top_cluster”, “pearson_r”, “p_value”]</p>
+</dd>
+<dt>cell_assignments</dt><dd><p>A DataFrame specifying the top 50 (or fewer if the cluster is
+smaller) events that correspond to each cluster, ranked by Pearson
+correlation of each event to its clusters centroid.
+Contains the following features:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[“cell”] - the event name</p></li>
+<li><p>[“top_cluster”] - the cluster to which the event best correlates</p></li>
+<li><p>[“top_corr”] - the Pearson correlation coefficient</p></li>
+<li><p>[“original”] - the original cluster identity provided</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple (markers_df, cell_assignments)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.save_umap_figures_all_features">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">save_umap_figures_all_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_p_adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_corrected_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.save_umap_figures_all_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the 2D-UMAP stored in sub_p_adata and colors using each of the feature
+values in sub_p_adata.var. A .png file will be saved for each feature in
+the directory specified by output_paths[“output_umap_bc_feature_plot_path”]
+and/or output_paths[“output_umap_feature_plot_path”].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_p_adata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object. Must have ‘umap-x’ and
+‘umap-y’ in sub_p_adata.obs.columns (Required)</p></li>
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.
+(Required)</p></li>
+<li><p><strong>output_paths</strong> (<em>dict</em>) – The output_paths dictionary created by the pyInfinityFlow.
+InfinityFlow_Utilities.setup_output_directories function (Required)</p></li>
+<li><p><strong>background_corrected_data</strong> (<em>pandas.DataFrame</em><em> or </em><em>None</em>) – The background corrected data generated by pyInfinityFlow.
+InfinityFlow_Utilities.perform_background_correction. (Default=None)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary that saves how much time each step of function takes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.InfinityFlow_Utilities.save_fcs_flow_anndata">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities.</span></span><span class="sig-name descname"><span class="pre">save_fcs_flow_anndata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_p_adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_corrected_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_corrected_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_umap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.InfinityFlow_Utilities.save_fcs_flow_anndata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the pyInfinityFlow structured AnnData object to an .fcs file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_p_adata</strong> (<em>anndata.AnnData</em>) – A pyInfinityFlow formatted AnnData object with the original parameter
+values as well as the imputed InfinityMarker values. Clusters must be
+defined in the sub_p_adata.obs DataFrame. (Required)</p></li>
+<li><p><strong>file_handler</strong> (<a class="reference internal" href="#pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler" title="pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler"><em>pyInfinityFlow.InfinityFlow_Utilities.InfinityFlowFileHandler</em></a>) – The InfinityFlowFileHandler that is returned by pyInfinityFlow.
+InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes.
+(Required)</p></li>
+<li><p><strong>output_paths</strong> (<em>dict</em>) – The output_paths dictionary created by the pyInfinityFlow.
+InfinityFlow_Utilities.setup_output_directories function (Required)</p></li>
+<li><p><strong>background_corrected_data</strong> (<em>pandas.DataFrame</em><em> or </em><em>None</em>) – The background corrected data generated by pyInfinityFlow.
+InfinityFlow_Utilities.perform_background_correction. (Default=None)</p></li>
+<li><p><strong>background_corrected_var</strong> (<em>pandas.DataFrame</em><em> or </em><em>None</em>) – The background_corrected_var DataFrame generated by pyInfinityFlow.
+InfinityFlow_Utilities.perform_background_correction. (Default=None)</p></li>
+<li><p><strong>add_umap</strong> (<em>bool</em>) – If True, will add the ‘umap-x’ and ‘umap-y’ features from sub_p_adata.obs
+to sub_p_adata.X. Requires that the 2D-UMAP has been generated for
+sub_p_adata and is specified in the ‘umap-x’ and ‘umap-y’ features of
+sub_p_adata.obs (Default=False)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and
+debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary that saves how much time each step of function takes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<hr class="docutils" />
+<section id="transformations">
+<h2>Transformations<a class="headerlink" href="#transformations" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Transformations.apply_logicle">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Transformations.</span></span><span class="sig-name descname"><span class="pre">apply_logicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Transformations.apply_logicle" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logicle scale is the inverse of a modified biexponential function and has the same relation to
+the modified biexponential function that a logarithmic scale has to its corresponding exponential
+function. [1]</p>
+<p>The logicle uses the modified biexponential function B, according to:</p>
+<blockquote>
+<div><p>logicle(x, T, W, M, A) = root(B(y, T, W, M, A) - x)</p>
+</div></blockquote>
+<p>B is the modified biexponential function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">ae</span><span class="o">^</span><span class="p">(</span><span class="n">by</span><span class="p">)</span> <span class="o">-</span> <span class="n">cd</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="n">dy</span><span class="p">))</span> <span class="o">-</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p>where:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">W</span> <span class="o">/</span> <span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="n">A</span><span class="p">)</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="n">A</span><span class="p">)</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">w</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="mi">2</span><span class="n">w</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="n">ln</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>d is a constant so that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="p">(</span><span class="n">ln</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">ln</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="n">w</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>given b and w:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ca</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">x0</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">d</span><span class="p">))</span>
+
+<span class="n">fa</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="o">^</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">x1</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">ca</span> <span class="o">/</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">d</span> <span class="o">*</span> <span class="n">x1</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="p">((</span><span class="n">e</span><span class="o">^</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span> <span class="o">-</span> <span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">e</span><span class="o">^</span><span class="n">d</span><span class="p">)))</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">a</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">a</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>list-like numeric vector</em>) – The input vector to normalize with logicle transformation</p></li>
+<li><p><strong>T</strong> (<em>numeric</em>) – The formal “Top of scale” value (Default=3000000)</p></li>
+<li><p><strong>W</strong> (<em>numeric</em>) – (Width parameter) The number of decades in the approximately linear region
+The choice of W = 0 gives essentially the hyperbolic sine function (sinh x)</p></li>
+<li><p><strong>M</strong> (<em>numeric</em>) – The number of decades that the true logarithmic scale approached at the
+high end of the logicle scale would cover in the plot range</p></li>
+<li><p><strong>A</strong> (<em>numeric</em>) – Number of Additional decades of negative data values to be included</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>Parameters should be chosen so that:</dt><dd><ul class="simple">
+<li><p>T &gt; 0</p></li>
+<li><p>M &gt; 0</p></li>
+<li><p>0 &lt;= W &lt;= M/2</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The input x after applying the logicle function</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list-like numeric vector</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>Moore, Wayne A., and David R. Parks. “Update for the logicle data
+scale including operational code implementations,” Cytometry. Part A:
+the journal of the International Society for Analytical Cytology 81.4
+(2012): 273.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Transformations.apply_inverse_logicle">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Transformations.</span></span><span class="sig-name descname"><span class="pre">apply_inverse_logicle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Transformations.apply_inverse_logicle" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function inverts pyInfinityFlow.Transformations.apply_logicle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>list-like numeric vector</em>) – The input vector to invert the logicle transformation</p></li>
+<li><p><strong>T</strong> (<em>numeric</em>) – The formal “Top of scale” value (Default=3000000)</p></li>
+<li><p><strong>W</strong> (<em>numeric</em>) – (Width parameter) The number of decades in the approximately linear region
+The choice of W = 0 gives essentially the hyperbolic sine function (sinh x)</p></li>
+<li><p><strong>M</strong> (<em>numeric</em>) – The number of decades that the true logarithmic scale approached at the
+high end of the logicle scale would cover in the plot range</p></li>
+<li><p><strong>A</strong> (<em>numeric</em>) – Number of Additional decades of negative data values to be included</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The input x after applying the inverse logicle function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list-like numeric vector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Transformations.scale_feature">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Transformations.</span></span><span class="sig-name descname"><span class="pre">scale_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_threshold_percentile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_threshold_percentile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Transformations.scale_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes outliers and applies MinMaxScaler</p>
+<p>This function is designed to remove outliers and fit the distribution into
+the range (0,1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_array</strong> (<em>list-like numeric vector</em>) – The feature values to scale</p></li>
+<li><p><strong>min_threshold_percentile</strong> (<em>(</em><em>number between 0 to 100 inclusive</em><em>)</em>) – The minimum value for the input domain to be accepted, outliers below         the percentile value given by this parameter will take on that minimum         value</p></li>
+<li><p><strong>max_threshold_percentile</strong> (<em>(</em><em>number between 0 to 100 inclusive</em><em>)</em>) – The maximum value for the input domain to be accepted, outliers above         the percentile value given by this parameter will take on the maximum         value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The input_array after applying the thresholding and min-max scaling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list-like numeric vector</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<hr class="docutils" />
+<section id="fcs-io">
+<h2>fcs_io<a class="headerlink" href="#fcs-io" title="Permalink to this headline">¶</a></h2>
+<section id="fcsfileobject-class">
+<h3>FCSFileObject Class<a class="headerlink" href="#fcsfileobject-class" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.fcs_io.</span></span><span class="sig-name descname"><span class="pre">FCSFileObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcs_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_data_segment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Primary class for working with FCS files.</p>
+<p>This class is used to read and write FCS files. A mode is specified to either
+read from or write to the given fcs_file_path. Reading of FCS files can be
+done without including the DATA segment, so that the HEADER and TEXT segments
+can be read quickly.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Currently only FCS3.1 files are supported.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcs_file_path</strong> (<em>str</em>) – The path to the FCS file. (Required)</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em> (</em><em>Epects 'r'</em><em>|</em><em>'w'</em><em>)</em>) – The mode in which to treat the FCS file. If ‘r’, the class instance will         read from the FCS file immediately after it is created. (Default=’r’)</p></li>
+<li><p><strong>read_data_segment</strong> (<em>bool</em>) – Whether or not to read in the DATA segment of the FCS file. If false,         this allows you to read in the HEADER and TEXT segment values into the         class to learn important properties from the FCS file (Eg. The number         of events captured, the channel names, etc.) (Default=True)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.file_path">
+<span class="sig-name descname"><span class="pre">file_path</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the FCS file. Set by fcs_file_path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.byte_locations">
+<span class="sig-name descname"><span class="pre">byte_locations</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.byte_locations" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The binary positions of the files marking the different segments. This         will be filled when mode=’r’ upon instantiation with the following keys:</dt><dd><ul class="simple">
+<li><p>[“text_start”]</p></li>
+<li><p>[“text_end”]</p></li>
+<li><p>[“data_start”]</p></li>
+<li><p>[“data_end”]</p></li>
+<li><p>[“analysis_start”]</p></li>
+<li><p>[“analysis_end”]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{KEY: int}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>The version of the .fcs file (Eg. ‘FCS3.1’)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.text_segment">
+<span class="sig-name descname"><span class="pre">text_segment</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.text_segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>The TEXT segment as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.delimiter">
+<span class="sig-name descname"><span class="pre">delimiter</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.delimiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the character used as the delimiter between items in the TEXT         segment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.byteord_format">
+<span class="sig-name descname"><span class="pre">byteord_format</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.byteord_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>The byte order format to use to read the DATA segment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.text_segment_values">
+<span class="sig-name descname"><span class="pre">text_segment_values</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.text_segment_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary that stores the FCS file TEXT segment key-value entries.         These are important for defining properties about the channels, file         positions, experiment annotations, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict{KEY: str}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.spillover">
+<span class="sig-name descname"><span class="pre">spillover</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.spillover" title="Permalink to this definition">¶</a></dt>
+<dd><p>The spillover matrix to use for compensation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data from the DATA segment of the FCS file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.struct_format_string">
+<span class="sig-name descname"><span class="pre">struct_format_string</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.struct_format_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Struct format string to pack and unpack the DATA segment as binary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.par_count">
+<span class="sig-name descname"><span class="pre">par_count</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.par_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of parameters in the FCSFileObject</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.list_par_n">
+<span class="sig-name descname"><span class="pre">list_par_n</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.list_par_n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ordered list of parameters by number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.named_par">
+<span class="sig-name descname"><span class="pre">named_par</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.named_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>The $PnS names, usually defined by the user when the FCS data is         captured</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.named_par_channel">
+<span class="sig-name descname"><span class="pre">named_par_channel</span></span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.named_par_channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>The $PnN channel names, these must be unique and are generally defined         by the software used to capture the FCS events (Eg. “GFP-A”)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.load_data_from_pd_df">
+<span class="sig-name descname"><span class="pre">load_data_from_pd_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_pd_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_spillover_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_text_segment_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.load_data_from_pd_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load data from a pandas.DataFrame into an FCSFileObject</p>
+<p>This method allows the FCSFileObject to add data to the DATA segment
+from a pandas.DataFrame. The resulting data can then be written to an
+FCS file using the FCSFileObject.to_fcs() method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_pd_df</strong> (<em>pandas.DataFrame</em>) – The DATA to add to the DATA segment. (Required)</p></li>
+<li><p><strong>input_channel_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – These are the names to give to the $PnS TEXT segment key-value.             The list must be the same size as input_pd_df.shape[1] (The columns             of the input_pd_df) or be empty (Default=[])</p></li>
+<li><p><strong>input_spillover_matrix</strong> (<em>None</em><em> or </em><em>pandas.DataFrame</em>) – The spillover matrix for fluorescence compensation (Default=None)</p></li>
+<li><p><strong>additional_text_segment_values</strong> (<em>dict{'str':'str'}</em>) – Key-value pairs to add to the TEXT segment of the FCS file.             (Default={})</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Adds the given information to the FCSFileObject</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.read_fcs">
+<span class="sig-name descname"><span class="pre">read_fcs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.read_fcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from an FCS file into the FCSFileObject instance</p>
+<p>This is useful if a shallow read of the FCS file was initially performed         without reading in the DATA segment. This function will read in the data         from the FCS file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Adds the data from the DATA segment of the fcs_file to the             FCSFileObject</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.FCSFileObject.to_fcs">
+<span class="sig-name descname"><span class="pre">to_fcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcs_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_spillover_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.fcs_io.FCSFileObject.to_fcs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write FCSFileObject to an FCS file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcs_file_path</strong> (<em>str</em>) – The path to where the FCS file should be written. (Required)</p></li>
+<li><p><strong>add_spillover_matrix</strong> (<em>bool</em>) – Specifies whether or not to add the Spillover matrix defined in the             FCSFileObject.spillover attribute to the TEXT segment of the FCS             file. (Default=False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Attempts to write the FCS file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="fcs-io-functions">
+<h3>fcs_io: Functions<a class="headerlink" href="#fcs-io-functions" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.fcs_io.list_fcs_channels">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.fcs_io.</span></span><span class="sig-name descname"><span class="pre">list_fcs_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcs_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_user_defined_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.fcs_io.list_fcs_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the channel names defined in a given FCS file</p>
+<p>This is useful for getting the channel names, exactly as they are written,
+in the FCS file. It is important when defining the Reference and Query
+channels in the backbone_annotation file, or the Target channel name in the
+InfinityMarker annotation file that they match the names from the channels
+in the specified FCS files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>“PnS” is the key used in an FCS file to specify how the user wanted to     annotate the channel.</p></li>
+<li><p>“PnN” is the key used in an FCS file to specify the name for the channel     and each must be unique in a given FCS file</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcs_file_path</strong> (<em>str</em>) – Path to the .fcs file (Required)</p></li>
+<li><p><strong>add_user_defined_names</strong> (<em>bool</em>) – If True, the function will put the user-defined (“PnS”) names as a second         column with the unique channel (“PnN”) names as the first column.         (Default=False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Prints out the channel names as a table to stdout.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<hr class="docutils" />
+<section id="plotting-utilities">
+<h2>Plotting_Utilities<a class="headerlink" href="#plotting-utilities" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Plotting_Utilities.assign_rainbow_colors_to_groups">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Plotting_Utilities.</span></span><span class="sig-name descname"><span class="pre">assign_rainbow_colors_to_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Plotting_Utilities.assign_rainbow_colors_to_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dictionary of cluster names to hexadecimal color strings</p>
+<p>This function takes a list of groups and assigns each unique item in the
+groups a color (using the matplotlib.cm.rainbow color-map) as a hexadecimal
+string value. This is useful for storing a single color scheme for clusters
+to be used with downstream visualizations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>groups</strong> (<em>numpy.Array</em><em>[</em><em>str</em><em>]</em>) – List of cluster names. (Required)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dict {str</strong> – Dictionary of cluster-names to assigned colors (hexadecimal value)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Plotting_Utilities.plot_feature_over_x_y_coordinates_and_save_fig">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Plotting_Utilities.</span></span><span class="sig-name descname"><span class="pre">plot_feature_over_x_y_coordinates_and_save_fig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Plotting_Utilities.plot_feature_over_x_y_coordinates_and_save_fig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 2D-scatter plot of numeric vector over x and y coordinates</p>
+<p>This function takes a feature_vector, x and y coordinates, a feature_name,
+and a file_path and plots a scatterplot of all points, coloring the points
+using the “jet” colormap in matplotlib following the feature_vector scale.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is expected that feature_vector, x, and y correspond to the same events,
+in the same order.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The colormap will start at the 20th percentile (~blue) and end at the
+80th percentile (~red) of the feature vector.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_vector</strong> (<em>numpy.Array</em><em>[</em><em>numeric</em><em>]</em>) – Numeric values to map the ‘jet’ colormap onto in the scatter plot.         (Required)</p></li>
+<li><p><strong>x</strong> (<em>numpy.Array</em><em>[</em><em>numeric</em><em>]</em>) – Numeric values for the x-coordinate of the scatter plot (Required)</p></li>
+<li><p><strong>y</strong> (<em>numpy.Array</em><em>[</em><em>numeric</em><em>]</em>) – Numeric values for the y-coordinate of the scatter plot (Required)</p></li>
+<li><p><strong>feature_name</strong> (<em>str</em>) – Label to give the colorbar and plt.title of the scatter plot.         (Required)</p></li>
+<li><p><strong>file_path</strong> (<em>str</em>) – The path to save the figure. (Required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Saves the scatterplot to the file specified by file_path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Plotting_Utilities.plot_markers_df">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Plotting_Utilities.</span></span><span class="sig-name descname"><span class="pre">plot_markers_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered_markers_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered_cells_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups_to_colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_save_figure</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Plotting_Utilities.plot_markers_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a heatmap of the MarkerFinder results</p>
+<p>This function takes a pandas.DataFrame of values, a markers_df and
+cell_assignments from pyInfinityFlow.InfinityFlow_Utilities.
+find_markers_from_anndata to plot a heatmap of the markers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function expects pyInfinityFlow.InfinityFlow_Utilities.
+find_markers_from_anndata to have already been run.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_df</strong> (<em>pandas.DataFrame</em>) – Data to plot. The columns must intersect with features in the         ordered_markers_df and the rows must intersect with the cells in         (Required)</p></li>
+<li><p><strong>ordered_markers_df</strong> (<em>pandas.DataFrame</em>) – The markers_df output from pyInfinityFlow.InfinityFlow_Utilities.        find_markers_from_anndata (Required)</p></li>
+<li><p><strong>ordered_cells_df</strong> (<em>pandas.DataFrame</em>) – The cell_assignments output from pyInfinityFlow.InfinityFlow_Utilities.        find_markers_from_anndata (Required)</p></li>
+<li><p><strong>groups_to_colors</strong> (<em>dict {str:str}</em>) – Dictionary of cluster-names to assigned colors (hexadecimal value)         The pyInfinityFlow.Plotting_Utilities.assign_rainbow_colors_to_groups         can be used to generate this dictionary from a list of clusters.         (Required)</p></li>
+<li><p><strong>path_to_save_figure</strong> (<em>str</em>) – The path to save the figure. (Required)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Saves the heatmap to the file specified by path_to_save_figure</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyInfinityFlow.Plotting_Utilities.plot_leiden_clusters_over_umap">
+<span class="sig-prename descclassname"><span class="pre">pyInfinityFlow.Plotting_Utilities.</span></span><span class="sig-name descname"><span class="pre">plot_leiden_clusters_over_umap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_p_adata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyInfinityFlow.Plotting_Utilities.plot_leiden_clusters_over_umap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 2D-UMAP colored by the values in the “leiden” field</p>
+<p>This function takes a pandas.DataFrame of values, a markers_df and
+cell_assignments from pyInfinityFlow.InfinityFlow_Utilities.
+find_markers_from_anndata to plot a heatmap of the markers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is expected that scanpy.pp.neighbors, scanpy.tl.umap, and scanpy.tl.
+leiden have been run on sub_p_adata. Also the x,y coordinates of the UMAP
+must have been added to the sub_p_adata.obs pandas.DataFrame.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_p_adata</strong> (<em>anndata.AnnData</em>) – <p>pyInfinityFlow formatted AnnData object. It is expected that the object
+have the following attributes present:</p>
+<blockquote>
+<div><ul>
+<li><p>sub_p_adata.obs[‘umap-x’] : the x-coordinates of the UMAP plot are             required to be in the sub_p_adata.obs pandas.DataFrame</p></li>
+<li><p>sub_p_adata.obs[‘umap-y’] : the y-coordinates of the UMAP plot are             required to be in the sub_p_adata.obs pandas.DataFrame</p></li>
+<li><p>sub_p_adata.obs[‘leiden’] : leiden cluster assignments are             required to be in the sub_p_adata.obs pandas.DataFrame</p></li>
+<li><p>sub_p_adata.uns[‘groups_to_color’] : (dict{str:str}) Dictionary of             cluster-names to assigned colors (hexadecimal value) (Required)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>output_paths</strong> (<em>dict</em>) – The output_paths dictionary created by the pyInfinityFlow.        InfinityFlow_Utilities.setup_output_directories function (Required)</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em><em> (</em><em>0</em><em>|</em><em>1</em><em>|</em><em>2</em><em>|</em><em>3</em><em>)</em>) – Specifies to what verbosity level the function will output progress and         debugging statements. (Default=0)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Saves the scatterplot to the file specified by output_paths[“clustering”]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="command_line_tools.html" class="btn btn-neutral float-left" title="Command Line Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kyle Ferchen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

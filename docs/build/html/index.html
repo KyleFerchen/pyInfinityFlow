@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyInfinityFlow &mdash; pyInfinityFlow 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> pyInfinityFlow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pyInfinityFlow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>pyInfinityFlow</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="pyinfinityflow">
+<h1>pyInfinityFlow<a class="headerlink" href="#pyinfinityflow" title="Permalink to this headline">¶</a></h1>
+<p><strong>pyInfinityFlow</strong> is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression. It is an adaptation of the <a class="reference external" href="https://github.com/ebecht/infinityFlow">original implementation in R</a> <a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><sup>1</sup></a> with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline.</p>
+<p>The package includes tools to read and write FCS files, following the FCS3.1 file standard</p>
+<p>Downstream analyses</p>
+<section id="graphical-summary">
+<h2>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Permalink to this headline">¶</a></h2>
+<p><img alt="graphical summary of pyinfinityflow workflow" src="_images/graphical_summary.png" /></p>
+</section>
+<section id="recommended-installation">
+<h2>Recommended Installation<a class="headerlink" href="#recommended-installation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section id="selected-references">
+<h2>Selected References<a class="headerlink" href="#selected-references" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><font size="2"><sup>1</sup> Becht, E., Tolstrup, D., Dutertre, C. A., Morawski, P. A., Campbell, D. J., Ginhoux, F., … &amp; Headley, M. B. (2021). High-throughput single-cell quantification of hundreds of proteins using conventional flow cytometry and machine learning. Science advances, 7(39), eabg0505. </font></a></p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-conda-virtual-environment-recommended">Using Conda Virtual Environment - <strong>RECOMMENDED</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-pip-alone">Using pip alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-github-alone">Using GitHub alone</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_line_tools.html#pyinfinityflow">pyInfinityFlow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools.html#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="command_line_tools.html#simple">Simple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="command_line_tools.html#all-arguments">All Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools.html#required-arguments">Required Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools.html#optional-arguments">Optional Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools.html#outputs">Outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_tools.html#pyinfinityflow-list-channels">pyInfinityFlow-list_channels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#infinityflow-utilities">InfinityFlow_Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#infinityflow-utilities-classes">InfinityFlow_Utilities: Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#infinityflow-utilities-general-tools">InfinityFlow_Utilities: General Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#infinityflow-utilities-analysis-pipeline-functions">InfinityFlow_Utilities: Analysis Pipeline Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#transformations">Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#fcs-io">fcs_io</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#fcsfileobject-class">FCSFileObject Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#fcs-io-functions">fcs_io: Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#plotting-utilities">Plotting_Utilities</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kyle Ferchen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
