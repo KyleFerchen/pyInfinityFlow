@@ -9,48 +9,30 @@ import warnings
 warnings.filterwarnings(action='ignore', category=UserWarning)
 
 
-from pyInfinityFlow.Debugging_Utilities import printv
+from Debugging_Utilities import printv
 
-from pyInfinityFlow.InfinityFlow_Utilities import read_annotation_table
-from pyInfinityFlow.InfinityFlow_Utilities import anndata_to_df
-from pyInfinityFlow.InfinityFlow_Utilities import check_infinity_flow_annotation_dataframes
-from pyInfinityFlow.InfinityFlow_Utilities import setup_output_directories
-from pyInfinityFlow.InfinityFlow_Utilities import single_chunk_training
-from pyInfinityFlow.InfinityFlow_Utilities import single_chunk_testing
-from pyInfinityFlow.InfinityFlow_Utilities import make_flow_regression_predictions
-from pyInfinityFlow.InfinityFlow_Utilities import perform_background_correction
-from pyInfinityFlow.InfinityFlow_Utilities import save_umap_figures_all_features
-from pyInfinityFlow.InfinityFlow_Utilities import save_fcs_flow_anndata
-from pyInfinityFlow.InfinityFlow_Utilities import move_features_to_silent
-from pyInfinityFlow.InfinityFlow_Utilities import move_features_out_of_silent
-from pyInfinityFlow.InfinityFlow_Utilities import make_pca_elbo_plot
-from pyInfinityFlow.InfinityFlow_Utilities import find_markers_from_anndata
-from pyInfinityFlow.InfinityFlow_Utilities import apply_logicle_to_anndata
-from pyInfinityFlow.InfinityFlow_Utilities import apply_inverse_logicle_to_anndata
+from InfinityFlow_Utilities import read_annotation_table
+from InfinityFlow_Utilities import anndata_to_df
+from InfinityFlow_Utilities import check_infinity_flow_annotation_dataframes
+from InfinityFlow_Utilities import setup_output_directories
+from InfinityFlow_Utilities import single_chunk_training
+from InfinityFlow_Utilities import single_chunk_testing
+from InfinityFlow_Utilities import make_flow_regression_predictions
+from InfinityFlow_Utilities import perform_background_correction
+from InfinityFlow_Utilities import save_umap_figures_all_features
+from InfinityFlow_Utilities import save_fcs_flow_anndata
+from InfinityFlow_Utilities import move_features_to_silent
+from InfinityFlow_Utilities import move_features_out_of_silent
+from InfinityFlow_Utilities import make_pca_elbo_plot
+from InfinityFlow_Utilities import find_markers_from_anndata
 
-from pyInfinityFlow.Plotting_Utilities import assign_rainbow_colors_to_groups
-from pyInfinityFlow.Plotting_Utilities import plot_leiden_clusters_over_umap
+from Plotting_Utilities import assign_rainbow_colors_to_groups
+from Plotting_Utilities import plot_leiden_clusters_over_umap
 
 COMMON_LINEAR_FEATURES = ["FSC-A", "FSC-H", "FSC-W", "SSC-A", "SSC-H", "SSC-W", "Time"]
 # UMAP_PARAMS = {"n_neighbors":15, "min_dist":0.75, "metric":"correlation"}
 UMAP_PARAMS = {}
 XGB_PARAMS = {"n_estimators": 100, "learning_rate": 0.3}
-
-def parse_boolean_string(input_string):
-    if input_string == "True":
-        return(True)
-    elif input_string == "False":
-        return(False)
-    else:
-        raise ValueError(f"Expected True or False, got {input_string}")
-
-
-def parse_none_string(input):
-    if input == "None":
-        return(None)
-    else:
-        return(input)
-
 
 def main():
     parser = argparse.ArgumentParser(description='User Defined Arguments')
@@ -67,10 +49,10 @@ def main():
     parser.add_argument('--random_state', dest='random_state', type=int,
         help='Integer to specify the random_state, to make sampling, regression, and umap steps reproducible.',
         default=None)
-    parser.add_argument('--use_logicle_scaling', dest='use_logicle_scaling', type=str,
+    parser.add_argument('--use_logicle_scaling', dest='use_logicle_scaling', type=bool,
         help='Whether or not to apply logicle scaling to features that are typically '\
             'fluorescence channels, and not common linear features (Eg. FSC-A, SSC-A)',
-        default="True")
+        default=True)
     parser.add_argument('--normalization_method', dest='normalization_method', type=str,
         help='Method for normalizing feature values in an attempt to reduce sample to '\
             'sample batch effects. Options are:\n\tNone: no normalization\n\t'\
@@ -106,45 +88,45 @@ def main():
             'either the separate_backbone_reference or the combination or n_events_combine \n'\
             'from the InfinityMarker input files will be used.',
         default=0)
-    parser.add_argument('--add_umap', dest='add_umap', type=str,
+    parser.add_argument('--add_umap', dest='add_umap', type=bool,
         help='Boolean to specify if UMAP dimensionality reduction should be carried out on the '\
             'Infinity Flow object',
-        default="False")
-    parser.add_argument('--find_clusters', dest='find_clusters', type=str,
+        default=False)
+    parser.add_argument('--find_clusters', dest='find_clusters', type=bool,
         help='Boolean to specify if clustering should be done using Leiden clustering.',
-        default="False")
-    parser.add_argument('--find_markers', dest='find_markers', type=str,
+        default=False)
+    parser.add_argument('--find_markers', dest='find_markers', type=bool,
         help='Boolean to specify if MarkerFinder should be applied to find optimal '
             'markers for clusters.',
-        default="False")
-    parser.add_argument('--make_feature_plots', dest='make_feature_plots', type=str,
+        default=False)
+    parser.add_argument('--make_feature_plots', dest='make_feature_plots', type=bool,
         help='Boolean to specify if markers should be plotted over UMAP plots',
-        default="False")
-    parser.add_argument('--use_pca', dest='use_pca', type=str,
+        default=False)
+    parser.add_argument('--use_pca', dest='use_pca', type=bool,
         help='Boolean to specify if principal component ananlysis should be used to '\
             'reduce the feature space prior to UMAP and clustering. This is suggested '\
             'to save computation time.',
-        default="True")
-    parser.add_argument('--n_pc', dest='n_pc', type=str,
+        default=True)
+    parser.add_argument('--n_pc', dest='n_pc', type=int,
         help='Integer to specify the number principal components to use for UMAP.',
         default=15)
     parser.add_argument('--n_pc_plot_qc', dest='n_pc_plot_qc', type=int,
         help='Integer to specify the number principal components to plot in the elbo curve. '\
             'Helpful to estimate the number of principal components to use downstream.',
         default=50)
-    parser.add_argument('--save_h5ad', dest='save_h5ad', type=str,
+    parser.add_argument('--save_h5ad', dest='save_h5ad', type=bool,
         help='Boolean to specify if the Infinity Flow object should be saved as an h5ad file',
-        default="False")
-    parser.add_argument('--save_feather', dest='save_feather', type=str,
+        default=False)
+    parser.add_argument('--save_feather', dest='save_feather', type=bool,
         help='Save the Infinity Flow object as a feather file',
-        default="False")
-    parser.add_argument('--save_file_handler', dest='save_file_handler', type=str,
+        default=False)
+    parser.add_argument('--save_file_handler', dest='save_file_handler', type=bool,
         help='Save the file_handler object to <out_dir>/QC/file_handler.pickle',
-        default="False")
-    parser.add_argument('--save_regression_models', dest='save_regression_models', type=str,
+        default=False)
+    parser.add_argument('--save_regression_models', dest='save_regression_models', type=bool,
         help='Save the regression_models object to <out_dir>/QC/regression_models.pickle',
-        default="False")
-    parser.add_argument('--verbosity', dest='verbosity', type=int,
+        default=False)
+    parser.add_argument('--verbosity', dest='verbosity', type=bool,
         help='The level of verbosity with which to write to std-out. \n'\
             '0 = no print statements, to 3 = all debug print statements.',
         default=1)
@@ -157,31 +139,31 @@ def main():
         output_dir = args.output_dir
         backbone_annotation_file = args.backbone_annotation_file
         infinity_marker_annotation_file = args.infinity_marker_annotation_file
-        RANDOM_STATE = parse_none_string(args.random_state)
-        use_logicle_scaling = parse_boolean_string(args.use_logicle_scaling)
-        normalization_method = parse_none_string(args.normalization_method)
+        RANDOM_STATE = args.random_state
+        use_logicle_scaling = args.use_logicle_scaling
+        normalization_method = args.normalization_method
         n_events_train = args.n_events_train
         n_events_validate = args.n_events_validate
         ratio_for_validation = args.ratio_for_validation
-        separate_backbone_reference = parse_none_string(args.separate_backbone_reference)
-        n_events_combine = parse_none_string(args.n_events_combine)
+        separate_backbone_reference = args.separate_backbone_reference
+        n_events_combine = args.n_events_combine
         n_final = args.n_final
-        add_umap = parse_boolean_string(args.add_umap)
-        find_clusters = parse_boolean_string(args.find_clusters)
-        find_markers = parse_boolean_string(args.find_markers)
-        make_feature_plots = parse_boolean_string(args.make_feature_plots)
-        use_pca = parse_boolean_string(args.use_pca)
+        add_umap = args.add_umap
+        find_clusters = args.find_clusters
+        find_markers = args.find_markers
+        make_feature_plots = args.make_feature_plots
+        use_pca = args.use_pca
         n_pc = args.n_pc
         n_pc_plot_qc = args.n_pc_plot_qc
-        save_h5ad = parse_boolean_string(args.save_h5ad)
-        save_feather = parse_boolean_string(args.save_feather)
-        save_file_handler = parse_boolean_string(args.save_file_handler)
-        save_regression_models = parse_boolean_string(args.save_regression_models)
+        save_h5ad = args.save_h5ad
+        save_feather = args.save_feather
+        save_file_handler = args.save_file_handler
+        save_regression_models = args.save_regression_models
         VERBOSITY = args.verbosity
         cores_to_use = args.n_cores
     except Exception as e:
-        printv(3, v3=str(e))
-        raise ValueError("Failed to parse arguments.")
+        printv(VERBOSITY, v3=str(e))
+        print("Failed to parse arguments...")
 
     ### pyInfinityFlow_single_directory_constant_backbone -> function to replicate the R workflow in Python
     t_start_base_inflow_pipeline = time.time()
@@ -390,51 +372,6 @@ def main():
     else:
         timings_6 = {}
 
-    # Save to h5ad (AnnData object) if desired
-    if save_h5ad:
-        if use_logicle_scaling:
-            h5_output_name = "infinity_flow_object_logicle_normalized.h5ad"
-        else:
-            h5_output_name = "infinity_flow_object.h5ad"
-
-        printv(VERBOSITY, v1 = "Saving Infinity Flow object as h5ad file...")
-        sub_p_adata.write(os.path.join(output_paths["output_regression_path"],
-            h5_output_name))
-        if file_handler.use_isotype_controls:
-            printv(VERBOSITY, v1 = "Saving background corrected Infinity Flow "\
-                "object as h5ad file...")
-            tmp_var_index = background_corrected_var.index.values
-            tmp_data_cols = background_corrected_data.columns.values
-            tmp_data = sub_p_adata[:,tmp_data_cols].X.copy()
-            tmp_var = sub_p_adata.var.loc[tmp_var_index,:].copy()
-            sub_p_adata[:,tmp_data_cols].X = background_corrected_data.values
-            sub_p_adata.var.loc[tmp_var_index,:] = background_corrected_var.values
-            sub_p_adata.var["name"] = sub_p_adata.var["name"].astype(str)
-            sub_p_adata.var.loc[tmp_var_index,"name"] = "bc_" + sub_p_adata.var.loc[tmp_var_index,"name"]
-            sub_p_adata.write(os.path.join(output_paths["output_regression_path"],
-                f"background_corrected_{h5_output_name}"))
-            # Reset data to non-background-corrected values
-            sub_p_adata[:,tmp_data_cols].X = tmp_data
-            sub_p_adata.var['name'] = sub_p_adata.var['name'].astype('str')
-            sub_p_adata.var.loc[tmp_var_index,:] = tmp_var.values
-
-    # Save to feather file if desired
-    if save_feather:
-        if use_logicle_scaling:
-            fea_output_name = "infinity_flow_object_logicle_normalized.fea"
-        else:
-            fea_output_name = "infinity_flow_object.fea"
-        printv(VERBOSITY, v1 = "Saving Infinity Flow object as feather file...")
-        anndata_to_df(sub_p_adata, use_raw_feature_names=False).reset_index().\
-            to_feather(os.path.join(output_paths["output_regression_path"],
-                fea_output_name))
-        if file_handler.use_isotype_controls:
-            background_corrected_data.reset_index().to_feather(\
-                os.path.join(output_paths["output_regression_path"],
-                f"background_corrected_{fea_output_name}"))
-
-
-
     # Save data to fcs file
     if file_handler.use_isotype_controls:
         timings_7 = save_fcs_flow_anndata(sub_p_adata = sub_p_adata, 
@@ -442,8 +379,6 @@ def main():
             background_corrected_var = background_corrected_var, 
             file_handler = file_handler, 
             output_paths = output_paths, 
-            add_umap = add_umap,
-            use_logicle = use_logicle_scaling, 
             verbosity=VERBOSITY)
     else:
         timings_7 = save_fcs_flow_anndata(sub_p_adata = sub_p_adata, 
@@ -451,9 +386,21 @@ def main():
             background_corrected_var = None, 
             file_handler = file_handler, 
             output_paths = output_paths,
-            add_umap = add_umap,
-            use_logicle = use_logicle_scaling, 
+            add_umap = add_umap, 
             verbosity=VERBOSITY)
+
+    # Save to h5ad (AnnData object) if desired
+    if save_h5ad:
+        printv(VERBOSITY, v1 = "Saving Infinity Flow object as h5ad file...")
+        sub_p_adata.write(os.path.join(output_paths["output_regression_path"],
+            "infinity_flow_object_logicle_normalized.h5ad"))
+
+    # Save to feather file if desired
+    if save_feather:
+        printv(VERBOSITY, v1 = "Saving Infinity Flow object as feather file...")
+        anndata_to_df(sub_p_adata, use_raw_feature_names=False).reset_index().\
+            to_feather(os.path.join(output_paths["output_regression_path"],
+                "infinity_flow_object_logicle_normalized.feather"))
 
     # Save the file_handler object if desired
     if save_file_handler:
