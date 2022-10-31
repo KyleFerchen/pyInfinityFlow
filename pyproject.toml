@@ -20,3 +20,10 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/"
 "Bug Tracker" = "https://github.com/"
+
+[project.optional-dependencies]
+doc = [
+  "sphinx~=4.2.0",
+  "myst-parser",
+  "nbsphinx",
+]

@@ -3,7 +3,8 @@
 % You can adapt this file completely to your liking, but it should at least
 % contain the root `toctree` directive.
 
-```{include} ../../readme.md
+
+```{include} ../../README.md
 :relative-images:
 ```
 
@@ -12,6 +13,8 @@
 :maxdepth: 6
 
 installation
+command_line_tools_tutorials.md
+notebooks/pyInfinityFlow_API_Tutorial
 command_line_tools
 api
 

@@ -1,0 +1,3335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Tutorial: Full pyInfinityFlow Pipeline &mdash; pyInfinityFlow 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> pyInfinityFlow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_line_tools.html">Command Line Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyInfinityFlow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API Tutorial: Full pyInfinityFlow Pipeline</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/pyInfinityFlow_API_Tutorial.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="API-Tutorial:-Full-pyInfinityFlow-Pipeline">
+<h1>API Tutorial: Full pyInfinityFlow Pipeline<a class="headerlink" href="#API-Tutorial:-Full-pyInfinityFlow-Pipeline" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial uses the pyInfinityFlow API to carry out the full analysis pipeline with an example dataset. This example is a subset of the previously published mouse lung dataset<a class="reference external" href="https://www.science.org/doi/10.1126/sciadv.abg0505">[1]</a>, the full data set was made publicly available <a class="reference external" href="https://flowrepository.org/id/FR-FCM-Z2LP">here</a> in flowrepository.org. You can download the subset with the <a class="reference external" href="https://github.com/KyleFerchen/pyInfinityFlow">pyInfinityFlow repository on GitHub</a>, which
+consists of 10 InfinityMarkers and 5 Isotype controls located in the <a class="reference external" href="https://github.com/KyleFerchen/pyInfinityFlow/tree/main/example_data">‘example_dataset’</a> directory. This directory also contains the relevant InfinityMarker annotation file as well as the Backbone annotation file, which are necessary for the analysis pipeline.</p>
+<p>You can download the repository after <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git has been installed</a> by changing directories to where you want to install it and by using the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/KyleFerchen/pyInfinityFlow.git
+</pre></div>
+</div>
+<section id="Provide-paths-for-your-machine">
+<h2>Provide paths for your machine<a class="headerlink" href="#Provide-paths-for-your-machine" title="Permalink to this headline">¶</a></h2>
+<p>After you have installed the GitHub repository, you can add the path to the repository below to run this Notebook on your machine:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the path to the repository</span>
+<span class="n">path_to_repo</span> <span class="o">=</span> <span class="s2">&quot;/media/kyle_ssd1/Repositories/pyInfinityFlow/&quot;</span>
+<span class="c1"># Specify which directory on your machine you want to save the results</span>
+<span class="n">my_output_dir</span> <span class="o">=</span> <span class="s2">&quot;/media/kyle_ssd1/outputs/&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Step-1:-Preparing-the-Inputs">
+<h2>Step 1: Preparing the Inputs<a class="headerlink" href="#Step-1:-Preparing-the-Inputs" title="Permalink to this headline">¶</a></h2>
+<section id="Backbone-Annotation-File">
+<h3>Backbone Annotation File<a class="headerlink" href="#Backbone-Annotation-File" title="Permalink to this headline">¶</a></h3>
+<p>First, we need to locate the Backbone annotation file. This will instruct the program which channel names in the input FCS files to use as the Backbone (predictors in the regression model). This is simply a .csv or .tsv file with three columns (in the same order as below) to annotate:</p>
+<ol class="arabic simple">
+<li><p>The channel names in the reference FCS file(s)(the data we use to build the final InfinityFlow object)</p></li>
+<li><p>The channel names in the InfinityMarker FCS files (the data use to fit and validate the models)</p></li>
+<li><p>The final name to use for the channel in the InfinityFlow object</p></li>
+</ol>
+<p>This file should have the column names as the first line.</p>
+<p>After downloading the pyInfinityFlow package repository on GitHub, we can access an example file for this test dataset, Eg.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/media/kyle_ssd1/Repositories/pyInfinityFlow/example_data/mouse_lung_dataset_subset_backbone_anno.csv&#39;
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyInfinityFlow.InfinityFlow_Utilities</span></code> module provides a simple function (<code class="docutils literal notranslate"><span class="pre">read_annotation_table</span></code>) to read either a .csv, .tsv, or .txt (tab-delimited) file into a pandas.DataFrame object:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pyInfinityFlow</span> <span class="kn">import</span> <span class="n">InfinityFlow_Utilities</span>
+
+<span class="c1"># PROVIDE THE PATH TO WHERE YOU DOWNLOADED THE REPOSITORY</span>
+<span class="n">path_backbone</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_repo</span><span class="p">,</span> <span class="s2">&quot;example_data/mouse_lung_dataset_subset_backbone_anno.csv&quot;</span><span class="p">)</span>
+<span class="n">backbone_anno</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">read_annotation_table</span><span class="p">(</span><span class="n">path_backbone</span><span class="p">)</span>
+<span class="n">backbone_anno</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Reference_Backbone</th>
+      <th>Query_Backbone</th>
+      <th>Final_Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FJComp-APC-A</td>
+      <td>FJComp-APC-A</td>
+      <td>CD69-CD301b</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>FJComp-AlexaFluor700-A</td>
+      <td>FJComp-AlexaFluor700-A</td>
+      <td>MHCII</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FJComp-BUV395-A</td>
+      <td>FJComp-BUV395-A</td>
+      <td>CD4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>FJComp-BUV737-A</td>
+      <td>FJComp-BUV737-A</td>
+      <td>CD44</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FJComp-BV421-A</td>
+      <td>FJComp-BV421-A</td>
+      <td>CD8</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>FJComp-BV510-A</td>
+      <td>FJComp-BV510-A</td>
+      <td>CD11c</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>FJComp-BV605-A</td>
+      <td>FJComp-BV605-A</td>
+      <td>CD11b</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>FJComp-BV650-A</td>
+      <td>FJComp-BV650-A</td>
+      <td>F480</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>FJComp-BV711-A</td>
+      <td>FJComp-BV711-A</td>
+      <td>Ly6C</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>FJComp-BV786-A</td>
+      <td>FJComp-BV786-A</td>
+      <td>Lineage</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>FJComp-GFP-A</td>
+      <td>FJComp-GFP-A</td>
+      <td>CD45a488</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>FJComp-PE-Cy7(yg)-A</td>
+      <td>FJComp-PE-Cy7(yg)-A</td>
+      <td>CD24</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>FJComp-PerCP-Cy5-5-A</td>
+      <td>FJComp-PerCP-Cy5-5-A</td>
+      <td>CD103</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="InfinityMarker-Annotation-File">
+<h3>InfinityMarker Annotation File<a class="headerlink" href="#InfinityMarker-Annotation-File" title="Permalink to this headline">¶</a></h3>
+<p>The InfinityMarker annotation file specifies what FCS files to use to build the regression models and how they should be treated. Each InfinityMarker (Flow Cytometry signal to impute using the backbone) has a row entry in this annotation file for the following columns:</p>
+<ol class="arabic simple">
+<li><p>The FCS file name</p></li>
+<li><p>The InfinityMarker channel name (exactly as it appears in the FCS file)</p></li>
+<li><p>The name to give the channel in the final InfinityFlow object</p></li>
+<li><p>(OPTIONAL) The final name of Isotype InfinityMarker (should be an entry in the third column for the InfinityMarkers that are Isotype controls)</p></li>
+</ol>
+<p>This file is included in the same directory as the Backbone annotation file in the GitHub repository, Eg.:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/media/kyle_ssd1/Repositories/pyInfinityFlow/example_data/mouse_lung_dataset_subset_infinity_marker_anno.csv&#39;
+</pre></div>
+</div>
+<p>Isotype background correction is an optional step in which a linear model is used to regress out the background binding and fluorescence of an antibody raised with a specific immunoglobulin. You can read more about it from the <a class="reference external" href="https://www.science.org/doi/10.1126/sciadv.abg0505">original publication</a>. The InfinityMarker annotation file is used to specify whether or not to perform background correction. This is optional and will only be attempted in the pipeline if this annotation file has a
+4th column.</p>
+<p>The InfinityMarker annotation file, like the Backbone annotation file, is expected to be either a .csv, .tsv, or .txt (tab-delimited) file, and can also be read into a pandas.DataFrame using the <code class="docutils literal notranslate"><span class="pre">read_annotation_table</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_infmarker</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_repo</span><span class="p">,</span>
+    <span class="s2">&quot;example_data/mouse_lung_dataset_subset_infinity_marker_anno.csv&quot;</span><span class="p">)</span>
+<span class="n">infinitymarker_anno</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">read_annotation_table</span><span class="p">(</span><span class="n">path_infmarker</span><span class="p">)</span>
+<span class="n">infinitymarker_anno</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>File</th>
+      <th>Channel</th>
+      <th>Name</th>
+      <th>Isotype</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>backbone_Plate2_Specimen_001_G1_G01_073_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>33D1</td>
+      <td>Isotype_rIgG2b</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>backbone_Plate2_Specimen_001_F7_F07_067_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>Allergin-1</td>
+      <td>Isotype_mIgG1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>backbone_Plate2_Specimen_001_F8_F08_068_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>B7-H4</td>
+      <td>Isotype_AHIgG</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>backbone_Plate1_Specimen_001_A2_A02_002_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD1d</td>
+      <td>Isotype_rIgG2b</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>backbone_Plate1_Specimen_001_G4_G04_076_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD103</td>
+      <td>Isotype_AHIgG</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>backbone_Plate1_Specimen_001_G5_G05_077_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD105</td>
+      <td>Isotype_rIgG2a</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>backbone_Plate1_Specimen_001_G6_G06_078_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD106</td>
+      <td>Isotype_rIgG2a</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>backbone_Plate1_Specimen_001_G7_G07_079_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD107a (Lamp-1)</td>
+      <td>Isotype_rIgG2a</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>backbone_Plate1_Specimen_001_G8_G08_080_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD107b (Mac-3)</td>
+      <td>Isotype_rIgG1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>backbone_Plate1_Specimen_001_G9_G09_081_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>CD115</td>
+      <td>Isotype_rIgG2a</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>backbone_Plate3_Specimen_001_F12_F12_072_targe...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>Isotype_rIgG2b</td>
+      <td>Isotype_rIgG2b</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>backbone_Plate3_Specimen_001_F6_F06_066_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>Isotype_mIgG1</td>
+      <td>Isotype_mIgG1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>backbone_Plate3_Specimen_001_F4_F04_064_target...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>Isotype_AHIgG</td>
+      <td>Isotype_AHIgG</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>backbone_Plate3_Specimen_001_F11_F11_071_targe...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>Isotype_rIgG2a</td>
+      <td>Isotype_rIgG2a</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>backbone_Plate3_Specimen_001_F10_F10_070_targe...</td>
+      <td>FJComp-PE(yg)-A</td>
+      <td>Isotype_rIgG1</td>
+      <td>Isotype_rIgG1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Step-2:-Checking-the-Inputs-and-Building-an-InfinityFlowFileHandler">
+<h2>Step 2: Checking the Inputs and Building an InfinityFlowFileHandler<a class="headerlink" href="#Step-2:-Checking-the-Inputs-and-Building-an-InfinityFlowFileHandler" title="Permalink to this headline">¶</a></h2>
+<p>Next, we need to specify the directory in which the FCS files are saved. This directory is located in the same parent directory as the annotation files on the pyInfinityFlow GitHub repository:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/media/kyle_ssd1/Repositories/pyInfinityFlow/example_data/mouse_lung_dataset_subset&#39;
+</pre></div>
+</div>
+<p>Then we can use the <code class="docutils literal notranslate"><span class="pre">check_infinity_flow_annotation_dataframes</span></code> to do the following:</p>
+<ul class="simple">
+<li><p>Validate the input annotation DataFrames</p></li>
+<li><p>Scan through the InfinityMarker FCS files to split events into training/validation/pooling subsets</p></li>
+<li><p>Return an InfinityFlowFileHandler to store how each of the InfinityMarker files will be processed</p></li>
+</ul>
+<p>Here we will use the n_events_combine parameter to pool events from each of the individual InfinityMarker files for the final InfinityFlow object. Each of original channels from this file will be preserved into the final InfinityFlow object.</p>
+<p>Note: it is also possible to use the <code class="docutils literal notranslate"><span class="pre">separate_backbone_reference</span></code> argument to supply a separate FCS file onto which the predictions will be made. This is useful if there is a feature(s) that is not well explained by the Backbone channels and therefore should not be imputed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fcs_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_repo</span><span class="p">,</span>
+    <span class="s2">&quot;example_data/mouse_lung_dataset_subset&quot;</span><span class="p">)</span>
+
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">check_infinity_flow_annotation_dataframes</span><span class="p">(</span>\
+    <span class="n">backbone_annotation</span><span class="o">=</span><span class="n">backbone_anno</span><span class="p">,</span>
+    <span class="n">infinity_marker_annotation</span><span class="o">=</span><span class="n">infinitymarker_anno</span><span class="p">,</span>
+    <span class="n">n_events_train</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># Use all possible events in the FCS file</span>
+    <span class="n">n_events_validate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># Use all possible events in the FCS file</span>
+    <span class="n">ratio_for_validation</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">n_events_combine</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="c1"># Events to pool into a final InfinityFlow object</span>
+    <span class="n">input_fcs_dir</span><span class="o">=</span><span class="n">fcs_dir</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">file_handler</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Isotype controls detected. Will attempt to use background correction...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+InfinityFlowFileHandler Object from pyInfinityFlow
+        .handles the following InfinityMarkers:
+                        33D1
+                        Allergin-1
+                        B7-H4
+                        CD1d
+                        CD103
+                        CD105
+                        CD106
+                        CD107a (Lamp-1)
+                        CD107b (Mac-3)
+                        CD115
+                        Isotype_rIgG2b
+                        Isotype_mIgG1
+                        Isotype_AHIgG
+                        Isotype_rIgG2a
+                        Isotype_rIgG1
+
+        Held in the InfinityFlowFileHandler.handles dictionary
+
+        InfinityFlowFileHandler.list_infinity_markers holds ordered list of InfinityMarkers
+
+</pre></div></div>
+</div>
+<p>For example, you can see how the InfinityMarker “33D1” is stored in the <code class="docutils literal notranslate"><span class="pre">file_handler.handles</span></code> dictionary, including the name, file_name, directory, reference_backbone_channels, backbone_channels, prediction_channel, train_indices, test_indices, and pool_indices.</p>
+<p>This information will be used later on to carry out XGBoost regression.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_handler</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s2">&quot;33D1&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;name&#39;: &#39;33D1&#39;,
+ &#39;file_name&#39;: &#39;backbone_Plate2_Specimen_001_G1_G01_073_target_33D1.fcs&#39;,
+ &#39;directory&#39;: &#39;/media/kyle_ssd1/Repositories/pyInfinityFlow/example_data/mouse_lung_dataset_subset&#39;,
+ &#39;reference_backbone_channels&#39;: array([&#39;FJComp-APC-A&#39;, &#39;FJComp-AlexaFluor700-A&#39;, &#39;FJComp-BUV395-A&#39;,
+        &#39;FJComp-BUV737-A&#39;, &#39;FJComp-BV421-A&#39;, &#39;FJComp-BV510-A&#39;,
+        &#39;FJComp-BV605-A&#39;, &#39;FJComp-BV650-A&#39;, &#39;FJComp-BV711-A&#39;,
+        &#39;FJComp-BV786-A&#39;, &#39;FJComp-GFP-A&#39;, &#39;FJComp-PE-Cy7(yg)-A&#39;,
+        &#39;FJComp-PerCP-Cy5-5-A&#39;], dtype=object),
+ &#39;backbone_channels&#39;: array([&#39;FJComp-APC-A&#39;, &#39;FJComp-AlexaFluor700-A&#39;, &#39;FJComp-BUV395-A&#39;,
+        &#39;FJComp-BUV737-A&#39;, &#39;FJComp-BV421-A&#39;, &#39;FJComp-BV510-A&#39;,
+        &#39;FJComp-BV605-A&#39;, &#39;FJComp-BV650-A&#39;, &#39;FJComp-BV711-A&#39;,
+        &#39;FJComp-BV786-A&#39;, &#39;FJComp-GFP-A&#39;, &#39;FJComp-PE-Cy7(yg)-A&#39;,
+        &#39;FJComp-PerCP-Cy5-5-A&#39;], dtype=object),
+ &#39;prediction_channel&#39;: &#39;FJComp-PE(yg)-A&#39;,
+ &#39;train_indices&#39;: array([     0,      1,      2, ..., 106341, 106343, 106345]),
+ &#39;test_indices&#39;: array([     5,      7,      9, ..., 106342, 106344, 106346]),
+ &#39;pool_indices&#39;: array([     5,    113,    137,    375,    430,    474,    527,    709,
+           914,    930,   1006,   1026,   1184,   1229,   1230,   1315,
+          1449,   1867,   2042,   2122,   2287,   2293,   2363,   2397,
+          2519,   2566,   2657,   2847,   2963,   3030,   3383,   3484,
+          3721,   3769,   4125,   4788,   4899,   4909,   4913,   5025,
+          5032,   5034,   5053,   5065,   5151,   5359,   5409,   5434,
+          5565,   5601,   5608,   5612,   5677,   6171,   6180,   6203,
+          6334,   6364,   6447,   6456,   6639,   6641,   6745,   6767,
+          6872,   7009,   7048,   7083,   7103,   7104,   7421,   7662,
+          7668,   7782,   7863,   7872,   7961,   8111,   8142,   8345,
+          8373,   8374,   8390,   8419,   8455,   8496,   8575,   8596,
+          8688,   8753,   8792,   8862,   8967,   8984,   9119,   9149,
+          9160,   9638,   9775,   9863,   9902,   9940,  10063,  10090,
+         10093,  10316,  10558,  10564,  10686,  10842,  10910,  10969,
+         11016,  11027,  11039,  11108,  11123,  11211,  11340,  11610,
+         11642,  11698,  11709,  11734,  11750,  11768,  12101,  12356,
+         12621,  12676,  12751,  12812,  12934,  12976,  12993,  13005,
+         13010,  13135,  13224,  13278,  13345,  13462,  13566,  13768,
+         13820,  13844,  13866,  13888,  13961,  14266,  14487,  14800,
+         14918,  15042,  15404,  15442,  15508,  15525,  15725,  15816,
+         15848,  15893,  15938,  16336,  16361,  16391,  16423,  16475,
+         16578,  16771,  16834,  17099,  17131,  17283,  17496,  17603,
+         17639,  17678,  17705,  17764,  18073,  18080,  18109,  18313,
+         18377,  18470,  18484,  19001,  19067,  19093,  19141,  19194,
+         19206,  19218,  19536,  19643,  19712,  19953,  19975,  19996,
+         20260,  20318,  20348,  20432,  20501,  20613,  20641,  20712,
+         20789,  20891,  21029,  21037,  21092,  21159,  21338,  21363,
+         21503,  21733,  21803,  21913,  22288,  22476,  22674,  22817,
+         22946,  23023,  23159,  23444,  23695,  23707,  23810,  23882,
+         24021,  24039,  24042,  24194,  24221,  24381,  24400,  24563,
+         24614,  24897,  25054,  25148,  25182,  25204,  25458,  25482,
+         25496,  25726,  25875,  25901,  25957,  26197,  26759,  26855,
+         26877,  26883,  27101,  27120,  27246,  27398,  27501,  27521,
+         27524,  27792,  27842,  27867,  27896,  27898,  27901,  28170,
+         28357,  28444,  28619,  28687,  28778,  28894,  28984,  29008,
+         29047,  29092,  29187,  29263,  29306,  29386,  29518,  29646,
+         29734,  30043,  30091,  30095,  30122,  30213,  30420,  30658,
+         31065,  31079,  31082,  31396,  31473,  31478,  31519,  31663,
+         31698,  31922,  31971,  32165,  32238,  32302,  32341,  32459,
+         32592,  32767,  32776,  32951,  33038,  33377,  33418,  33560,
+         33735,  33744,  33996,  34037,  34069,  34071,  34252,  34344,
+         34388,  34533,  34640,  34717,  34758,  34993,  35056,  35170,
+         35214,  35245,  35298,  35427,  35438,  35546,  35757,  35830,
+         36162,  36173,  36203,  36345,  36420,  36481,  36598,  36787,
+         36822,  36840,  36846,  36992,  36996,  37102,  37154,  37238,
+         37500,  37520,  37620,  37669,  37715,  38021,  38082,  38170,
+         38371,  38408,  38438,  38457,  38477,  38579,  38954,  38956,
+         39064,  39188,  39201,  39327,  39669,  39752,  39807,  39910,
+         39957,  39999,  40082,  40106,  40158,  40287,  40297,  40514,
+         40583,  40584,  40723,  40811,  41199,  41257,  41374,  41590,
+         41613,  41638,  41658,  41887,  41901,  41916,  41966,  42098,
+         42249,  42285,  42493,  42557,  42565,  42665,  42673,  42739,
+         42796,  43117,  43287,  43362,  43377,  43667,  43707,  43731,
+         43758,  43795,  43931,  43981,  43989,  44042,  44064,  44699,
+         44740,  44895,  44913,  44986,  45058,  45168,  45274,  45362,
+         45364,  45461,  45508,  45566,  45826,  45998,  46319,  46332,
+         46366,  46505,  46524,  46698,  46797,  46898,  46968,  47453,
+         47494,  47631,  47683,  47693,  47747,  47882,  48119,  48162,
+         48170,  48218,  48306,  48325,  48374,  48488,  48530,  48549,
+         48560,  48618,  48702,  48714,  48745,  49034,  49084,  49114,
+         49180,  49243,  49246,  49309,  49349,  49433,  49434,  49506,
+         49575,  49779,  49846,  49910,  49966,  49973,  50174,  50482,
+         50647,  50679,  50728,  50730,  50808,  50910,  50998,  51184,
+         51299,  51431,  51557,  51655,  51674,  51682,  51858,  51940,
+         51941,  51960,  51982,  52153,  52225,  52318,  52333,  52613,
+         52692,  52850,  52870,  53000,  53064,  53136,  53193,  53197,
+         53279,  53323,  53355,  53410,  53463,  53686,  53713,  54210,
+         54381,  54382,  54537,  54594,  54688,  54929,  55316,  55389,
+         55501,  55509,  55564,  55652,  55667,  55765,  55888,  56108,
+         56256,  56408,  56478,  56620,  56935,  57082,  57131,  57477,
+         57593,  57635,  57649,  57671,  57902,  57996,  58103,  58214,
+         58230,  58288,  58367,  58693,  58749,  58822,  59031,  59053,
+         59132,  59164,  59201,  59308,  59532,  59759,  59871,  59935,
+         59991,  60169,  60379,  60465,  60483,  60550,  60666,  60670,
+         60732,  60757,  61152,  61168,  61192,  61254,  61530,  61767,
+         61905,  61931,  62066,  62108,  62545,  62752,  62939,  63084,
+         63200,  63219,  63253,  63290,  63330,  63368,  63682,  63801,
+         63874,  63933,  63963,  64035,  64036,  64131,  64164,  64350,
+         64598,  64661,  64663,  64701,  64934,  64947,  65118,  65286,
+         65330,  65401,  65657,  65661,  66020,  66037,  66263,  66747,
+         66769,  66780,  66906,  67009,  67038,  67124,  67192,  67357,
+         67379,  67389,  67446,  67494,  67612,  67712,  67843,  67892,
+         67927,  67940,  68148,  68172,  68266,  68286,  68349,  68414,
+         68601,  68607,  68653,  68747,  68803,  68865,  68903,  68909,
+         69207,  69236,  69370,  69394,  69411,  69502,  69619,  69720,
+         69833,  69885,  69956,  70023,  70056,  70296,  70465,  70589,
+         70641,  70686,  71028,  71113,  71180,  71200,  71203,  71587,
+         71649,  71676,  72106,  72159,  72200,  72261,  72271,  72313,
+         72537,  72557,  72853,  73155,  73275,  73504,  73812,  74128,
+         74181,  74430,  74627,  74801,  74824,  74909,  75083,  75210,
+         75801,  75828,  75842,  75991,  76442,  76644,  76776,  76971,
+         76986,  77154,  77396,  77775,  77800,  77803,  77853,  78191,
+         78270,  78439,  78594,  78611,  78618,  78696,  78911,  78928,
+         79016,  79090,  79175,  79313,  79438,  79541,  79649,  79783,
+         80150,  80173,  80491,  80647,  80718,  80725,  80860,  80869,
+         80891,  80944,  80958,  81008,  81015,  81020,  81111,  81271,
+         81313,  81386,  81419,  81586,  81622,  81670,  81791,  81807,
+         81988,  82060,  82092,  82336,  82516,  82523,  82526,  82541,
+         82554,  82564,  82630,  82636,  82687,  82750,  82918,  82966,
+         83507,  84850,  84952,  84964,  85136,  85222,  85231,  85388,
+         85446,  85529,  85850,  85883,  85952,  86032,  86096,  86169,
+         86188,  86352,  86472,  86712,  86713,  86823,  86938,  87129,
+         87309,  87413,  87529,  87723,  88053,  88087,  88090,  88157,
+         88161,  88258,  88265,  88273,  88572,  88754,  88780,  88821,
+         88915,  88965,  88988,  88998,  89040,  89062,  89245,  89279,
+         89633,  89647,  89827,  89941,  90003,  90034,  90256,  90414,
+         90583,  90587,  90885,  91190,  91352,  91410,  91502,  91599,
+         91685,  91707,  91711,  91729,  91894,  92030,  92081,  92277,
+         92302,  92386,  92476,  92516,  92755,  92879,  92959,  93072,
+         93115,  93121,  93276,  93646,  93790,  93837,  93852,  94023,
+         94026,  94229,  94267,  94491,  94588,  94771,  94899,  94916,
+         95014,  95079,  95093,  95100,  95220,  95242,  95314,  95328,
+         95410,  95608,  95668,  95683,  95776,  95853,  95891,  95978,
+         96222,  96225,  96242,  96299,  96349,  96417,  96508,  96613,
+         96895,  96917,  96947,  96979,  97178,  97287,  97324,  97341,
+         97457,  97531,  97542,  97575,  97682,  97719,  97769,  97836,
+         97976,  98127,  98328,  98417,  98436,  98446,  98518,  98674,
+         98721,  98857,  98886,  98910,  99168,  99190,  99206,  99320,
+         99362,  99703,  99845,  99883,  99902,  99904,  99932,  99956,
+         99978, 100203, 100330, 100416, 100450, 100589, 100685, 100735,
+        100755, 100761, 100803, 100909, 100916, 101335, 101993, 102036,
+        102204, 102233, 102292, 102345, 102459, 102661, 102672, 102776,
+        102835, 102841, 102862, 102989, 102993, 103183, 103375, 103732,
+        103798, 103876, 104273, 104297, 104317, 104324, 104685, 105143,
+        105145, 105193, 105404, 105481, 105886, 105975, 105979, 106099])}
+</pre></div></div>
+</div>
+</section>
+<section id="Step-3:-Specify-Output-Directories">
+<h2>Step 3: Specify Output Directories<a class="headerlink" href="#Step-3:-Specify-Output-Directories" title="Permalink to this headline">¶</a></h2>
+<p>Here, we simply need to specify a directory in which to save the outputs of the pipeline. The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.setup_output_directories</span></code> function will prepare a dictionary that stores where to save different outputs, and create those directories:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_paths</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">setup_output_directories</span><span class="p">(</span>\
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">my_output_dir</span><span class="p">,</span>
+    <span class="n">file_handler</span><span class="o">=</span><span class="n">file_handler</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">output_paths</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;output_regression_path&#39;: &#39;/media/kyle_ssd1/outputs/regression_results&#39;,
+ &#39;output_umap_feature_plot_path&#39;: &#39;/media/kyle_ssd1/outputs/umap_feature_plots&#39;,
+ &#39;clustering&#39;: &#39;/media/kyle_ssd1/outputs/clustering&#39;,
+ &#39;qc&#39;: &#39;/media/kyle_ssd1/outputs/QC&#39;,
+ &#39;output_umap_bc_feature_plot_path&#39;: &#39;/media/kyle_ssd1/outputs/umap_feature_plots_background_corrected&#39;}
+</pre></div></div>
+</div>
+</section>
+<section id="Step-4:-Fitting-the-XGBoost-Regression-Models">
+<h2>Step 4: Fitting the XGBoost Regression Models<a class="headerlink" href="#Step-4:-Fitting-the-XGBoost-Regression-Models" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.single_chunk_training</span></code> function is used to create and fit the XGBoost models. It will return a tuple consisting of a <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.CombinedRegressionModels</span></code> object and a dictionary that saves how much time it took to fit the models for the InfinityMarkers.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span><span class="p">,</span> <span class="n">timings_1</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">single_chunk_training</span><span class="p">(</span>\
+    <span class="n">file_handler</span><span class="o">=</span><span class="n">file_handler</span><span class="p">,</span>
+    <span class="n">cores_to_use</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">use_logicle_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">normalization_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Reading in data from .fcs files for model training...
+DEBUG:          Reading in the data for InfinityMarker 33D1...
+DEBUG:          Reading in the data for InfinityMarker Allergin-1...
+DEBUG:          Reading in the data for InfinityMarker B7-H4...
+DEBUG:          Reading in the data for InfinityMarker CD1d...
+DEBUG:          Reading in the data for InfinityMarker CD103...
+DEBUG:          Reading in the data for InfinityMarker CD105...
+DEBUG:          Reading in the data for InfinityMarker CD106...
+DEBUG:          Reading in the data for InfinityMarker CD107a (Lamp-1)...
+DEBUG:          Reading in the data for InfinityMarker CD107b (Mac-3)...
+DEBUG:          Reading in the data for InfinityMarker CD115...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG2b...
+DEBUG:          Reading in the data for InfinityMarker Isotype_mIgG1...
+DEBUG:          Reading in the data for InfinityMarker Isotype_AHIgG...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG2a...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG1...
+Applying Logicle normalization to data...
+        Building regression model for 33D1...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 4.51 seconds.
+
+        Building regression model for Allergin-1...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 4.49 seconds.
+
+        Building regression model for B7-H4...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.65 seconds.
+
+        Building regression model for CD1d...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 6.50 seconds.
+
+        Building regression model for CD103...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 5.05 seconds.
+
+        Building regression model for CD105...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.90 seconds.
+
+        Building regression model for CD106...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.28 seconds.
+
+        Building regression model for CD107a (Lamp-1)...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 6.44 seconds.
+
+        Building regression model for CD107b (Mac-3)...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 4.62 seconds.
+
+        Building regression model for CD115...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.80 seconds.
+
+        Building regression model for Isotype_rIgG2b...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.79 seconds.
+
+        Building regression model for Isotype_mIgG1...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.76 seconds.
+
+        Building regression model for Isotype_AHIgG...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.75 seconds.
+
+        Building regression model for Isotype_rIgG2a...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.71 seconds.
+
+        Building regression model for Isotype_rIgG1...
+DEBUG: Setting n_jobs to 12 and random_state to None
+DEBUG:          XGBoost regression model trained in 3.46 seconds.
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CombinedRegressionModels Object from pyInfinityFlow
+        Contains regression models for the following InfinityMarkers (Response Variables):
+33D1,Allergin-1,B7-H4,CD1d,CD103,CD105,CD106,CD107a (Lamp-1),CD107b (Mac-3),CD115,Isotype_rIgG2b,Isotype_mIgG1,Isotype_AHIgG,Isotype_rIgG2a,Isotype_rIgG1
+
+        Uses the following backbone (Explanatory Variables):
+FJComp-APC-A,FJComp-AlexaFluor700-A,FJComp-BUV395-A,FJComp-BUV737-A,FJComp-BV421-A,FJComp-BV510-A,FJComp-BV605-A,FJComp-BV650-A,FJComp-BV711-A,FJComp-BV786-A,FJComp-GFP-A,FJComp-PE-Cy7(yg)-A,FJComp-PerCP-Cy5-5-A
+
+The object holds the following variables:
+        ordered_training_channels
+        var_annotations
+        infinity_markers
+        regression_models
+        parameter_annotations
+        infinity_channels
+        validation_metrics
+
+        Access regression models as dictionary with the InfinityMarker as the key:
+                Eg. CombinedRegressionModels.regression_models[&#34;33D1&#34;]
+
+</pre></div></div>
+</div>
+</section>
+<section id="Step-5:-Validating-Regression-Models">
+<h2>Step 5: Validating Regression Models<a class="headerlink" href="#Step-5:-Validating-Regression-Models" title="Permalink to this headline">¶</a></h2>
+<p>We can next use held out data from each of the InfinityMarker FCS files to score how well each of the models is able to impute the InfinityMarker expression values with the Backbone features. This is done with the <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.single_chunk_testing</span></code> function. This will return a tuple with an updated <code class="docutils literal notranslate"><span class="pre">CombinedRegressionModels</span></code> object that contains validation metrics, and a dictionary to track the timing of the validation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span><span class="p">,</span> <span class="n">timings_2</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">single_chunk_testing</span><span class="p">(</span>\
+    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
+    <span class="n">regression_models</span> <span class="o">=</span> <span class="n">regression_models</span><span class="p">,</span>
+    <span class="n">use_logicle_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">normalization_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Reading in data from .fcs files for model validation...
+DEBUG:          Reading in the data for InfinityMarker 33D1...
+DEBUG:          Reading in the data for InfinityMarker Allergin-1...
+DEBUG:          Reading in the data for InfinityMarker B7-H4...
+DEBUG:          Reading in the data for InfinityMarker CD1d...
+DEBUG:          Reading in the data for InfinityMarker CD103...
+DEBUG:          Reading in the data for InfinityMarker CD105...
+DEBUG:          Reading in the data for InfinityMarker CD106...
+DEBUG:          Reading in the data for InfinityMarker CD107a (Lamp-1)...
+DEBUG:          Reading in the data for InfinityMarker CD107b (Mac-3)...
+DEBUG:          Reading in the data for InfinityMarker CD115...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG2b...
+DEBUG:          Reading in the data for InfinityMarker Isotype_mIgG1...
+DEBUG:          Reading in the data for InfinityMarker Isotype_AHIgG...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG2a...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG1...
+Applying Logicle normalization to data...
+Obtaining validation metrics for regression models...
+                Working on 33D1...
+                Working on Allergin-1...
+                Working on B7-H4...
+                Working on CD1d...
+                Working on CD103...
+                Working on CD105...
+                Working on CD106...
+                Working on CD107a (Lamp-1)...
+                Working on CD107b (Mac-3)...
+                Working on CD115...
+                Working on Isotype_rIgG2b...
+                Working on Isotype_mIgG1...
+                Working on Isotype_AHIgG...
+                Working on Isotype_rIgG2a...
+                Working on Isotype_rIgG1...
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">single_chunk_testing</span></code> function will set a dictionary to the <code class="docutils literal notranslate"><span class="pre">validation_metrics</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">CombinedRegressionModels</span></code> object. For each InfinityMarker name as a key, a dictionary is stored as the value with the predicted values, ture values, r2_score, and mean_squared_error:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span><span class="o">.</span><span class="n">validation_metrics</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;33D1&#39;: {&#39;pred&#39;: array([0.25200623, 0.2564635 , 0.25081083, ..., 0.25893834, 0.23685327,
+         0.25687218], dtype=float32),
+  &#39;true&#39;: array([0.25880677, 0.24245095, 0.25493586, ..., 0.274207  , 0.21523006,
+         0.24371576], dtype=float32),
+  &#39;r2_score&#39;: 0.19209259889025,
+  &#39;mean_squared_error&#39;: 0.0001764585},
+ &#39;Allergin-1&#39;: {&#39;pred&#39;: array([0.21301892, 0.21872343, 0.20963453, ..., 0.21750394, 0.22308473,
+         0.21142632], dtype=float32),
+  &#39;true&#39;: array([0.26102197, 0.2454918 , 0.24498476, ..., 0.21617137, 0.22679122,
+         0.23546468], dtype=float32),
+  &#39;r2_score&#39;: 0.5829876350462362,
+  &#39;mean_squared_error&#39;: 0.00061123044},
+ &#39;B7-H4&#39;: {&#39;pred&#39;: array([0.22862323, 0.2501482 , 0.25119272, ..., 0.2621282 , 0.2515326 ,
+         0.24431813], dtype=float32),
+  &#39;true&#39;: array([0.2212211 , 0.22892201, 0.24515927, ..., 0.25912946, 0.23800558,
+         0.23579723], dtype=float32),
+  &#39;r2_score&#39;: 0.17660769306807023,
+  &#39;mean_squared_error&#39;: 0.00022054944},
+ &#39;CD1d&#39;: {&#39;pred&#39;: array([0.27452454, 0.27784905, 0.3807743 , ..., 0.26960534, 0.27109462,
+         0.26869002], dtype=float32),
+  &#39;true&#39;: array([0.29084668, 0.2787824 , 0.37280142, ..., 0.2871778 , 0.2708428 ,
+         0.25334674], dtype=float32),
+  &#39;r2_score&#39;: 0.6454607421084098,
+  &#39;mean_squared_error&#39;: 0.0010725937},
+ &#39;CD103&#39;: {&#39;pred&#39;: array([0.25955388, 0.25041333, 0.2822778 , ..., 0.2555274 , 0.23480846,
+         0.23861615], dtype=float32),
+  &#39;true&#39;: array([0.26624402, 0.21703161, 0.25556582, ..., 0.24584499, 0.23774952,
+         0.26314855], dtype=float32),
+  &#39;r2_score&#39;: 0.6333754867688306,
+  &#39;mean_squared_error&#39;: 0.00029186436},
+ &#39;CD105&#39;: {&#39;pred&#39;: array([0.25279748, 0.26322943, 0.33079505, ..., 0.2977552 , 0.24908838,
+         0.23428737], dtype=float32),
+  &#39;true&#39;: array([0.25490686, 0.27640045, 0.3742214 , ..., 0.2684391 , 0.24985689,
+         0.21935181], dtype=float32),
+  &#39;r2_score&#39;: 0.6753359632935965,
+  &#39;mean_squared_error&#39;: 0.0004727315},
+ &#39;CD106&#39;: {&#39;pred&#39;: array([0.24811669, 0.24805331, 0.25124604, ..., 0.26913488, 0.24582317,
+         0.24637443], dtype=float32),
+  &#39;true&#39;: array([0.25405908, 0.2475744 , 0.24266441, ..., 0.25619355, 0.2635005 ,
+         0.24447615], dtype=float32),
+  &#39;r2_score&#39;: 0.3221144778474361,
+  &#39;mean_squared_error&#39;: 0.00039838598},
+ &#39;CD107a (Lamp-1)&#39;: {&#39;pred&#39;: array([0.25488272, 0.2471615 , 0.5623303 , ..., 0.25523907, 0.25942624,
+         0.25205564], dtype=float32),
+  &#39;true&#39;: array([0.2673547 , 0.25526446, 0.58498925, ..., 0.23471874, 0.26126346,
+         0.24185239], dtype=float32),
+  &#39;r2_score&#39;: 0.8204075049850199,
+  &#39;mean_squared_error&#39;: 0.0018579975},
+ &#39;CD107b (Mac-3)&#39;: {&#39;pred&#39;: array([0.26830757, 0.28503788, 0.2507204 , ..., 0.24908292, 0.25389788,
+         0.24230753], dtype=float32),
+  &#39;true&#39;: array([0.29518053, 0.28111485, 0.255299  , ..., 0.2436143 , 0.2626211 ,
+         0.2382466 ], dtype=float32),
+  &#39;r2_score&#39;: 0.7183401629602935,
+  &#39;mean_squared_error&#39;: 0.0014851231},
+ &#39;CD115&#39;: {&#39;pred&#39;: array([0.2469954 , 0.25325543, 0.24312335, ..., 0.2437099 , 0.26318344,
+         0.2492683 ], dtype=float32),
+  &#39;true&#39;: array([0.24417807, 0.25671375, 0.2558331 , ..., 0.23946778, 0.26340008,
+         0.25041574], dtype=float32),
+  &#39;r2_score&#39;: 0.2159727711077275,
+  &#39;mean_squared_error&#39;: 0.00015180971},
+ &#39;Isotype_rIgG2b&#39;: {&#39;pred&#39;: array([0.3152353 , 0.30198446, 0.24886578, ..., 0.24904986, 0.24726558,
+         0.24757081], dtype=float32),
+  &#39;true&#39;: array([0.31431442, 0.34223923, 0.32557005, ..., 0.23365542, 0.26259127,
+         0.24768159], dtype=float32),
+  &#39;r2_score&#39;: 0.2243016223785964,
+  &#39;mean_squared_error&#39;: 0.00011540718},
+ &#39;Isotype_mIgG1&#39;: {&#39;pred&#39;: array([0.28719217, 0.2716357 , 0.26335174, ..., 0.27846232, 0.2770714 ,
+         0.2506193 ], dtype=float32),
+  &#39;true&#39;: array([0.29004258, 0.31199   , 0.3189279 , ..., 0.30371755, 0.311677  ,
+         0.29318032], dtype=float32),
+  &#39;r2_score&#39;: 0.2049955296927476,
+  &#39;mean_squared_error&#39;: 0.00071228656},
+ &#39;Isotype_AHIgG&#39;: {&#39;pred&#39;: array([0.24830323, 0.2492735 , 0.25518328, ..., 0.24604471, 0.24749778,
+         0.2534635 ], dtype=float32),
+  &#39;true&#39;: array([0.29159304, 0.26729953, 0.27030438, ..., 0.22781612, 0.24713887,
+         0.24599802], dtype=float32),
+  &#39;r2_score&#39;: 0.21989004514011257,
+  &#39;mean_squared_error&#39;: 0.00014965146},
+ &#39;Isotype_rIgG2a&#39;: {&#39;pred&#39;: array([0.25454333, 0.24098672, 0.2699412 , ..., 0.25125703, 0.24956013,
+         0.24680562], dtype=float32),
+  &#39;true&#39;: array([0.2568882 , 0.281961  , 0.33056295, ..., 0.25644702, 0.24867922,
+         0.24952465], dtype=float32),
+  &#39;r2_score&#39;: 0.17117436281629972,
+  &#39;mean_squared_error&#39;: 0.00016250834},
+ &#39;Isotype_rIgG1&#39;: {&#39;pred&#39;: array([0.2509288 , 0.24883913, 0.25389326, ..., 0.24579412, 0.24850413,
+         0.24942122], dtype=float32),
+  &#39;true&#39;: array([0.24504311, 0.24437752, 0.25067183, ..., 0.22886375, 0.24671295,
+         0.23623529], dtype=float32),
+  &#39;r2_score&#39;: 0.21265289462313386,
+  &#39;mean_squared_error&#39;: 0.00014281561}}
+</pre></div></div>
+</div>
+</section>
+<section id="Step-6:-Predict-InfinityMarker-Values-for-Final-InfinityFlow-Object">
+<h2>Step 6: Predict InfinityMarker Values for Final InfinityFlow Object<a class="headerlink" href="#Step-6:-Predict-InfinityMarker-Values-for-Final-InfinityFlow-Object" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.make_flow_regression_predictions</span></code> function is used to carry out the imputation on the reference FCS dataset to predict the InfinityMarker expression values. This function returns a tuple with the resulting object as an anndata.AnnData object, and a dictionary to store the timing of the prediction steps:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="p">,</span> <span class="n">timings_3</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">make_flow_regression_predictions</span><span class="p">(</span>\
+    <span class="n">file_handler</span><span class="o">=</span><span class="n">file_handler</span><span class="p">,</span>
+    <span class="n">regression_models</span><span class="o">=</span><span class="n">regression_models</span><span class="p">,</span>
+    <span class="n">use_logicle_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">normalization_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Reading in data from .fcs files for pooling into final InfinityFlow object...
+DEBUG:          Reading in the data for InfinityMarker 33D1...
+DEBUG:          Reading in the data for InfinityMarker Allergin-1...
+DEBUG:          Reading in the data for InfinityMarker B7-H4...
+DEBUG:          Reading in the data for InfinityMarker CD1d...
+DEBUG:          Reading in the data for InfinityMarker CD103...
+DEBUG:          Reading in the data for InfinityMarker CD105...
+DEBUG:          Reading in the data for InfinityMarker CD106...
+DEBUG:          Reading in the data for InfinityMarker CD107a (Lamp-1)...
+DEBUG:          Reading in the data for InfinityMarker CD107b (Mac-3)...
+DEBUG:          Reading in the data for InfinityMarker CD115...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG2b...
+DEBUG:          Reading in the data for InfinityMarker Isotype_mIgG1...
+DEBUG:          Reading in the data for InfinityMarker Isotype_AHIgG...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG2a...
+DEBUG:          Reading in the data for InfinityMarker Isotype_rIgG1...
+Applying Logicle normalization to data...
+Making predictions for final InfinityFlow object...
+                Working on 33D1...
+                Working on Allergin-1...
+                Working on B7-H4...
+                Working on CD1d...
+                Working on CD103...
+                Working on CD105...
+                Working on CD106...
+                Working on CD107a (Lamp-1)...
+                Working on CD107b (Mac-3)...
+                Working on CD115...
+                Working on Isotype_rIgG2b...
+                Working on Isotype_mIgG1...
+                Working on Isotype_AHIgG...
+                Working on Isotype_rIgG2a...
+                Working on Isotype_rIgG1...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/media/kyle_storage/kyle_ferchen/Python/Env/pyInfinityFlow_dev/lib/python3.8/site-packages/pyInfinityFlow/InfinityFlow_Utilities.py:1469: FutureWarning: In a future version, `df.iloc[:, i] = newvals` will attempt to set the values inplace instead of always setting a new array. To retain the old behavior, use either `df[df.columns[i]] = newvals` or, if columns are non-unique, `df.isetitem(i, newvals)`
+  predicted_var.loc[:,&#34;IMPUTED&#34;] = True
+/media/kyle_storage/kyle_ferchen/Python/Env/pyInfinityFlow_dev/lib/python3.8/site-packages/pyInfinityFlow/InfinityFlow_Utilities.py:1482: FutureWarning: In a future version, object-dtype columns with all-bool values will not be included in reductions with bool_only=True. Explicitly cast to bool dtype instead.
+  var = pd.concat([raw_sub_p_adata.var, predicted_var]),
+</pre></div></div>
+</div>
+<p>The resulting AnnData object (<code class="docutils literal notranslate"><span class="pre">sub_p_adata</span></code>) can now be used for downstream analysis steps!</p>
+</section>
+<section id="Step-7:-Isotype-Background-Correction">
+<h2>Step 7: Isotype Background Correction<a class="headerlink" href="#Step-7:-Isotype-Background-Correction" title="Permalink to this headline">¶</a></h2>
+<p>We can now carry out Isotype background correction using the <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.perform_background_correction</span></code> function, which will return a tuple with 3 values:</p>
+<ol class="arabic simple">
+<li><p>A pandas.DataFrame of the background corrected data</p></li>
+<li><p>The .var annotation to specify settings for the features</p></li>
+<li><p>Timings dictionary to track how much time was used in the function</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background_corrected_data</span><span class="p">,</span> <span class="n">background_corrected_var</span><span class="p">,</span> <span class="n">timings_4</span> <span class="o">=</span> \
+    <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">perform_background_correction</span><span class="p">(</span>\
+        <span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="p">,</span>
+        <span class="n">infinity_marker_annotation</span> <span class="o">=</span> <span class="n">infinitymarker_anno</span><span class="p">,</span>
+        <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
+        <span class="n">cores_to_use</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+DEBUG: Feature 33D1 will use isotype Isotype_rIgG2b...
+DEBUG: Feature Allergin-1 will use isotype Isotype_mIgG1...
+DEBUG: Feature B7-H4 will use isotype Isotype_AHIgG...
+DEBUG: Feature CD1d will use isotype Isotype_rIgG2b...
+DEBUG: Feature CD103 will use isotype Isotype_AHIgG...
+DEBUG: Feature CD105 will use isotype Isotype_rIgG2a...
+DEBUG: Feature CD106 will use isotype Isotype_rIgG2a...
+DEBUG: Feature CD107a (Lamp-1) will use isotype Isotype_rIgG2a...
+DEBUG: Feature CD107b (Mac-3) will use isotype Isotype_rIgG1...
+DEBUG: Feature CD115 will use isotype Isotype_rIgG2a...
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background_corrected_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>33D1</th>
+      <th>Allergin-1</th>
+      <th>B7-H4</th>
+      <th>CD1d</th>
+      <th>CD103</th>
+      <th>CD105</th>
+      <th>CD106</th>
+      <th>CD107a (Lamp-1)</th>
+      <th>CD107b (Mac-3)</th>
+      <th>CD115</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.053235</td>
+      <td>0.083288</td>
+      <td>0.062567</td>
+      <td>0.073332</td>
+      <td>0.050480</td>
+      <td>0.143983</td>
+      <td>0.087025</td>
+      <td>0.060597</td>
+      <td>0.050773</td>
+      <td>0.050279</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.059184</td>
+      <td>0.080860</td>
+      <td>0.043288</td>
+      <td>0.046708</td>
+      <td>0.030332</td>
+      <td>0.049352</td>
+      <td>0.079781</td>
+      <td>0.069040</td>
+      <td>0.047640</td>
+      <td>0.042443</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.059397</td>
+      <td>0.085905</td>
+      <td>0.048852</td>
+      <td>0.151401</td>
+      <td>0.021355</td>
+      <td>0.056680</td>
+      <td>0.089235</td>
+      <td>0.135968</td>
+      <td>0.109725</td>
+      <td>0.052312</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.050306</td>
+      <td>0.078846</td>
+      <td>0.060089</td>
+      <td>0.123346</td>
+      <td>0.041751</td>
+      <td>0.036221</td>
+      <td>0.080687</td>
+      <td>0.058094</td>
+      <td>0.036672</td>
+      <td>0.044819</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.060201</td>
+      <td>0.072160</td>
+      <td>0.055046</td>
+      <td>0.054883</td>
+      <td>0.049996</td>
+      <td>0.056747</td>
+      <td>0.083932</td>
+      <td>0.073318</td>
+      <td>0.054824</td>
+      <td>0.051910</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background_corrected_var</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>USE_LOGICLE</th>
+      <th>LOGICLE_T</th>
+      <th>LOGICLE_W</th>
+      <th>LOGICLE_M</th>
+      <th>LOGICLE_A</th>
+      <th>LOGICLE_APPLIED</th>
+      <th>IMPUTED</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>33D1</th>
+      <td>InfinityMarker_33D1</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>Allergin-1</th>
+      <td>InfinityMarker_Allergin-1</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>B7-H4</th>
+      <td>InfinityMarker_B7-H4</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD1d</th>
+      <td>InfinityMarker_CD1d</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD103</th>
+      <td>InfinityMarker_CD103</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Step-8:-Silencing-Features">
+<h2>Step 8: Silencing Features<a class="headerlink" href="#Step-8:-Silencing-Features" title="Permalink to this headline">¶</a></h2>
+<p>There are some channels that we may want to avoid considering for downstream analyses if they are not relevant to cell state (Eg. The ‘Time’ parameter). The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.move_features_to_silent</span></code> function will take the given features_to_silence out of the AnnData.X array, and move them into the AnnData.obsm[‘silent’] attribute.</p>
+<p>For example, we can first list the features present in the InfinityFlow AnnData object:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;SSC-H&#39;, &#39;SSC-W&#39;,
+       &#39;FJComp-APC-A&#39;, &#39;FJComp-APC-eFlour780-A&#39;, &#39;FJComp-AlexaFluor700-A&#39;,
+       &#39;FJComp-BUV395-A&#39;, &#39;FJComp-BUV737-A&#39;, &#39;FJComp-BV421-A&#39;,
+       &#39;FJComp-BV510-A&#39;, &#39;FJComp-BV605-A&#39;, &#39;FJComp-BV650-A&#39;,
+       &#39;FJComp-BV711-A&#39;, &#39;FJComp-BV786-A&#39;, &#39;FJComp-GFP-A&#39;,
+       &#39;FJComp-PE(yg)-A&#39;, &#39;FJComp-PE-Cy7(yg)-A&#39;, &#39;FJComp-PerCP-Cy5-5-A&#39;,
+       &#39;Time&#39;, &#39;33D1&#39;, &#39;Allergin-1&#39;, &#39;B7-H4&#39;, &#39;CD1d&#39;, &#39;CD103&#39;, &#39;CD105&#39;,
+       &#39;CD106&#39;, &#39;CD107a (Lamp-1)&#39;, &#39;CD107b (Mac-3)&#39;, &#39;CD115&#39;,
+       &#39;Isotype_rIgG2b&#39;, &#39;Isotype_mIgG1&#39;, &#39;Isotype_AHIgG&#39;,
+       &#39;Isotype_rIgG2a&#39;, &#39;Isotype_rIgG1&#39;], dtype=object)
+</pre></div></div>
+</div>
+<p>Let’s move some of the features to silent, so they are not considered for dimensionality reduction or clustering:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_to_silence</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-W&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-W&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FJComp-PE(yg)-A&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_rIgG2b&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_mIgG1&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_AHIgG&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Isotype_rIgG2a&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_rIgG1&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">]</span>
+
+<span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">move_features_to_silent</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">,</span> <span class="n">features_to_silence</span><span class="p">)</span>
+<span class="n">sub_p_adata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 15000 × 24
+    obs: &#39;cell_number&#39;, &#39;batch&#39;
+    var: &#39;name&#39;, &#39;USE_LOGICLE&#39;, &#39;LOGICLE_T&#39;, &#39;LOGICLE_W&#39;, &#39;LOGICLE_M&#39;, &#39;LOGICLE_A&#39;, &#39;LOGICLE_APPLIED&#39;, &#39;IMPUTED&#39;
+    uns: &#39;obs_file_origin&#39;, &#39;silent_var&#39;
+    obsm: &#39;silent&#39;
+</pre></div></div>
+</div>
+<p>As you can see, the AnnData object now contains an obsm key ‘silent’ to store the event values for the silenced features, as well as a ‘silent_var’ pandas.DataFrame in the AnnData.uns attribute.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;silent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FSC-A</th>
+      <th>FSC-H</th>
+      <th>FSC-W</th>
+      <th>SSC-A</th>
+      <th>SSC-H</th>
+      <th>SSC-W</th>
+      <th>FJComp-PE(yg)-A</th>
+      <th>Isotype_rIgG2b</th>
+      <th>Isotype_mIgG1</th>
+      <th>Isotype_AHIgG</th>
+      <th>Isotype_rIgG2a</th>
+      <th>Isotype_rIgG1</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>F0:5</th>
+      <td>44290.410156</td>
+      <td>48154.0</td>
+      <td>60277.785156</td>
+      <td>3829.130127</td>
+      <td>3626.0</td>
+      <td>0.590961</td>
+      <td>0.258807</td>
+      <td>0.252803</td>
+      <td>0.247846</td>
+      <td>0.250860</td>
+      <td>0.246098</td>
+      <td>0.256654</td>
+      <td>0.250912</td>
+    </tr>
+    <tr>
+      <th>F0:113</th>
+      <td>33078.601562</td>
+      <td>28222.0</td>
+      <td>76813.804688</td>
+      <td>9273.810547</td>
+      <td>7514.0</td>
+      <td>0.607835</td>
+      <td>0.245435</td>
+      <td>0.235438</td>
+      <td>0.238048</td>
+      <td>0.257867</td>
+      <td>0.249520</td>
+      <td>0.250518</td>
+      <td>0.251031</td>
+    </tr>
+    <tr>
+      <th>F0:137</th>
+      <td>141369.265625</td>
+      <td>105760.0</td>
+      <td>87601.898438</td>
+      <td>26223.259766</td>
+      <td>22176.0</td>
+      <td>0.603203</td>
+      <td>0.195596</td>
+      <td>0.230424</td>
+      <td>0.277973</td>
+      <td>0.244754</td>
+      <td>0.227513</td>
+      <td>0.227703</td>
+      <td>0.251047</td>
+    </tr>
+    <tr>
+      <th>F0:375</th>
+      <td>86083.023438</td>
+      <td>62675.0</td>
+      <td>90012.554688</td>
+      <td>9570.060547</td>
+      <td>7683.0</td>
+      <td>0.608832</td>
+      <td>0.238332</td>
+      <td>0.248544</td>
+      <td>0.235057</td>
+      <td>0.245086</td>
+      <td>0.249628</td>
+      <td>0.247355</td>
+      <td>0.251229</td>
+    </tr>
+    <tr>
+      <th>F0:430</th>
+      <td>126470.789062</td>
+      <td>99065.0</td>
+      <td>83666.179688</td>
+      <td>7711.190430</td>
+      <td>6665.0</td>
+      <td>0.600839</td>
+      <td>0.213695</td>
+      <td>0.249908</td>
+      <td>0.270671</td>
+      <td>0.260307</td>
+      <td>0.245320</td>
+      <td>0.248516</td>
+      <td>0.251268</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;silent_var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>USE_LOGICLE</th>
+      <th>LOGICLE_T</th>
+      <th>LOGICLE_W</th>
+      <th>LOGICLE_M</th>
+      <th>LOGICLE_A</th>
+      <th>LOGICLE_APPLIED</th>
+      <th>IMPUTED</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>FSC-A</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FSC-H</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FSC-W</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SSC-A</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SSC-H</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Step-9:-Dimensionality-Reduction">
+<h2>Step 9: Dimensionality Reduction<a class="headerlink" href="#Step-9:-Dimensionality-Reduction" title="Permalink to this headline">¶</a></h2>
+<p>Now that the InfinityFlow results are in an AnnData object, we can use the tools provided by Scanpy to perform downstream analysis.</p>
+<section id="PCA">
+<h3>PCA<a class="headerlink" href="#PCA" title="Permalink to this headline">¶</a></h3>
+<p>If there are a lot of features in the dataset, it may be beneficial to use Principal component analysis to reduce the feature space to a smaller set that captures most of the variation observed.</p>
+<p>We can apply the <code class="docutils literal notranslate"><span class="pre">scanpy.tl.pca</span></code> function to carry this out on our InfinityFlow AnnData object. <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.make_pca_elbo_plot</span></code> can then be used to generate an elbo plot so we can estimate how few features we can get away with using that capture most of the variation in the dataset:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
+<span class="c1"># It is useful to save the features that were used</span>
+<span class="c1"># at the time the PCA function was called, as the</span>
+<span class="c1"># silenced features may change when the object is</span>
+<span class="c1"># reloaded.</span>
+<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;pca_features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Make the elbo plot:</span>
+<span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">make_pca_elbo_plot</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">output_paths</span><span class="o">=</span><span class="n">output_paths</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pyInfinityFlow_API_Tutorial_35_0.png" src="../_images/notebooks_pyInfinityFlow_API_Tutorial_35_0.png" />
+</div>
+</div>
+<p>Here, we can see that with the first 15 Principal components, we capture most of the explained variance in the data. So for downstream analysis steps, we will select to use 15 PCs.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">make_pca_elbo_plot</span></code> function will save this PC Elbo Plot to the ‘QC’ directory of the output_dir that we specified in the <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.setup_output_directories</span></code> function. This produced the <code class="docutils literal notranslate"><span class="pre">output_paths</span></code> dictionary. We can check to see where the ‘QC’ folder in the <code class="docutils literal notranslate"><span class="pre">output_paths</span></code> on our machine is with the following:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List the keys available in output_paths</span>
+<span class="n">output_paths</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([&#39;output_regression_path&#39;, &#39;output_umap_feature_plot_path&#39;, &#39;clustering&#39;, &#39;qc&#39;, &#39;output_umap_bc_feature_plot_path&#39;])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the &#39;qc&#39; directory path</span>
+<span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;qc&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;/media/kyle_ssd1/outputs/QC&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="UMAP">
+<h3>UMAP<a class="headerlink" href="#UMAP" title="Permalink to this headline">¶</a></h3>
+<p>UMAP is a very popular method for dimensionality reduction, particularly for the practice of reducing the feature space to 2-Dimensions to view that data as a scatterplot. With this, we can observe the global structure of the data to get an idea of what groups of observations exist. In the context of Flow Cytometry, we can also cluster the data to identify cell types based on surface marker phenotypes.</p>
+<p>To carry out UMAP 2D-Dimensionality reduction, we can again use scanpy. First, we need to generate aa estimate of the adjacency matrix, using the <code class="docutils literal notranslate"><span class="pre">scanpy.pp.neighbors</span></code> function, which will help the UMAP function optimize where to put the observations in our dataset on the reduced dimension space. We will specify the function to use the first 15 PCs:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">,</span> <span class="n">n_pcs</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">sub_p_adata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 15000 × 24
+    obs: &#39;cell_number&#39;, &#39;batch&#39;
+    var: &#39;name&#39;, &#39;USE_LOGICLE&#39;, &#39;LOGICLE_T&#39;, &#39;LOGICLE_W&#39;, &#39;LOGICLE_M&#39;, &#39;LOGICLE_A&#39;, &#39;LOGICLE_APPLIED&#39;, &#39;IMPUTED&#39;
+    uns: &#39;obs_file_origin&#39;, &#39;silent_var&#39;, &#39;pca&#39;, &#39;pca_features&#39;, &#39;neighbors&#39;
+    obsm: &#39;silent&#39;, &#39;X_pca&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;distances&#39;, &#39;connectivities&#39;
+</pre></div></div>
+</div>
+<p>As you can see, this added the ‘neighbors’ key to the sub_p_adata.uns attribute, as well as the ‘distances’ and ‘connectivities’ to the sub_p_adata.obsp attribute.</p>
+<p>We can then call the <code class="docutils literal notranslate"><span class="pre">scanpy.tl.umap</span></code> function to generate the low dimensional embedding:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
+<span class="n">sub_p_adata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 15000 × 24
+    obs: &#39;cell_number&#39;, &#39;batch&#39;
+    var: &#39;name&#39;, &#39;USE_LOGICLE&#39;, &#39;LOGICLE_T&#39;, &#39;LOGICLE_W&#39;, &#39;LOGICLE_M&#39;, &#39;LOGICLE_A&#39;, &#39;LOGICLE_APPLIED&#39;, &#39;IMPUTED&#39;
+    uns: &#39;obs_file_origin&#39;, &#39;silent_var&#39;, &#39;pca&#39;, &#39;pca_features&#39;, &#39;neighbors&#39;, &#39;umap&#39;
+    obsm: &#39;silent&#39;, &#39;X_pca&#39;, &#39;X_umap&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;distances&#39;, &#39;connectivities&#39;
+</pre></div></div>
+</div>
+<p>We will then move the 2 UMAP vectors to the sub_p_adata.obs DataFrame:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;umap-x&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;X_umap&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;umap-y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;X_umap&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cell_number</th>
+      <th>batch</th>
+      <th>umap-x</th>
+      <th>umap-y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>F0:5</th>
+      <td>5</td>
+      <td>33D1</td>
+      <td>-3.683015</td>
+      <td>13.849557</td>
+    </tr>
+    <tr>
+      <th>F0:113</th>
+      <td>113</td>
+      <td>33D1</td>
+      <td>13.346261</td>
+      <td>0.064281</td>
+    </tr>
+    <tr>
+      <th>F0:137</th>
+      <td>137</td>
+      <td>33D1</td>
+      <td>7.532703</td>
+      <td>-3.680286</td>
+    </tr>
+    <tr>
+      <th>F0:375</th>
+      <td>375</td>
+      <td>33D1</td>
+      <td>9.984137</td>
+      <td>7.248507</td>
+    </tr>
+    <tr>
+      <th>F0:430</th>
+      <td>430</td>
+      <td>33D1</td>
+      <td>12.682547</td>
+      <td>0.622352</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Step-10:-Making-Feature-Plots">
+<h2>Step 10: Making Feature Plots<a class="headerlink" href="#Step-10:-Making-Feature-Plots" title="Permalink to this headline">¶</a></h2>
+<p>Next, we will make feature plots of each feature currently stored in the <code class="docutils literal notranslate"><span class="pre">sub_p_adata.var</span></code> space (not the silenced features). The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.save_umap_figures_all_features</span></code> function is called on the InfinityFlow AnnData object. Note, we can include the <code class="docutils literal notranslate"><span class="pre">background_corrected_data</span></code> to also plot the background corrected features.</p>
+<p>This function will save the original prediction feature figures to the ‘output_umap_feature_plot_path’ and the background corrected feature figures to the ‘output_umap_bc_feature_plot_path’ in the <code class="docutils literal notranslate"><span class="pre">output_paths</span></code> dictionary:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timings_6</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">save_umap_figures_all_features</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">background_corrected_data</span> <span class="o">=</span> <span class="n">background_corrected_data</span><span class="p">,</span>
+    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
+    <span class="n">output_paths</span> <span class="o">=</span> <span class="n">output_paths</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Working on plotting feature 33D1...
+Working on plotting feature Allergin-1...
+Working on plotting feature B7-H4...
+Working on plotting feature CD103...
+Working on plotting feature CD105...
+Working on plotting feature CD106...
+Working on plotting feature CD107a (Lamp-1)...
+Working on plotting feature CD107b (Mac-3)...
+Working on plotting feature CD115...
+Working on plotting feature CD1d...
+Working on plotting feature FJComp-APC-A...
+Working on plotting feature FJComp-APC-eFlour780-A...
+Working on plotting feature FJComp-AlexaFluor700-A...
+Working on plotting feature FJComp-BUV395-A...
+Working on plotting feature FJComp-BUV737-A...
+Working on plotting feature FJComp-BV421-A...
+Working on plotting feature FJComp-BV510-A...
+Working on plotting feature FJComp-BV605-A...
+Working on plotting feature FJComp-BV650-A...
+Working on plotting feature FJComp-BV711-A...
+Working on plotting feature FJComp-BV786-A...
+Working on plotting feature FJComp-GFP-A...
+Working on plotting feature FJComp-PE-Cy7(yg)-A...
+Working on plotting feature FJComp-PerCP-Cy5-5-A...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pyInfinityFlow_API_Tutorial_46_1.png" src="../_images/notebooks_pyInfinityFlow_API_Tutorial_46_1.png" />
+</div>
+</div>
+</section>
+<section id="Step-11:-Clustering-the-Data">
+<h2>Step 11: Clustering the Data<a class="headerlink" href="#Step-11:-Clustering-the-Data" title="Permalink to this headline">¶</a></h2>
+<p>Next, we can try to cluster the events from our FCS data. The Leiden algorithm is a popular method for clustering data, and is provided in the <code class="docutils literal notranslate"><span class="pre">scanpy.tl.leiden</span></code> function. It will utilize the estimated adjacency matrix produced by <code class="docutils literal notranslate"><span class="pre">scanpy.pp.neighbors</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">leiden</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
+<span class="n">sub_p_adata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 15000 × 24
+    obs: &#39;cell_number&#39;, &#39;batch&#39;, &#39;umap-x&#39;, &#39;umap-y&#39;, &#39;leiden&#39;
+    var: &#39;name&#39;, &#39;USE_LOGICLE&#39;, &#39;LOGICLE_T&#39;, &#39;LOGICLE_W&#39;, &#39;LOGICLE_M&#39;, &#39;LOGICLE_A&#39;, &#39;LOGICLE_APPLIED&#39;, &#39;IMPUTED&#39;
+    uns: &#39;obs_file_origin&#39;, &#39;silent_var&#39;, &#39;pca&#39;, &#39;pca_features&#39;, &#39;neighbors&#39;, &#39;umap&#39;, &#39;leiden&#39;
+    obsm: &#39;silent&#39;, &#39;X_pca&#39;, &#39;X_umap&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;distances&#39;, &#39;connectivities&#39;
+</pre></div></div>
+</div>
+<p>You can see that this function added the ‘leiden’ feature to our sub_p_adata.obs DataFrame, as well as the ‘leiden’ key to the sub_p_adata.uns attribute to store the parameters provided to the Leiden clustering algorithm.</p>
+<section id="Specify-Colors-for-Clusters">
+<h3>Specify Colors for Clusters<a class="headerlink" href="#Specify-Colors-for-Clusters" title="Permalink to this headline">¶</a></h3>
+<p>Let’s specify a set of colors to use for later plotting the clusters. The <code class="docutils literal notranslate"><span class="pre">Plotting_Utilities.assign_rainbow_colors_to_groups</span></code> function provides a quick way to assign colors to a set of cluster assignments:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyInfinityFlow.Plotting_Utilities</span> <span class="kn">import</span> <span class="n">assign_rainbow_colors_to_groups</span>
+<span class="n">groups_to_colors</span> <span class="o">=</span> <span class="n">assign_rainbow_colors_to_groups</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;leiden&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;groups_to_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">groups_to_colors</span>
+<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;groups_to_color&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;0&#39;: &#39;#8000ff&#39;,
+ &#39;1&#39;: &#39;#6c1fff&#39;,
+ &#39;10&#39;: &#39;#5641fd&#39;,
+ &#39;11&#39;: &#39;#4062fa&#39;,
+ &#39;12&#39;: &#39;#2c7ef7&#39;,
+ &#39;13&#39;: &#39;#169bf2&#39;,
+ &#39;14&#39;: &#39;#00b5eb&#39;,
+ &#39;15&#39;: &#39;#14cae5&#39;,
+ &#39;16&#39;: &#39;#2adddd&#39;,
+ &#39;17&#39;: &#39;#40ecd4&#39;,
+ &#39;18&#39;: &#39;#54f6cb&#39;,
+ &#39;19&#39;: &#39;#6afdc0&#39;,
+ &#39;2&#39;: &#39;#80ffb4&#39;,
+ &#39;20&#39;: &#39;#94fda8&#39;,
+ &#39;21&#39;: &#39;#abf69b&#39;,
+ &#39;22&#39;: &#39;#c0eb8d&#39;,
+ &#39;23&#39;: &#39;#d4dd80&#39;,
+ &#39;3&#39;: &#39;#ebca70&#39;,
+ &#39;4&#39;: &#39;#ffb360&#39;,
+ &#39;5&#39;: &#39;#ff9b52&#39;,
+ &#39;6&#39;: &#39;#ff7e41&#39;,
+ &#39;7&#39;: &#39;#ff5f30&#39;,
+ &#39;8&#39;: &#39;#ff4121&#39;,
+ &#39;9&#39;: &#39;#ff1f10&#39;}
+</pre></div></div>
+</div>
+<p>This simply set a hexadecimal color value to each of the ‘leiden’ clusters and stored the mapping as a dictionary to later use for plotting the clusters.</p>
+</section>
+<section id="Plotting-Leiden-clusters-over-UMAP">
+<h3>Plotting Leiden clusters over UMAP<a class="headerlink" href="#Plotting-Leiden-clusters-over-UMAP" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have colors associated with our Leiden clusters in the <code class="docutils literal notranslate"><span class="pre">sub_p_adata.uns['groups_to_color']</span></code> attribute, we can project those clusters onto the 2D-UMAP to get an idea of where each cluster sits in the reduced dimensional space.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot_leiden_clusters_over_umap</span></code> function will take in the InfinityFlow AnnData object and the <code class="docutils literal notranslate"><span class="pre">output_paths</span></code> dictionary and save this UMAP to the ‘clustering’ directory in the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyInfinityFlow.Plotting_Utilities</span> <span class="kn">import</span> <span class="n">plot_leiden_clusters_over_umap</span>
+
+<span class="n">plot_leiden_clusters_over_umap</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">output_paths</span><span class="o">=</span><span class="n">output_paths</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pyInfinityFlow_API_Tutorial_54_0.png" src="../_images/notebooks_pyInfinityFlow_API_Tutorial_54_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clustering directory</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/media/kyle_ssd1/outputs/clustering
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Step-12:-Find-Markers-for-Clusters">
+<h2>Step 12: Find Markers for Clusters<a class="headerlink" href="#Step-12:-Find-Markers-for-Clusters" title="Permalink to this headline">¶</a></h2>
+<p>We can use the MarkerFinder algorithm to assign each feature to a cluster which it best uniquely identifies. This is provided as the <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.find_markers_from_anndata</span></code> function, and works directly on the InfinityFlow formatted AnnData object.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">markers_df</span><span class="p">,</span> <span class="n">cell_assignments</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">find_markers_from_anndata</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">output_paths</span><span class="o">=</span><span class="n">output_paths</span><span class="p">,</span>
+    <span class="n">groups_to_colors</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;groups_to_color&#39;</span><span class="p">],</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Finding markers for Infinity Flow object...
+Plotting markers...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_pyInfinityFlow_API_Tutorial_57_1.png" src="../_images/notebooks_pyInfinityFlow_API_Tutorial_57_1.png" />
+</div>
+</div>
+<p>Note, this will save a heatmap of the markers vs. clusters in the <code class="docutils literal notranslate"><span class="pre">output_paths['clustering']</span></code> directory, as well as a csv file with the MarkerFinder results:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clustering outputs directory</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">])</span>
+<span class="c1"># Contents of the directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/media/kyle_ssd1/outputs/clustering
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;cluster_markers.csv&#39;, &#39;cluster_markers.pdf&#39;, &#39;Leiden_Clusters_over_UMAP.png&#39;]
+</pre></div></div>
+</div>
+<p>We can also now plot the Leiden clusters over the UMAP plot to get an idea of where each cluster sits in the reduced dimensional space:</p>
+</section>
+<section id="Step-13:-Moving-Features-out-of-Silent">
+<h2>Step 13: Moving Features out of Silent<a class="headerlink" href="#Step-13:-Moving-Features-out-of-Silent" title="Permalink to this headline">¶</a></h2>
+<p>After we have performed dimensionality reduction and clustering with our features of interest, we may want to move the features that we previously silenced back into the AnnData object. This will make it so when we save our final FCS file, we can include features we may have silenced (Eg. ‘Time’ or ‘FSC-A’) that we want to add back.</p>
+<p>We can list what features are currently silenced:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;silent_var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;SSC-H&#39;, &#39;SSC-W&#39;,
+       &#39;FJComp-PE(yg)-A&#39;, &#39;Isotype_rIgG2b&#39;, &#39;Isotype_mIgG1&#39;,
+       &#39;Isotype_AHIgG&#39;, &#39;Isotype_rIgG2a&#39;, &#39;Isotype_rIgG1&#39;, &#39;Time&#39;],
+      dtype=object)
+</pre></div></div>
+</div>
+<p>Let’s move the ‘FSC-A’, ‘FSC-H’, ‘FSC-W’, ‘SSC-A’, ‘SSC-H’, and ‘SSC-W’ features out if of the silenced space. The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.move_features_out_of_silent</span></code> function will take in our AnnData object along with a list of features to move out of silent:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_to_unsilence</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-W&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-W&#39;</span><span class="p">]</span>
+<span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">move_features_out_of_silent</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">features_to_unsilence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now these features are back in the AnnData.X and AnnData.var attributes!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>USE_LOGICLE</th>
+      <th>LOGICLE_T</th>
+      <th>LOGICLE_W</th>
+      <th>LOGICLE_M</th>
+      <th>LOGICLE_A</th>
+      <th>LOGICLE_APPLIED</th>
+      <th>IMPUTED</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>33D1</th>
+      <td>InfinityMarker_33D1</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>Allergin-1</th>
+      <td>InfinityMarker_Allergin-1</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>B7-H4</th>
+      <td>InfinityMarker_B7-H4</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD103</th>
+      <td>InfinityMarker_CD103</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD105</th>
+      <td>InfinityMarker_CD105</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD106</th>
+      <td>InfinityMarker_CD106</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD107a (Lamp-1)</th>
+      <td>InfinityMarker_CD107a (Lamp-1)</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD107b (Mac-3)</th>
+      <td>InfinityMarker_CD107b (Mac-3)</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD115</th>
+      <td>InfinityMarker_CD115</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD1d</th>
+      <td>InfinityMarker_CD1d</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>FJComp-APC-A</th>
+      <td>CD69-CD301b</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-APC-eFlour780-A</th>
+      <td>Zombie</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-AlexaFluor700-A</th>
+      <td>MHCII</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BUV395-A</th>
+      <td>CD4</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BUV737-A</th>
+      <td>CD44</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BV421-A</th>
+      <td>CD8</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BV510-A</th>
+      <td>CD11c</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BV605-A</th>
+      <td>CD11b</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BV650-A</th>
+      <td>F480</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BV711-A</th>
+      <td>Ly6C</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-BV786-A</th>
+      <td>Lineage</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-GFP-A</th>
+      <td>CD45a488</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-PE-Cy7(yg)-A</th>
+      <td>CD24</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FJComp-PerCP-Cy5-5-A</th>
+      <td>CD103</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FSC-A</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FSC-H</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>FSC-W</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SSC-A</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SSC-H</th>
+      <td></td>
+      <td>False</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>SSC-W</th>
+      <td></td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Step-14:-Saving-Regression-Outputs">
+<h2>Step 14: Saving Regression Outputs<a class="headerlink" href="#Step-14:-Saving-Regression-Outputs" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our final InfinityFlow object stored in AnnData format, we can save it to storage in different formats for later downstream analyses.</p>
+<section id="h5ad-File">
+<h3>h5ad File<a class="headerlink" href="#h5ad-File" title="Permalink to this headline">¶</a></h3>
+<p>The h5ad file will preserve the structure of the AnnData object, and let’s us quickly load the data for future processing with tools like Scanpy. We can simply use the <code class="docutils literal notranslate"><span class="pre">.write</span></code> method on the AnnData object to write the file as an h5ad file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h5_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;output_regression_path&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;InfinityFlow_object_logicle_normalized.h5ad&quot;</span><span class="p">)</span>
+
+<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">h5_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">output_paths['output_regression_path']</span></code> can provide the traditional path set up with the output_paths directory to save the file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eg. Using the output_paths directory</span>
+<span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;output_regression_path&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;/media/kyle_ssd1/outputs/regression_results&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Feather-File">
+<h3>Feather File<a class="headerlink" href="#Feather-File" title="Permalink to this headline">¶</a></h3>
+<p>The Feather file format is commonly used for DataFrame objects. We will lose some of the information present in the AnnData object, but we will be able to very quickly load the DataFrame back into memory:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.anndata_to_df</span></code> function provides a quick way to convert the AnnData object to a DataFrame. We can then reset the index and save the DataFrame as a Feather file with the <code class="docutils literal notranslate"><span class="pre">.to_feather</span></code> method provided by Pandas:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an output path for the DataFrame</span>
+<span class="n">feather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;output_regression_path&#39;</span><span class="p">],</span>
+    <span class="s2">&quot;InfinityFlow_object_logicle_normalized.fea&quot;</span><span class="p">)</span>
+<span class="c1"># Convert to DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">anndata_to_df</span><span class="p">(</span>\
+    <span class="n">input_anndata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">use_raw_feature_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">add_index_names</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Save as Feather file</span>
+<span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_feather</span><span class="p">(</span><span class="n">feather_path</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>33D1:InfinityMarker_33D1</th>
+      <th>Allergin-1:InfinityMarker_Allergin-1</th>
+      <th>B7-H4:InfinityMarker_B7-H4</th>
+      <th>CD103:InfinityMarker_CD103</th>
+      <th>CD105:InfinityMarker_CD105</th>
+      <th>CD106:InfinityMarker_CD106</th>
+      <th>CD107a (Lamp-1):InfinityMarker_CD107a (Lamp-1)</th>
+      <th>CD107b (Mac-3):InfinityMarker_CD107b (Mac-3)</th>
+      <th>CD115:InfinityMarker_CD115</th>
+      <th>CD1d:InfinityMarker_CD1d</th>
+      <th>...</th>
+      <th>FJComp-BV786-A:Lineage</th>
+      <th>FJComp-GFP-A:CD45a488</th>
+      <th>FJComp-PE-Cy7(yg)-A:CD24</th>
+      <th>FJComp-PerCP-Cy5-5-A:CD103</th>
+      <th>FSC-A:</th>
+      <th>FSC-H:</th>
+      <th>FSC-W:</th>
+      <th>SSC-A:</th>
+      <th>SSC-H:</th>
+      <th>SSC-W:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>F0:5</th>
+      <td>0.252006</td>
+      <td>0.221211</td>
+      <td>0.254082</td>
+      <td>0.249303</td>
+      <td>0.389210</td>
+      <td>0.249804</td>
+      <td>0.253386</td>
+      <td>0.300907</td>
+      <td>0.253446</td>
+      <td>0.307087</td>
+      <td>...</td>
+      <td>0.235586</td>
+      <td>0.223836</td>
+      <td>0.272052</td>
+      <td>0.276451</td>
+      <td>44290.410156</td>
+      <td>48154.0</td>
+      <td>60277.785156</td>
+      <td>3829.130127</td>
+      <td>3626.0</td>
+      <td>0.590961</td>
+    </tr>
+    <tr>
+      <th>F0:113</th>
+      <td>0.245084</td>
+      <td>0.211464</td>
+      <td>0.234267</td>
+      <td>0.227056</td>
+      <td>0.261304</td>
+      <td>0.243082</td>
+      <td>0.286747</td>
+      <td>0.282273</td>
+      <td>0.246122</td>
+      <td>0.242309</td>
+      <td>...</td>
+      <td>0.402271</td>
+      <td>0.503064</td>
+      <td>0.489275</td>
+      <td>0.321054</td>
+      <td>33078.601562</td>
+      <td>28222.0</td>
+      <td>76813.804688</td>
+      <td>9273.810547</td>
+      <td>7514.0</td>
+      <td>0.607835</td>
+    </tr>
+    <tr>
+      <th>F0:137</th>
+      <td>0.241113</td>
+      <td>0.245277</td>
+      <td>0.229664</td>
+      <td>0.220823</td>
+      <td>0.250333</td>
+      <td>0.235402</td>
+      <td>0.419354</td>
+      <td>0.373128</td>
+      <td>0.240887</td>
+      <td>0.404543</td>
+      <td>...</td>
+      <td>0.416697</td>
+      <td>0.678155</td>
+      <td>0.305735</td>
+      <td>0.509343</td>
+      <td>141369.265625</td>
+      <td>105760.0</td>
+      <td>87601.898438</td>
+      <td>26223.259766</td>
+      <td>22176.0</td>
+      <td>0.603203</td>
+    </tr>
+    <tr>
+      <th>F0:375</th>
+      <td>0.244557</td>
+      <td>0.206941</td>
+      <td>0.245322</td>
+      <td>0.241661</td>
+      <td>0.243205</td>
+      <td>0.244426</td>
+      <td>0.255690</td>
+      <td>0.252353</td>
+      <td>0.249280</td>
+      <td>0.382239</td>
+      <td>...</td>
+      <td>0.296814</td>
+      <td>0.598728</td>
+      <td>0.494562</td>
+      <td>0.217368</td>
+      <td>86083.023438</td>
+      <td>62675.0</td>
+      <td>90012.554688</td>
+      <td>9570.060547</td>
+      <td>7683.0</td>
+      <td>0.608832</td>
+    </tr>
+    <tr>
+      <th>F0:430</th>
+      <td>0.258684</td>
+      <td>0.223491</td>
+      <td>0.252599</td>
+      <td>0.246665</td>
+      <td>0.267524</td>
+      <td>0.244834</td>
+      <td>0.287726</td>
+      <td>0.294017</td>
+      <td>0.254916</td>
+      <td>0.273731</td>
+      <td>...</td>
+      <td>0.373348</td>
+      <td>0.558255</td>
+      <td>0.484305</td>
+      <td>0.337422</td>
+      <td>126470.789062</td>
+      <td>99065.0</td>
+      <td>83666.179688</td>
+      <td>7711.190430</td>
+      <td>6665.0</td>
+      <td>0.600839</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div></div>
+</div>
+</section>
+<section id="FCS-File">
+<h3>FCS File<a class="headerlink" href="#FCS-File" title="Permalink to this headline">¶</a></h3>
+<p>After converting the InfinityFlow object back into an FCS file, we can then open the file in traditional Flow Cytometry Analysis software tools (Eg. <a class="reference external" href="https://www.flowjo.com/solutions/flowjo">Flowjo</a>) to perform different custom downstream analyses, like gating to certain populations.</p>
+<section id="Inverting-the-Logicle-Normalization">
+<h4>Inverting the Logicle Normalization<a class="headerlink" href="#Inverting-the-Logicle-Normalization" title="Permalink to this headline">¶</a></h4>
+<p>However, since we used Logicle normalization to more accurately carry out regression and perform dimensionality reduction and clustering, we should invert the Logicle normalization back to the original fluorescence intensity measurements. The pyInfinityFlow format of the AnnData object stores the method for carrying out the Logicle normalization and inverting it in the .var attribute:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>USE_LOGICLE</th>
+      <th>LOGICLE_T</th>
+      <th>LOGICLE_W</th>
+      <th>LOGICLE_M</th>
+      <th>LOGICLE_A</th>
+      <th>LOGICLE_APPLIED</th>
+      <th>IMPUTED</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>33D1</th>
+      <td>InfinityMarker_33D1</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>Allergin-1</th>
+      <td>InfinityMarker_Allergin-1</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>B7-H4</th>
+      <td>InfinityMarker_B7-H4</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD103</th>
+      <td>InfinityMarker_CD103</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CD105</th>
+      <td>InfinityMarker_CD105</td>
+      <td>True</td>
+      <td>3000000.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We can invert the Logicle normalization on the features that have the <code class="docutils literal notranslate"><span class="pre">USE_LOGICLE</span></code> column set to <code class="docutils literal notranslate"><span class="pre">True</span></code> by using the <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.apply_inverse_logicle_to_anndata</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">apply_inverse_logicle_to_anndata</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
+<span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">anndata_to_df</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>33D1</th>
+      <th>Allergin-1</th>
+      <th>B7-H4</th>
+      <th>CD103</th>
+      <th>CD105</th>
+      <th>CD106</th>
+      <th>CD107a (Lamp-1)</th>
+      <th>CD107b (Mac-3)</th>
+      <th>CD115</th>
+      <th>CD1d</th>
+      <th>...</th>
+      <th>FJComp-BV786-A</th>
+      <th>FJComp-GFP-A</th>
+      <th>FJComp-PE-Cy7(yg)-A</th>
+      <th>FJComp-PerCP-Cy5-5-A</th>
+      <th>FSC-A</th>
+      <th>FSC-H</th>
+      <th>FSC-W</th>
+      <th>SSC-A</th>
+      <th>SSC-H</th>
+      <th>SSC-W</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>F0:5</th>
+      <td>110.998680</td>
+      <td>-1611.187378</td>
+      <td>225.875824</td>
+      <td>-38.550339</td>
+      <td>9981.195312</td>
+      <td>-10.849790</td>
+      <td>187.352631</td>
+      <td>2918.396240</td>
+      <td>190.660049</td>
+      <td>3302.118652</td>
+      <td>...</td>
+      <td>-799.727173</td>
+      <td>-1461.367188</td>
+      <td>1228.294067</td>
+      <td>1477.697266</td>
+      <td>44290.410156</td>
+      <td>48154.0</td>
+      <td>60277.785156</td>
+      <td>3829.130127</td>
+      <td>3626.0</td>
+      <td>69207.367188</td>
+    </tr>
+    <tr>
+      <th>F0:113</th>
+      <td>-272.058624</td>
+      <td>-2176.202148</td>
+      <td>-873.436096</td>
+      <td>-1278.713989</td>
+      <td>626.500122</td>
+      <td>-382.992645</td>
+      <td>2071.328857</td>
+      <td>1811.447266</td>
+      <td>-214.581619</td>
+      <td>-425.844513</td>
+      <td>...</td>
+      <td>11457.474609</td>
+      <td>30567.076172</td>
+      <td>26846.810547</td>
+      <td>4209.315430</td>
+      <td>33078.601562</td>
+      <td>28222.0</td>
+      <td>76813.804688</td>
+      <td>9273.810547</td>
+      <td>7514.0</td>
+      <td>80884.835938</td>
+    </tr>
+    <tr>
+      <th>F0:137</th>
+      <td>-492.217468</td>
+      <td>-261.397980</td>
+      <td>-1131.551514</td>
+      <td>-1633.387573</td>
+      <td>18.449854</td>
+      <td>-810.031494</td>
+      <td>13642.258789</td>
+      <td>8355.895508</td>
+      <td>-504.758484</td>
+      <td>11730.511719</td>
+      <td>...</td>
+      <td>13281.506836</td>
+      <td>154731.609375</td>
+      <td>3217.331787</td>
+      <td>32420.519531</td>
+      <td>141369.265625</td>
+      <td>105760.0</td>
+      <td>87601.898438</td>
+      <td>26223.259766</td>
+      <td>22176.0</td>
+      <td>77496.765625</td>
+    </tr>
+    <tr>
+      <th>F0:375</th>
+      <td>-301.269897</td>
+      <td>-2443.946289</td>
+      <td>-258.863922</td>
+      <td>-461.783051</td>
+      <td>-376.178040</td>
+      <td>-308.487518</td>
+      <td>314.955200</td>
+      <td>130.189346</td>
+      <td>-39.852901</td>
+      <td>9252.339844</td>
+      <td>...</td>
+      <td>2669.240967</td>
+      <td>74358.414062</td>
+      <td>28219.044922</td>
+      <td>-1832.219971</td>
+      <td>86083.023438</td>
+      <td>62675.0</td>
+      <td>90012.554688</td>
+      <td>9570.060547</td>
+      <td>7683.0</td>
+      <td>81632.640625</td>
+    </tr>
+    <tr>
+      <th>F0:430</th>
+      <td>480.960388</td>
+      <td>-1480.978882</td>
+      <td>143.819992</td>
+      <td>-184.526932</td>
+      <td>973.659363</td>
+      <td>-285.889282</td>
+      <td>2128.691162</td>
+      <td>2501.141357</td>
+      <td>272.047882</td>
+      <td>1323.218140</td>
+      <td>...</td>
+      <td>8376.817383</td>
+      <td>51127.210938</td>
+      <td>25615.402344</td>
+      <td>5362.881836</td>
+      <td>126470.789062</td>
+      <td>99065.0</td>
+      <td>83666.179688</td>
+      <td>7711.190430</td>
+      <td>6665.0</td>
+      <td>75823.031250</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div></div>
+</div>
+<p>You can see that the fluorescence derived values are now no longer between 0 and 1, indicating that the Logicle normalization has been inverted.</p>
+<p>We can then save the data as an FCS file with the <code class="docutils literal notranslate"><span class="pre">InfinityFlow_Utilities.save_fcs_flow_anndata</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">save_fcs_flow_anndata</span><span class="p">(</span>\
+    <span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="p">,</span>
+    <span class="n">background_corrected_data</span> <span class="o">=</span> <span class="n">background_corrected_data</span><span class="p">,</span>
+    <span class="n">background_corrected_var</span> <span class="o">=</span> <span class="n">background_corrected_var</span><span class="p">,</span>
+    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
+    <span class="n">output_paths</span> <span class="o">=</span> <span class="n">output_paths</span><span class="p">,</span>
+    <span class="n">add_umap</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_logicle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Writing out base prediction values to fcs file...
+WARNING! No features required inverting logicle normalization at this time.
+Omitting spillover matrix...
+WARNING! TEXT segment value for key $P25S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P26S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P27S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P28S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P29S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P30S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P31S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P32S is empty. Excluding from written file.
+Writing out background-corrected prediction values to fcs file...
+Omitting spillover matrix...
+WARNING! TEXT segment value for key $P25S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P26S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P27S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P28S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P29S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P30S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P31S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P32S is empty. Excluding from written file.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;file_export&#39;: 2.1501059532165527}
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="Finish">
+<h2>Finish<a class="headerlink" href="#Finish" title="Permalink to this headline">¶</a></h2>
+<p>We have now carried out all of the steps of the analysis pipeline provided by pyInfinityFlow, using the API!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kyle Ferchen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

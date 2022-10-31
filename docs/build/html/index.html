@@ -40,6 +40,8 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools_tutorials.html">Tutorial - Command Line Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html">API Tutorial: Full pyInfinityFlow Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
@@ -94,25 +96,40 @@
 </style>
 <section id="pyinfinityflow">
 <h1>pyInfinityFlow<a class="headerlink" href="#pyinfinityflow" title="Permalink to this headline">¶</a></h1>
-<p><strong>pyInfinityFlow</strong> is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression. It is an adaptation of the <a class="reference external" href="https://github.com/ebecht/infinityFlow">original implementation in R</a> <a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><sup>1</sup></a> with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline.</p>
-<p>The package includes tools to read and write FCS files, following the FCS3.1 file standard</p>
-<p>Downstream analyses</p>
+<p><strong>pyInfinityFlow</strong> is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression. It is an adaptation of the <a class="reference external" href="https://github.com/ebecht/infinityFlow">original implementation in R</a><a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><sup>1</sup></a> with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline.</p>
+<p>The package includes tools to read and write FCS files, following the FCS3.1 file standard, into AnnData objects, allowing for easy downstream analysis of single-cell data with <a class="reference external" href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a><a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com"><sup>2</sup></a> and <a class="reference external" href="https://umap-learn.readthedocs.io/en/latest/index.html">UMAP</a><a class="reference external" href="https://arxiv.org/abs/1802.03426"><sup>3</sup></a>.</p>
+<p>Read more about the pyInfinityFlow package on its Read the Docs page!</p>
 <section id="graphical-summary">
 <h2>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Permalink to this headline">¶</a></h2>
 <p><img alt="graphical summary of pyinfinityflow workflow" src="_images/graphical_summary.png" /></p>
 </section>
 <section id="recommended-installation">
 <h2>Recommended Installation<a class="headerlink" href="#recommended-installation" title="Permalink to this headline">¶</a></h2>
+<p>It is recommended to set up a virtual environment to install the package.</p>
+<p>Creating a new conda environment and installing pyInfinityFlow:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create -n pyInfinityFlow python=3.8</span>
+<span class="go">conda activate pyInfinityFlow</span>
+
+<span class="go">pip install pyInfinityFlow</span>
+</pre></div>
+</div>
+<p>Then pyInfinityFlow will be installed in a conda environment named ‘pyInfinityFlow’.</p>
 </section>
 <section id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+<p>To run the pyInfinityFlow pipeline, we can use this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pyInfinityFlow --data_dir /home/kyle/Documents/GitHub/pyInfinityFlow/example_data/mouse_lung_dataset_subset/ \</span>
+<span class="go">    --out_dir /media/kyle_ssd1/example_outputs/ \</span>
+<span class="go">    --backbone_annotation /home/kyle/Documents/GitHub/pyInfinityFlow/example_data/mouse_lung_dataset_subset_backbone_anno.csv \</span>
+<span class="go">    --infinity_marker_annotation /home/kyle/Documents/GitHub/pyInfinityFlow/example_data/mouse_lung_dataset_subset_infinity_marker_anno.csv</span>
 </pre></div>
 </div>
 </section>
 <section id="selected-references">
 <h2>Selected References<a class="headerlink" href="#selected-references" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><font size="2"><sup>1</sup> Becht, E., Tolstrup, D., Dutertre, C. A., Morawski, P. A., Campbell, D. J., Ginhoux, F., … &amp; Headley, M. B. (2021). High-throughput single-cell quantification of hundreds of proteins using conventional flow cytometry and machine learning. Science advances, 7(39), eabg0505. </font></a></p>
+<p><a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com"><font size="2"><sup>2</sup> Wolf, F. A., Angerer, P., &amp; Theis, F. J. (2018). SCANPY: large-scale single-cell gene expression data analysis. Genome biology, 19(1), 1-5. </font></a></p>
+<p><a class="reference external" href="https://arxiv.org/abs/1802.03426"><font size="2"><sup>3</sup> McInnes, L., Healy, J., &amp; Melville, J. (2018). Umap: Uniform manifold approximation and projection for dimension reduction. arXiv preprint arXiv:1802.03426. </font></a></p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -120,6 +137,60 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#using-conda-virtual-environment-recommended">Using Conda Virtual Environment - <strong>RECOMMENDED</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#using-pip-alone">Using pip alone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#using-github-alone">Using GitHub alone</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools_tutorials.html">Tutorial - Command Line Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_line_tools_tutorials.html#pyinfinityflow-tutorial">pyInfinityFlow Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools_tutorials.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools_tutorials.html#example-standard-output">Example standard output:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="command_line_tools_tutorials.html#pyinfinityflow-list-channels-tutorial">pyInfinityFlow-list_channels Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools_tutorials.html#id1">Example:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools_tutorials.html#id2">Example standard output:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools_tutorials.html#example-with-user-defined-names">Example with user-defined names:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command_line_tools_tutorials.html#example-standard-output-with-user-defined-names">Example standard output with user-defined names:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html">API Tutorial: Full pyInfinityFlow Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Provide-paths-for-your-machine">Provide paths for your machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-1:-Preparing-the-Inputs">Step 1: Preparing the Inputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Backbone-Annotation-File">Backbone Annotation File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#InfinityMarker-Annotation-File">InfinityMarker Annotation File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-2:-Checking-the-Inputs-and-Building-an-InfinityFlowFileHandler">Step 2: Checking the Inputs and Building an InfinityFlowFileHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-3:-Specify-Output-Directories">Step 3: Specify Output Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-4:-Fitting-the-XGBoost-Regression-Models">Step 4: Fitting the XGBoost Regression Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-5:-Validating-Regression-Models">Step 5: Validating Regression Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-6:-Predict-InfinityMarker-Values-for-Final-InfinityFlow-Object">Step 6: Predict InfinityMarker Values for Final InfinityFlow Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-7:-Isotype-Background-Correction">Step 7: Isotype Background Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-8:-Silencing-Features">Step 8: Silencing Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-9:-Dimensionality-Reduction">Step 9: Dimensionality Reduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#PCA">PCA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#UMAP">UMAP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-10:-Making-Feature-Plots">Step 10: Making Feature Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-11:-Clustering-the-Data">Step 11: Clustering the Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Specify-Colors-for-Clusters">Specify Colors for Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Plotting-Leiden-clusters-over-UMAP">Plotting Leiden clusters over UMAP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-12:-Find-Markers-for-Clusters">Step 12: Find Markers for Clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-13:-Moving-Features-out-of-Silent">Step 13: Moving Features out of Silent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Step-14:-Saving-Regression-Outputs">Step 14: Saving Regression Outputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#h5ad-File">h5ad File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Feather-File">Feather File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#FCS-File">FCS File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Inverting-the-Logicle-Normalization">Inverting the Logicle Normalization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html#Finish">Finish</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a><ul>

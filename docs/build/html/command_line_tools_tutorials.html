@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial - Command Line Tools &mdash; pyInfinityFlow 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Tutorial: Full pyInfinityFlow Pipeline" href="notebooks/pyInfinityFlow_API_Tutorial.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyInfinityFlow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial - Command Line Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyinfinityflow-tutorial">pyInfinityFlow Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-standard-output">Example standard output:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyinfinityflow-list-channels-tutorial">pyInfinityFlow-list_channels Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Example:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example standard output:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-with-user-defined-names">Example with user-defined names:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-standard-output-with-user-defined-names">Example standard output with user-defined names:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html">API Tutorial: Full pyInfinityFlow Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyInfinityFlow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Tutorial - Command Line Tools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/command_line_tools_tutorials.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="tutorial-command-line-tools">
+<h1>Tutorial - Command Line Tools<a class="headerlink" href="#tutorial-command-line-tools" title="Permalink to this headline">¶</a></h1>
+<section id="pyinfinityflow-tutorial">
+<h2>pyInfinityFlow Tutorial<a class="headerlink" href="#pyinfinityflow-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial uses the pyInfinityFlow command line tool to carry out the full analysis pipeline with an example dataset. This example is a subset of the previously published mouse lung dataset<a class="reference external" href="https://www.science.org/doi/10.1126/sciadv.abg0505">[1]</a>, the full data set was made publicly available <a class="reference external" href="https://flowrepository.org/id/FR-FCM-Z2LP">here</a> in flowrepository.org. You can download the subset with the <a class="reference external" href="https://github.com/KyleFerchen/pyInfinityFlow">pyInfinityFlow repository on GitHub</a>, which consists of 10 InfinityMarkers and 5 Isotype controls located in the <a class="reference external" href="https://github.com/KyleFerchen/pyInfinityFlow/tree/main/example_data">‘example_dataset’</a> directory. This directory also contains the relevant InfinityMarker annotation file as well as the Backbone annotation file, which are necessary for the analysis pipeline.</p>
+<p>You can download the repository after <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git has been installed</a> by changing directories to where you want to install it and by using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KyleFerchen</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyInfinityFlow</span> <span class="o">--</span><span class="n">data_dir</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kyle</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">/</span><span class="n">example_data</span><span class="o">/</span><span class="n">mouse_lung_dataset_subset</span><span class="o">/</span> \
+    <span class="o">--</span><span class="n">out_dir</span> <span class="o">/</span><span class="n">media</span><span class="o">/</span><span class="n">kyle_ssd1</span><span class="o">/</span><span class="n">example_outputs</span><span class="o">/</span> \
+    <span class="o">--</span><span class="n">backbone_annotation</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kyle</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">/</span><span class="n">example_data</span><span class="o">/</span><span class="n">mouse_lung_dataset_subset_backbone_anno</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">--</span><span class="n">infinity_marker_annotation</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kyle</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">/</span><span class="n">example_data</span><span class="o">/</span><span class="n">mouse_lung_dataset_subset_infinity_marker_anno</span><span class="o">.</span><span class="n">csv</span> \
+    <span class="o">--</span><span class="n">use_logicle_scaling</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">normalization_method</span> <span class="kc">None</span> \
+    <span class="o">--</span><span class="n">n_events_train</span> <span class="mi">0</span> \
+    <span class="o">--</span><span class="n">n_events_validate</span> <span class="mi">0</span> \
+    <span class="o">--</span><span class="n">ratio_for_validation</span> <span class="mf">0.5</span> \
+    <span class="o">--</span><span class="n">separate_backbone_reference</span> <span class="kc">None</span> \
+    <span class="o">--</span><span class="n">n_events_combine</span> <span class="mi">10000</span> \
+    <span class="o">--</span><span class="n">n_final</span> <span class="mi">0</span> \
+    <span class="o">--</span><span class="n">add_umap</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">find_clusters</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">find_markers</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">make_feature_plots</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">use_pca</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">n_pc</span> <span class="mi">15</span> \
+    <span class="o">--</span><span class="n">n_pc_plot_qc</span> <span class="mi">50</span> \
+    <span class="o">--</span><span class="n">save_h5ad</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">save_feather</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">save_file_handler</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">save_regression_models</span> <span class="kc">True</span> \
+    <span class="o">--</span><span class="n">verbosity</span> <span class="mi">1</span> \
+    <span class="o">--</span><span class="n">n_cores</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</section>
+<section id="example-standard-output">
+<h3>Example standard output:<a class="headerlink" href="#example-standard-output" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Running InfinityFlow from single directory, with all input .fcs files using the same channels for backbone...
+Isotype controls detected. Will attempt to use background correction...
+Reading in data from .fcs files for model training...
+Applying Logicle normalization to data...
+Reading in data from .fcs files for model validation...
+Applying Logicle normalization to data...
+Obtaining validation metrics for regression models...
+		Working on 33D1...
+		Working on Allergin-1...
+		Working on B7-H4...
+		Working on CD1d...
+		Working on CD103...
+		Working on CD105...
+		Working on CD106...
+		Working on CD107a (Lamp-1)...
+		Working on CD107b (Mac-3)...
+		Working on CD115...
+		Working on Isotype_rIgG2b...
+		Working on Isotype_mIgG1...
+		Working on Isotype_AHIgG...
+		Working on Isotype_rIgG2a...
+		Working on Isotype_rIgG1...
+Reading in data from .fcs files for pooling into final InfinityFlow object...
+Applying Logicle normalization to data...
+Making predictions for final InfinityFlow object...
+		Working on 33D1...
+		Working on Allergin-1...
+		Working on B7-H4...
+		Working on CD1d...
+		Working on CD103...
+		Working on CD105...
+		Working on CD106...
+		Working on CD107a (Lamp-1)...
+		Working on CD107b (Mac-3)...
+		Working on CD115...
+		Working on Isotype_rIgG2b...
+		Working on Isotype_mIgG1...
+		Working on Isotype_AHIgG...
+		Working on Isotype_rIgG2a...
+		Working on Isotype_rIgG1...
+
+Finding neighbors using PCA result...
+Adding umap to AnnData object...
+Finding clusters using leiden clustering...
+Plotting Leiden clusters over UMAP...
+Finding Markers for Leiden clusters in Infinity Flow object...
+Finding markers for Infinity Flow object...
+Plotting markers...
+Working on plotting feature 33D1...
+Working on plotting feature Allergin-1...
+Working on plotting feature B7-H4...
+Working on plotting feature CD103...
+Working on plotting feature CD105...
+Working on plotting feature CD106...
+Working on plotting feature CD107a (Lamp-1)...
+Working on plotting feature CD107b (Mac-3)...
+Working on plotting feature CD115...
+Working on plotting feature CD1d...
+Working on plotting feature FJComp-APC-A...
+Working on plotting feature FJComp-AlexaFluor700-A...
+Working on plotting feature FJComp-BUV395-A...
+Working on plotting feature FJComp-BUV737-A...
+Working on plotting feature FJComp-BV421-A...
+Working on plotting feature FJComp-BV510-A...
+Working on plotting feature FJComp-BV605-A...
+Working on plotting feature FJComp-BV650-A...
+Working on plotting feature FJComp-BV711-A...
+Working on plotting feature FJComp-BV786-A...
+Working on plotting feature FJComp-GFP-A...
+Working on plotting feature FJComp-PE-Cy7(yg)-A...
+Working on plotting feature FJComp-PerCP-Cy5-5-A...
+Working on plotting feature FJComp-APC-eFlour780-A...
+Working on plotting feature FJComp-PE(yg)-A...
+Working on plotting feature FSC-A...
+Working on plotting feature FSC-H...
+Working on plotting feature FSC-W...
+Working on plotting feature Isotype_AHIgG...
+Working on plotting feature Isotype_mIgG1...
+Working on plotting feature Isotype_rIgG1...
+Working on plotting feature Isotype_rIgG2a...
+Working on plotting feature Isotype_rIgG2b...
+Working on plotting feature SSC-A...
+Working on plotting feature SSC-H...
+Working on plotting feature SSC-W...
+Working on plotting feature Time...
+Saving Infinity Flow object as h5ad file...
+Saving background corrected Infinity Flow object as h5ad file...
+Saving Infinity Flow object as feather file...
+Writing out base prediction values to fcs file...
+Omitting spillover matrix...
+WARNING! TEXT segment value for key $P26S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P27S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P28S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P34S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P35S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P36S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P37S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P38S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P39S is empty. Excluding from written file.
+Writing out background-corrected prediction values to fcs file...
+Omitting spillover matrix...
+WARNING! TEXT segment value for key $P26S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P27S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P28S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P34S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P35S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P36S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P37S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P38S is empty. Excluding from written file.
+WARNING! TEXT segment value for key $P39S is empty. Excluding from written file.
+Done.
+Base InfinityFlow Pipeline took 392.24 seconds for input dataset.
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pyinfinityflow-list-channels-tutorial">
+<h2>pyInfinityFlow-list_channels Tutorial<a class="headerlink" href="#pyinfinityflow-list-channels-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>There is also a command line tool to list the channels in an existing FCS file. This should make it easier to create the InfinityMarker annotation file and Backbone annotation file.</p>
+<p>We simply need to provide the path to the FCS file for which we want to list the channel names. The command will do a shallow read of the FCS file HEADER and TEXT segment values and print out the channel names.</p>
+<section id="id1">
+<h3>Example:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kyle</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">/</span><span class="n">example_data</span><span class="o">/</span><span class="n">mouse_lung_dataset_subset</span><span class="o">/</span>
+
+<span class="n">pyInfinityFlow</span><span class="o">-</span><span class="n">list_channels</span> <span class="o">--</span><span class="n">fcs_file</span> <span class="n">backbone_Plate1_Specimen_001_A2_A02_002_target_CD1</span><span class="o">.</span><span class="n">fcs</span>
+
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Example standard output:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FSC</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FSC</span><span class="o">-</span><span class="n">H</span>
+<span class="n">FSC</span><span class="o">-</span><span class="n">W</span>
+<span class="n">SSC</span><span class="o">-</span><span class="n">A</span>
+<span class="n">SSC</span><span class="o">-</span><span class="n">H</span>
+<span class="n">SSC</span><span class="o">-</span><span class="n">W</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">APC</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">APC</span><span class="o">-</span><span class="n">eFlour780</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">AlexaFluor700</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BUV395</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BUV737</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV421</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV510</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV605</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV650</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV711</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV786</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">GFP</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">PE</span><span class="p">(</span><span class="n">yg</span><span class="p">)</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">PE</span><span class="o">-</span><span class="n">Cy7</span><span class="p">(</span><span class="n">yg</span><span class="p">)</span><span class="o">-</span><span class="n">A</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">PerCP</span><span class="o">-</span><span class="n">Cy5</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="n">A</span>
+<span class="n">Time</span>
+
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can also include the user defined channel names that were entered when the data was captured to help us identify the channels to which we need to pay attention. It will be formatted as &lt;channel_name&gt;:&lt;user_defined_name&gt; so that they can be easily split by a “split text to columns” tool in a spreadsheet application (Eg. Microsoft Excel).</p>
+</div>
+</section>
+<section id="example-with-user-defined-names">
+<h3>Example with user-defined names:<a class="headerlink" href="#example-with-user-defined-names" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kyle</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">/</span><span class="n">example_data</span><span class="o">/</span><span class="n">mouse_lung_dataset_subset</span><span class="o">/</span>
+
+<span class="n">pyInfinityFlow</span><span class="o">-</span><span class="n">list_channels</span> <span class="o">--</span><span class="n">fcs_file</span> <span class="n">backbone_Plate1_Specimen_001_A2_A02_002_target_CD1</span><span class="o">.</span><span class="n">fcs</span> \
+    <span class="o">--</span><span class="n">add_user_defined_names</span> <span class="kc">True</span>
+
+</pre></div>
+</div>
+</section>
+<section id="example-standard-output-with-user-defined-names">
+<h3>Example standard output with user-defined names:<a class="headerlink" href="#example-standard-output-with-user-defined-names" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FSC</span><span class="o">-</span><span class="n">H</span><span class="p">:</span>
+<span class="n">FSC</span><span class="o">-</span><span class="n">W</span><span class="p">:</span>
+<span class="n">SSC</span><span class="o">-</span><span class="n">A</span><span class="p">:</span>
+<span class="n">SSC</span><span class="o">-</span><span class="n">H</span><span class="p">:</span>
+<span class="n">SSC</span><span class="o">-</span><span class="n">W</span><span class="p">:</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">APC</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD69</span><span class="o">-</span><span class="n">CD301b</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">APC</span><span class="o">-</span><span class="n">eFlour780</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">Zombie</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">AlexaFluor700</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">MHCII</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BUV395</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD4</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BUV737</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD44</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV421</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD8</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV510</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD11c</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV605</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD11b</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV650</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">F480</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV711</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">Ly6C</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">BV786</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">Lineage</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">GFP</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD45a488</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">PE</span><span class="p">(</span><span class="n">yg</span><span class="p">)</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">Legend</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">PE</span><span class="o">-</span><span class="n">Cy7</span><span class="p">(</span><span class="n">yg</span><span class="p">)</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD24</span>
+<span class="n">FJComp</span><span class="o">-</span><span class="n">PerCP</span><span class="o">-</span><span class="n">Cy5</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="n">A</span><span class="p">:</span><span class="n">CD103</span>
+<span class="n">Time</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="notebooks/pyInfinityFlow_API_Tutorial.html" class="btn btn-neutral float-right" title="API Tutorial: Full pyInfinityFlow Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kyle Ferchen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
