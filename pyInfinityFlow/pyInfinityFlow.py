@@ -125,7 +125,7 @@ def main():
             'reduce the feature space prior to UMAP and clustering. This is suggested '\
             'to save computation time.',
         default="True")
-    parser.add_argument('--n_pc', dest='n_pc', type=str,
+    parser.add_argument('--n_pc', dest='n_pc', type=int,
         help='Integer to specify the number principal components to use for UMAP.',
         default=15)
     parser.add_argument('--n_pc_plot_qc', dest='n_pc_plot_qc', type=int,
