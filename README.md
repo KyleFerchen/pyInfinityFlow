@@ -4,7 +4,7 @@
 
 The package includes tools to read and write FCS files, following the FCS3.1 file standard, into AnnData objects, allowing for easy downstream analysis of single-cell data with [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html)[<sup>2</sup>](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com) and [UMAP](https://umap-learn.readthedocs.io/en/latest/index.html)[<sup>3</sup>](https://arxiv.org/abs/1802.03426).
 
-Read more about the pyInfinityFlow package on its [Read the Docs page](pyinfinityflow.readthedocs.io)!
+Read more about the pyInfinityFlow package on its [Read the Docs page](https://pyinfinityflow.readthedocs.io/en/latest/)!
 
 
 ## Graphical Summary
