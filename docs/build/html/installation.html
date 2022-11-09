@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Command Line Tools" href="command_line_tools.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="index.html" /> 
+    <link rel="next" title="Tutorial - Command Line Tools" href="command_line_tools_tutorials.html" />
+    <link rel="prev" title="pyInfinityFlow" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,11 +41,16 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#using-conda-virtual-environment-recommended">Using Conda Virtual Environment - <strong>RECOMMENDED</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-pip-alone">Using pip alone</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-github-alone">Using GitHub alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-conda-virtual-environment-recommended">Using Conda Virtual Environment - <strong>RECOMMENDED</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-github">Using GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-pypi">Using PyPI</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#using-pypi-alone">Using PyPI alone</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_tools_tutorials.html">Tutorial - Command Line Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/pyInfinityFlow_API_Tutorial.html">API Tutorial: Full pyInfinityFlow Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command_line_tools.html">Command Line Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
@@ -63,8 +68,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Installation</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/installation.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -105,20 +110,40 @@
 <h2>Using Conda Virtual Environment - <strong>RECOMMENDED</strong><a class="headerlink" href="#using-conda-virtual-environment-recommended" title="Permalink to this headline">¶</a></h2>
 <p>It is best to use a virtual environment so that each of the dependencies can be installed correctly. First, download and install <span class="xref myst">conda</span> on your machine if it is not already available.</p>
 <p>After conda is installed, you can create a virtual environment with conda create and activate it with the conda activate command-line tool:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">prefix</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">save</span><span class="o">/</span><span class="n">environment</span> <span class="n">python</span><span class="o">=</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">pyInfinityFlow</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.8</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">pyInfinityFlow</span>
+</pre></div>
+</div>
+<section id="using-github">
+<h3>Using GitHub<a class="headerlink" href="#using-github" title="Permalink to this headline">¶</a></h3>
+<p>Follow the below steps to download the most up-to-date version of the pyInfinityFlow
+package from GitHub. Create and/or move to the directory in which you want to
+install the package files. Then change directories into the package parent
+directory and install with pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">directory_to_save_repository</span><span class="o">&gt;</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KyleFerchen</span><span class="o">/</span><span class="n">pyInfinityFlow</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">pyInfinityFlow</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
 </pre></div>
 </div>
 </section>
-<section id="using-pip-alone">
-<h2>Using pip alone<a class="headerlink" href="#using-pip-alone" title="Permalink to this headline">¶</a></h2>
+<section id="using-pypi">
+<h3>Using PyPI<a class="headerlink" href="#using-pypi" title="Permalink to this headline">¶</a></h3>
+<p>The package is also available from the <a class="reference external" href="https://pypi.org/project/pyInfinityFlow/">Python packaging index</a>.
+(Though the GitHub repository is likely to be more up to date)</p>
+<p>After the environment is set up and you have activated it in your current terminal
+instance, you can install the pyInfinityFlow package onto this environment with pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyInfinityFlow</span>
+</pre></div>
+</div>
 </section>
-<section id="using-github-alone">
-<h2>Using GitHub alone<a class="headerlink" href="#using-github-alone" title="Permalink to this headline">¶</a></h2>
-<p>Follow the below steps to download the most up-to-date version of the pyInfinityFlow package from GitHub. Create and/or move to the directory in which you want to install the package files. Then change directories into the package parent directory and install with pip:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">directory_to_save_repository</span>
-<span class="n">git</span> <span class="n">clone</span> 
-<span class="n">cd</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+</section>
+<section id="using-pypi-alone">
+<h2>Using PyPI alone<a class="headerlink" href="#using-pypi-alone" title="Permalink to this headline">¶</a></h2>
+<p>If you have a Python environment (&gt;=3.8) set up on your machine onto which you
+would like to try to add the pyInfinityFlow package, you can simply install it
+using pip with the command below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyInfinityFlow</span>
 </pre></div>
 </div>
 </section>
@@ -128,8 +153,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="command_line_tools.html" class="btn btn-neutral float-right" title="Command Line Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="pyInfinityFlow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="command_line_tools_tutorials.html" class="btn btn-neutral float-right" title="Tutorial - Command Line Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

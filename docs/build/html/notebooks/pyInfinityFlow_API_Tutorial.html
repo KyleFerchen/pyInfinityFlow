@@ -20,7 +20,9 @@
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command Line Tools" href="../command_line_tools.html" />
+    <link rel="prev" title="Tutorial - Command Line Tools" href="../command_line_tools_tutorials.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,8 +41,48 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_line_tools_tutorials.html">Tutorial - Command Line Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Tutorial: Full pyInfinityFlow Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Provide-paths-for-your-machine">Provide paths for your machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-1:-Preparing-the-Inputs">Step 1: Preparing the Inputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Backbone-Annotation-File">Backbone Annotation File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#InfinityMarker-Annotation-File">InfinityMarker Annotation File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-2:-Checking-the-Inputs-and-Building-an-InfinityFlowFileHandler">Step 2: Checking the Inputs and Building an InfinityFlowFileHandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-3:-Specify-Output-Directories">Step 3: Specify Output Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-4:-Fitting-the-XGBoost-Regression-Models">Step 4: Fitting the XGBoost Regression Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-5:-Validating-Regression-Models">Step 5: Validating Regression Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-6:-Predict-InfinityMarker-Values-for-Final-InfinityFlow-Object">Step 6: Predict InfinityMarker Values for Final InfinityFlow Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-7:-Isotype-Background-Correction">Step 7: Isotype Background Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-8:-Silencing-Features">Step 8: Silencing Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-9:-Dimensionality-Reduction">Step 9: Dimensionality Reduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PCA">PCA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#UMAP">UMAP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-10:-Making-Feature-Plots">Step 10: Making Feature Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-11:-Clustering-the-Data">Step 11: Clustering the Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Specify-Colors-for-Clusters">Specify Colors for Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Plotting-Leiden-clusters-over-UMAP">Plotting Leiden clusters over UMAP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-12:-Find-Markers-for-Clusters">Step 12: Find Markers for Clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-13:-Moving-Features-out-of-Silent">Step 13: Moving Features out of Silent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Step-14:-Saving-Regression-Outputs">Step 14: Saving Regression Outputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#h5ad-File">h5ad File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Feather-File">Feather File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#FCS-File">FCS File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Inverting-the-Logicle-Normalization">Inverting the Logicle Normalization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Finish">Finish</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../command_line_tools.html">Command Line Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 </ul>
@@ -58,8 +100,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>API Tutorial: Full pyInfinityFlow Pipeline</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">API Tutorial: Full pyInfinityFlow Pipeline</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/notebooks/pyInfinityFlow_API_Tutorial.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -362,10 +404,10 @@ consists of 10 InfinityMarkers and 5 Isotype controls located in the <a class="r
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the path to the repository</span>
-<span class="n">path_to_repo</span> <span class="o">=</span> <span class="s2">&quot;/media/kyle_ssd1/Repositories/pyInfinityFlow/&quot;</span>
-<span class="c1"># Specify which directory on your machine you want to save the results</span>
-<span class="n">my_output_dir</span> <span class="o">=</span> <span class="s2">&quot;/media/kyle_ssd1/outputs/&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Specify the path to the repository
+path_to_repo = &quot;/media/kyle_ssd1/Repositories/pyInfinityFlow/&quot;
+# Specify which directory on your machine you want to save the results
+my_output_dir = &quot;/media/kyle_ssd1/outputs/&quot;
 </pre></div>
 </div>
 </div>
@@ -390,13 +432,13 @@ consists of 10 InfinityMarkers and 5 Isotype controls located in the <a class="r
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pyInfinityFlow</span> <span class="kn">import</span> <span class="n">InfinityFlow_Utilities</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+from pyInfinityFlow import InfinityFlow_Utilities
 
-<span class="c1"># PROVIDE THE PATH TO WHERE YOU DOWNLOADED THE REPOSITORY</span>
-<span class="n">path_backbone</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_repo</span><span class="p">,</span> <span class="s2">&quot;example_data/mouse_lung_dataset_subset_backbone_anno.csv&quot;</span><span class="p">)</span>
-<span class="n">backbone_anno</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">read_annotation_table</span><span class="p">(</span><span class="n">path_backbone</span><span class="p">)</span>
-<span class="n">backbone_anno</span>
+# PROVIDE THE PATH TO WHERE YOU DOWNLOADED THE REPOSITORY
+path_backbone = os.path.join(path_to_repo, &quot;example_data/mouse_lung_dataset_subset_backbone_anno.csv&quot;)
+backbone_anno = InfinityFlow_Utilities.read_annotation_table(path_backbone)
+backbone_anno
 </pre></div>
 </div>
 </div>
@@ -532,10 +574,10 @@ consists of 10 InfinityMarkers and 5 Isotype controls located in the <a class="r
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_infmarker</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_repo</span><span class="p">,</span>
-    <span class="s2">&quot;example_data/mouse_lung_dataset_subset_infinity_marker_anno.csv&quot;</span><span class="p">)</span>
-<span class="n">infinitymarker_anno</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">read_annotation_table</span><span class="p">(</span><span class="n">path_infmarker</span><span class="p">)</span>
-<span class="n">infinitymarker_anno</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>path_infmarker = os.path.join(path_to_repo,
+    &quot;example_data/mouse_lung_dataset_subset_infinity_marker_anno.csv&quot;)
+infinitymarker_anno = InfinityFlow_Utilities.read_annotation_table(path_infmarker)
+infinitymarker_anno
 </pre></div>
 </div>
 </div>
@@ -698,20 +740,20 @@ consists of 10 InfinityMarkers and 5 Isotype controls located in the <a class="r
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fcs_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_repo</span><span class="p">,</span>
-    <span class="s2">&quot;example_data/mouse_lung_dataset_subset&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fcs_dir = os.path.join(path_to_repo,
+    &quot;example_data/mouse_lung_dataset_subset&quot;)
 
-<span class="n">file_handler</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">check_infinity_flow_annotation_dataframes</span><span class="p">(</span>\
-    <span class="n">backbone_annotation</span><span class="o">=</span><span class="n">backbone_anno</span><span class="p">,</span>
-    <span class="n">infinity_marker_annotation</span><span class="o">=</span><span class="n">infinitymarker_anno</span><span class="p">,</span>
-    <span class="n">n_events_train</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># Use all possible events in the FCS file</span>
-    <span class="n">n_events_validate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># Use all possible events in the FCS file</span>
-    <span class="n">ratio_for_validation</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">n_events_combine</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="c1"># Events to pool into a final InfinityFlow object</span>
-    <span class="n">input_fcs_dir</span><span class="o">=</span><span class="n">fcs_dir</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+file_handler = InfinityFlow_Utilities.check_infinity_flow_annotation_dataframes(\
+    backbone_annotation=backbone_anno,
+    infinity_marker_annotation=infinitymarker_anno,
+    n_events_train=0, # Use all possible events in the FCS file
+    n_events_validate=0, # Use all possible events in the FCS file
+    ratio_for_validation=0.5,
+    n_events_combine=1000, # Events to pool into a final InfinityFlow object
+    input_fcs_dir=fcs_dir,
+    verbosity=1)
 
-<span class="n">file_handler</span>
+file_handler
 </pre></div>
 </div>
 </div>
@@ -759,7 +801,7 @@ InfinityFlowFileHandler Object from pyInfinityFlow
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_handler</span><span class="o">.</span><span class="n">handles</span><span class="p">[</span><span class="s2">&quot;33D1&quot;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>file_handler.handles[&quot;33D1&quot;]
 </pre></div>
 </div>
 </div>
@@ -920,12 +962,12 @@ InfinityFlowFileHandler Object from pyInfinityFlow
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_paths</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">setup_output_directories</span><span class="p">(</span>\
-    <span class="n">output_dir</span><span class="o">=</span><span class="n">my_output_dir</span><span class="p">,</span>
-    <span class="n">file_handler</span><span class="o">=</span><span class="n">file_handler</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>output_paths = InfinityFlow_Utilities.setup_output_directories(\
+    output_dir=my_output_dir,
+    file_handler=file_handler,
+    verbosity=1)
 
-<span class="n">output_paths</span>
+output_paths
 </pre></div>
 </div>
 </div>
@@ -950,12 +992,12 @@ InfinityFlowFileHandler Object from pyInfinityFlow
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span><span class="p">,</span> <span class="n">timings_1</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">single_chunk_training</span><span class="p">(</span>\
-    <span class="n">file_handler</span><span class="o">=</span><span class="n">file_handler</span><span class="p">,</span>
-    <span class="n">cores_to_use</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-    <span class="n">use_logicle_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">normalization_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>regression_models, timings_1 = InfinityFlow_Utilities.single_chunk_training(\
+    file_handler=file_handler,
+    cores_to_use=12,
+    use_logicle_scaling=True,
+    normalization_method=None,
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -1047,7 +1089,7 @@ DEBUG:          XGBoost regression model trained in 3.46 seconds.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>regression_models
 </pre></div>
 </div>
 </div>
@@ -1086,12 +1128,12 @@ The object holds the following variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span><span class="p">,</span> <span class="n">timings_2</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">single_chunk_testing</span><span class="p">(</span>\
-    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
-    <span class="n">regression_models</span> <span class="o">=</span> <span class="n">regression_models</span><span class="p">,</span>
-    <span class="n">use_logicle_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">normalization_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>regression_models, timings_2 = InfinityFlow_Utilities.single_chunk_testing(\
+    file_handler = file_handler,
+    regression_models = regression_models,
+    use_logicle_scaling=True,
+    normalization_method=None,
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -1140,7 +1182,7 @@ Obtaining validation metrics for regression models...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regression_models</span><span class="o">.</span><span class="n">validation_metrics</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>regression_models.validation_metrics
 </pre></div>
 </div>
 </div>
@@ -1250,12 +1292,12 @@ Obtaining validation metrics for regression models...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="p">,</span> <span class="n">timings_3</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">make_flow_regression_predictions</span><span class="p">(</span>\
-    <span class="n">file_handler</span><span class="o">=</span><span class="n">file_handler</span><span class="p">,</span>
-    <span class="n">regression_models</span><span class="o">=</span><span class="n">regression_models</span><span class="p">,</span>
-    <span class="n">use_logicle_scaling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">normalization_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata, timings_3 = InfinityFlow_Utilities.make_flow_regression_predictions(\
+    file_handler=file_handler,
+    regression_models=regression_models,
+    use_logicle_scaling=True,
+    normalization_method=None,
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -1324,13 +1366,13 @@ Making predictions for final InfinityFlow object...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background_corrected_data</span><span class="p">,</span> <span class="n">background_corrected_var</span><span class="p">,</span> <span class="n">timings_4</span> <span class="o">=</span> \
-    <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">perform_background_correction</span><span class="p">(</span>\
-        <span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="p">,</span>
-        <span class="n">infinity_marker_annotation</span> <span class="o">=</span> <span class="n">infinitymarker_anno</span><span class="p">,</span>
-        <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
-        <span class="n">cores_to_use</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
-        <span class="n">verbosity</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>background_corrected_data, background_corrected_var, timings_4 = \
+    InfinityFlow_Utilities.perform_background_correction(\
+        sub_p_adata = sub_p_adata,
+        infinity_marker_annotation = infinitymarker_anno,
+        file_handler = file_handler,
+        cores_to_use = 12,
+        verbosity = 3)
 </pre></div>
 </div>
 </div>
@@ -1355,7 +1397,7 @@ DEBUG: Feature CD115 will use isotype Isotype_rIgG2a...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background_corrected_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>background_corrected_data.head()
 </pre></div>
 </div>
 </div>
@@ -1468,7 +1510,7 @@ DEBUG: Feature CD115 will use isotype Isotype_rIgG2a...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">background_corrected_var</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>background_corrected_var.head()
 </pre></div>
 </div>
 </div>
@@ -1574,7 +1616,7 @@ DEBUG: Feature CD115 will use isotype Isotype_rIgG2a...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.var.index.values
 </pre></div>
 </div>
 </div>
@@ -1601,12 +1643,12 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_to_silence</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-W&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-W&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FJComp-PE(yg)-A&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_rIgG2b&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_mIgG1&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_AHIgG&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Isotype_rIgG2a&#39;</span><span class="p">,</span> <span class="s1">&#39;Isotype_rIgG1&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>features_to_silence = [&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;SSC-H&#39;, &#39;SSC-W&#39;,
+    &#39;FJComp-PE(yg)-A&#39;, &#39;Isotype_rIgG2b&#39;, &#39;Isotype_mIgG1&#39;, &#39;Isotype_AHIgG&#39;,
+    &#39;Isotype_rIgG2a&#39;, &#39;Isotype_rIgG1&#39;, &#39;Time&#39;]
 
-<span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">move_features_to_silent</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">,</span> <span class="n">features_to_silence</span><span class="p">)</span>
-<span class="n">sub_p_adata</span>
+sub_p_adata = InfinityFlow_Utilities.move_features_to_silent(sub_p_adata, features_to_silence)
+sub_p_adata
 </pre></div>
 </div>
 </div>
@@ -1628,7 +1670,7 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;silent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.obsm[&#39;silent&#39;].head()
 </pre></div>
 </div>
 </div>
@@ -1759,7 +1801,7 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;silent_var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.uns[&#39;silent_var&#39;].head()
 </pre></div>
 </div>
 </div>
@@ -1868,18 +1910,18 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
-<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
-<span class="c1"># It is useful to save the features that were used</span>
-<span class="c1"># at the time the PCA function was called, as the</span>
-<span class="c1"># silenced features may change when the object is</span>
-<span class="c1"># reloaded.</span>
-<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;pca_features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import scanpy as sc
+sc.tl.pca(sub_p_adata)
+# It is useful to save the features that were used
+# at the time the PCA function was called, as the
+# silenced features may change when the object is
+# reloaded.
+sub_p_adata.uns[&#39;pca_features&#39;] = sub_p_adata.var.index.values
 
-<span class="c1"># Make the elbo plot:</span>
-<span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">make_pca_elbo_plot</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">output_paths</span><span class="o">=</span><span class="n">output_paths</span><span class="p">)</span>
+# Make the elbo plot:
+InfinityFlow_Utilities.make_pca_elbo_plot(\
+    sub_p_adata=sub_p_adata,
+    output_paths=output_paths)
 </pre></div>
 </div>
 </div>
@@ -1896,8 +1938,8 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List the keys available in output_paths</span>
-<span class="n">output_paths</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># List the keys available in output_paths
+output_paths.keys()
 </pre></div>
 </div>
 </div>
@@ -1914,8 +1956,8 @@ dict_keys([&#39;output_regression_path&#39;, &#39;output_umap_feature_plot_path&
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the &#39;qc&#39; directory path</span>
-<span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;qc&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Print out the &#39;qc&#39; directory path
+output_paths[&#39;qc&#39;]
 </pre></div>
 </div>
 </div>
@@ -1937,8 +1979,8 @@ dict_keys([&#39;output_regression_path&#39;, &#39;output_umap_feature_plot_path&
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">,</span> <span class="n">n_pcs</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">sub_p_adata</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sc.pp.neighbors(sub_p_adata, n_pcs=15)
+sub_p_adata
 </pre></div>
 </div>
 </div>
@@ -1963,8 +2005,8 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
-<span class="n">sub_p_adata</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sc.tl.umap(sub_p_adata)
+sub_p_adata
 </pre></div>
 </div>
 </div>
@@ -1988,9 +2030,9 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;umap-x&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;X_umap&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;umap-y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;X_umap&#39;</span><span class="p">][:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.obs[&quot;umap-x&quot;] = sub_p_adata.obsm[&#39;X_umap&#39;][:,0]
+sub_p_adata.obs[&quot;umap-y&quot;] = sub_p_adata.obsm[&#39;X_umap&#39;][:,1]
+sub_p_adata.obs.head()
 </pre></div>
 </div>
 </div>
@@ -2073,12 +2115,12 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timings_6</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">save_umap_figures_all_features</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">background_corrected_data</span> <span class="o">=</span> <span class="n">background_corrected_data</span><span class="p">,</span>
-    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
-    <span class="n">output_paths</span> <span class="o">=</span> <span class="n">output_paths</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>timings_6 = InfinityFlow_Utilities.save_umap_figures_all_features(\
+    sub_p_adata,
+    background_corrected_data = background_corrected_data,
+    file_handler = file_handler,
+    output_paths = output_paths,
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -2128,8 +2170,8 @@ Working on plotting feature FJComp-PerCP-Cy5-5-A...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">leiden</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
-<span class="n">sub_p_adata</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sc.tl.leiden(sub_p_adata)
+sub_p_adata
 </pre></div>
 </div>
 </div>
@@ -2156,12 +2198,12 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyInfinityFlow.Plotting_Utilities</span> <span class="kn">import</span> <span class="n">assign_rainbow_colors_to_groups</span>
-<span class="n">groups_to_colors</span> <span class="o">=</span> <span class="n">assign_rainbow_colors_to_groups</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;leiden&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from pyInfinityFlow.Plotting_Utilities import assign_rainbow_colors_to_groups
+groups_to_colors = assign_rainbow_colors_to_groups(\
+    sub_p_adata.obs[&quot;leiden&quot;].values)
 
-<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;groups_to_color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">groups_to_colors</span>
-<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;groups_to_color&#39;</span><span class="p">]</span>
+sub_p_adata.uns[&#39;groups_to_color&#39;] = groups_to_colors
+sub_p_adata.uns[&#39;groups_to_color&#39;]
 </pre></div>
 </div>
 </div>
@@ -2207,12 +2249,12 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyInfinityFlow.Plotting_Utilities</span> <span class="kn">import</span> <span class="n">plot_leiden_clusters_over_umap</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from pyInfinityFlow.Plotting_Utilities import plot_leiden_clusters_over_umap
 
-<span class="n">plot_leiden_clusters_over_umap</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">output_paths</span><span class="o">=</span><span class="n">output_paths</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+plot_leiden_clusters_over_umap(\
+    sub_p_adata=sub_p_adata,
+    output_paths=output_paths,
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -2227,8 +2269,8 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clustering directory</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Clustering directory
+print(output_paths[&#39;clustering&#39;])
 </pre></div>
 </div>
 </div>
@@ -2249,11 +2291,11 @@ AnnData object with n_obs × n_vars = 15000 × 24
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">markers_df</span><span class="p">,</span> <span class="n">cell_assignments</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">find_markers_from_anndata</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">output_paths</span><span class="o">=</span><span class="n">output_paths</span><span class="p">,</span>
-    <span class="n">groups_to_colors</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;groups_to_color&#39;</span><span class="p">],</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>markers_df, cell_assignments = InfinityFlow_Utilities.find_markers_from_anndata(\
+    sub_p_adata=sub_p_adata,
+    output_paths=output_paths,
+    groups_to_colors=sub_p_adata.uns[&#39;groups_to_color&#39;],
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -2278,10 +2320,10 @@ Plotting markers...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clustering outputs directory</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">])</span>
-<span class="c1"># Contents of the directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;clustering&#39;</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Clustering outputs directory
+print(output_paths[&#39;clustering&#39;])
+# Contents of the directory
+os.listdir(output_paths[&#39;clustering&#39;])
 </pre></div>
 </div>
 </div>
@@ -2312,7 +2354,7 @@ Plotting markers...
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;silent_var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.uns[&#39;silent_var&#39;].index.values
 </pre></div>
 </div>
 </div>
@@ -2333,10 +2375,10 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features_to_unsilence</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;FSC-W&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-A&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-H&#39;</span><span class="p">,</span> <span class="s1">&#39;SSC-W&#39;</span><span class="p">]</span>
-<span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">move_features_out_of_silent</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">features_to_unsilence</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>features_to_unsilence = [&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;SSC-H&#39;, &#39;SSC-W&#39;]
+sub_p_adata = InfinityFlow_Utilities.move_features_out_of_silent(\
+    sub_p_adata,
+    features_to_unsilence)
 </pre></div>
 </div>
 </div>
@@ -2345,7 +2387,7 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.var
 </pre></div>
 </div>
 </div>
@@ -2728,10 +2770,10 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h5_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;output_regression_path&#39;</span><span class="p">],</span>
-    <span class="s2">&quot;InfinityFlow_object_logicle_normalized.h5ad&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>h5_path = os.path.join(output_paths[&#39;output_regression_path&#39;],
+    &quot;InfinityFlow_object_logicle_normalized.h5ad&quot;)
 
-<span class="n">sub_p_adata</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">h5_path</span><span class="p">)</span>
+sub_p_adata.write(h5_path)
 </pre></div>
 </div>
 </div>
@@ -2740,8 +2782,8 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eg. Using the output_paths directory</span>
-<span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;output_regression_path&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Eg. Using the output_paths directory
+output_paths[&#39;output_regression_path&#39;]
 </pre></div>
 </div>
 </div>
@@ -2763,18 +2805,18 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an output path for the DataFrame</span>
-<span class="n">feather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_paths</span><span class="p">[</span><span class="s1">&#39;output_regression_path&#39;</span><span class="p">],</span>
-    <span class="s2">&quot;InfinityFlow_object_logicle_normalized.fea&quot;</span><span class="p">)</span>
-<span class="c1"># Convert to DataFrame</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">anndata_to_df</span><span class="p">(</span>\
-    <span class="n">input_anndata</span><span class="o">=</span><span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">use_raw_feature_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">add_index_names</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># Save as Feather file</span>
-<span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_feather</span><span class="p">(</span><span class="n">feather_path</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create an output path for the DataFrame
+feather_path = os.path.join(output_paths[&#39;output_regression_path&#39;],
+    &quot;InfinityFlow_object_logicle_normalized.fea&quot;)
+# Convert to DataFrame
+df = InfinityFlow_Utilities.anndata_to_df(\
+    input_anndata=sub_p_adata,
+    use_raw_feature_names=False,
+    add_index_names=True)
+# Save as Feather file
+df.reset_index().to_feather(feather_path)
 
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+df.head()
 </pre></div>
 </div>
 </div>
@@ -2961,7 +3003,7 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_p_adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sub_p_adata.var.head()
 </pre></div>
 </div>
 </div>
@@ -3063,8 +3105,8 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">apply_inverse_logicle_to_anndata</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span>
-<span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">anndata_to_df</span><span class="p">(</span><span class="n">sub_p_adata</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>InfinityFlow_Utilities.apply_inverse_logicle_to_anndata(sub_p_adata)
+InfinityFlow_Utilities.anndata_to_df(sub_p_adata).head()
 </pre></div>
 </div>
 </div>
@@ -3246,15 +3288,15 @@ array([&#39;FSC-A&#39;, &#39;FSC-H&#39;, &#39;FSC-W&#39;, &#39;SSC-A&#39;, &#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">InfinityFlow_Utilities</span><span class="o">.</span><span class="n">save_fcs_flow_anndata</span><span class="p">(</span>\
-    <span class="n">sub_p_adata</span> <span class="o">=</span> <span class="n">sub_p_adata</span><span class="p">,</span>
-    <span class="n">background_corrected_data</span> <span class="o">=</span> <span class="n">background_corrected_data</span><span class="p">,</span>
-    <span class="n">background_corrected_var</span> <span class="o">=</span> <span class="n">background_corrected_var</span><span class="p">,</span>
-    <span class="n">file_handler</span> <span class="o">=</span> <span class="n">file_handler</span><span class="p">,</span>
-    <span class="n">output_paths</span> <span class="o">=</span> <span class="n">output_paths</span><span class="p">,</span>
-    <span class="n">add_umap</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">use_logicle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>InfinityFlow_Utilities.save_fcs_flow_anndata(\
+    sub_p_adata = sub_p_adata,
+    background_corrected_data = background_corrected_data,
+    background_corrected_var = background_corrected_var,
+    file_handler = file_handler,
+    output_paths = output_paths,
+    add_umap = True,
+    use_logicle = True,
+    verbosity=3)
 </pre></div>
 </div>
 </div>
@@ -3307,7 +3349,10 @@ WARNING! TEXT segment value for key $P32S is empty. Excluding from written file.
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../command_line_tools_tutorials.html" class="btn btn-neutral float-left" title="Tutorial - Command Line Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../command_line_tools.html" class="btn btn-neutral float-right" title="Command Line Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

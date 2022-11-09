@@ -59,8 +59,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>pyInfinityFlow</li>
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">pyInfinityFlow</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,7 +98,7 @@
 <h1>pyInfinityFlow<a class="headerlink" href="#pyinfinityflow" title="Permalink to this headline">¶</a></h1>
 <p><strong>pyInfinityFlow</strong> is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression. It is an adaptation of the <a class="reference external" href="https://github.com/ebecht/infinityFlow">original implementation in R</a><a class="reference external" href="https://www.science.org/doi/full/10.1126/sciadv.abg0505"><sup>1</sup></a> with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline.</p>
 <p>The package includes tools to read and write FCS files, following the FCS3.1 file standard, into AnnData objects, allowing for easy downstream analysis of single-cell data with <a class="reference external" href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a><a class="reference external" href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com"><sup>2</sup></a> and <a class="reference external" href="https://umap-learn.readthedocs.io/en/latest/index.html">UMAP</a><a class="reference external" href="https://arxiv.org/abs/1802.03426"><sup>3</sup></a>.</p>
-<p>Read more about the pyInfinityFlow package on its Read the Docs page!</p>
+<p>Read more about the pyInfinityFlow package on its <a class="reference external" href="https://pyinfinityflow.readthedocs.io/en/latest/">Read the Docs page</a>!</p>
 <section id="graphical-summary">
 <h2>Graphical Summary<a class="headerlink" href="#graphical-summary" title="Permalink to this headline">¶</a></h2>
 <p><img alt="graphical summary of pyinfinityflow workflow" src="_images/graphical_summary.png" /></p>
@@ -134,9 +134,12 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#using-conda-virtual-environment-recommended">Using Conda Virtual Environment - <strong>RECOMMENDED</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#using-pip-alone">Using pip alone</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#using-github-alone">Using GitHub alone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-conda-virtual-environment-recommended">Using Conda Virtual Environment - <strong>RECOMMENDED</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#using-github">Using GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#using-pypi">Using PyPI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#using-pypi-alone">Using PyPI alone</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="command_line_tools_tutorials.html">Tutorial - Command Line Tools</a><ul>
