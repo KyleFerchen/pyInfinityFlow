@@ -1656,7 +1656,6 @@ def find_markers_from_anndata(sub_p_adata, output_dir, groups_to_colors,
         markers_df = markers_df.sort_values(by=["top_cluster", "pearson_r"], 
             ascending=[True, False])
         # Associate top_n_markers to each cluster
-        top_n_df_r = [for item in cluster_order]
         top_n_df = []
         for tmp_cluster in np.unique(x.obs['leiden'].values):
             top_markers = r_df[tmp_cluster].sort_values(\
