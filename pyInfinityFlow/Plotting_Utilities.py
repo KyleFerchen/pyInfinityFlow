@@ -1,4 +1,5 @@
 import os
+import traceback
 import pandas as pd
 import numpy as np
 from scipy.stats import zscore
@@ -345,6 +346,13 @@ def plot_leiden_clusters_over_umap(sub_p_adata, file_path=None, verbosity=0):
         plt.close("all")
         fig, ax = plt.subplots(figsize=(12, 12))
         ax.grid(False)
+        # Assign colors if not already present in AnnData object
+        if 'groups_to_color' not in sub_p_adata.uns:
+            printv(verbosity, "Warning. sub_p_adata.uns does not contain a "\
+                "'groups_to_color' field. Generating with random rainbow colors.")
+            sub_p_adata.uns['groups_to_color'] = assign_rainbow_colors_to_groups(\
+                sub_p_adata.obs['leiden'].values)
+
         # Make UMAP scatter plot
         ax.scatter(sub_p_adata.obs['umap-x'].values, 
                     sub_p_adata.obs['umap-y'].values,
@@ -372,5 +380,6 @@ def plot_leiden_clusters_over_umap(sub_p_adata, file_path=None, verbosity=0):
             plt.show()
         else:
             plt.savefig(file_path)
-    except:
+    except Exception as e:
+        printv(verbosity=verbosity, v2=traceback.format_exc())
         print("Warning! Failed to plot Leiden clusters.")
