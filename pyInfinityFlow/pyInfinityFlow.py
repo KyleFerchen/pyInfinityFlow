@@ -349,7 +349,7 @@ def main():
             v1="Plotting Leiden clusters over UMAP...")
         plot_leiden_clusters_over_umap(\
             sub_p_adata=sub_p_adata, 
-            output_dir=os.path.join(output_paths["clustering"], 
+            file_path=os.path.join(output_paths["clustering"], 
                 "Leiden_Clusters_over_UMAP.png"), 
             verbosity=VERBOSITY)
         
