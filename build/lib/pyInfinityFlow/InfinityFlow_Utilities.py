@@ -297,8 +297,8 @@ def pearson_corr_df_to_df(df1, df2):
 
 def marker_finder(input_df, groups):
     """
-    Function to find which features in input_df correspond best to which groups
-    annotating the observations in input_df. The function will perform a 
+    Function to find pearson correlation coefficient values and p-values for 
+    the given data and groups for groups to test. The function will perform a 
     Pearson correlation of the input_df feature values to an "idealized" 
     group specific expression vector, where each observation in a given group
     is set to a value of 1, and the observations in other groups are set to 0.
@@ -315,11 +315,12 @@ def marker_finder(input_df, groups):
 
     Returns
     -------
-    pandas.DataFrame
-        DataFrame of the Pearson correlation test results. Each feature is
-        assigned the cluster for which the test resulted in the highest Pearson
-        correlation coefficient. The columns of the DataFrame will be 
-        ["marker", "top_cluster", "pearson_r", "p_value"]
+    tuple (pandas.DataFrame, pandas.DataFrame)
+        The first item in the tuple is a pandas.DataFrame containing the pearson
+        correlation coefficient values for each marker to the idealized vector
+        for each cluster.
+        The second item is also a pandas.DataFrame, but contains the p-values 
+        for each comparison.
     """
     ideal_vectors = pd.get_dummies(groups)
     ideal_vectors.index = input_df.index.values
@@ -327,16 +328,7 @@ def marker_finder(input_df, groups):
     r_df = pearson_corr_df_to_df(input_df, ideal_vectors)
     t_df = r_df*np.sqrt(degrees_f) / np.sqrt(1-(r_df**2))
     p_df = t_df.applymap(lambda x: t.sf(abs(x), df=degrees_f)*2)
-    top_cluster = r_df.idxmax(axis=1)
-    top_r = r_df.max(axis=1)
-    markers_df = pd.DataFrame({"marker": top_cluster.index.values,
-        "top_cluster": top_cluster.values,
-        "pearson_r": top_r.values,
-        "p_value": [p_df.loc[i, j] for i, j in \
-            zip(top_cluster.index.values, top_cluster.values)]})
-    markers_df = markers_df.sort_values(by=["top_cluster", "pearson_r"], 
-        ascending=[True, False])
-    return(markers_df)
+    return((r_df, p_df))
 
 
 def read_fcs_into_anndata(fcs_file_path, obs_prefix="", batch_key=""):
@@ -1582,8 +1574,8 @@ def perform_background_correction(sub_p_adata, file_handler,
     return((background_corrected_data, background_corrected_var, tmp_timings))
 
 
-def find_markers_from_anndata(sub_p_adata, output_paths, groups_to_colors, 
-        cluster_key="leiden", verbosity=0):
+def find_markers_from_anndata(sub_p_adata, output_dir, groups_to_colors, 
+        top_n_markers=5, cluster_key="leiden", verbosity=0):
     """
     Attempts to associate each of the clusters present in the AnnData 
     object with the Backbone and InfinityMarkers in the dataset. It applies 
@@ -1597,14 +1589,16 @@ def find_markers_from_anndata(sub_p_adata, output_paths, groups_to_colors,
         values as well as the imputed InfinityMarker values. Clusters must be 
         defined in the sub_p_adata.obs DataFrame. (Required)
 
-    output_paths: dict
-        The output_paths dictionary created by the pyInfinityFlow.
-        InfinityFlow_Utilities.setup_output_directories function (Required)
+    output_dir: str
+        The directory to which save the MarkerFinder results (Required)
 
     groups_to_colors: dict
         Dictionary to specify what color should be used for each cluster in 
         sub_p_adata.obs[cluster_key]. (Eg. {'c1':'red', 'c2': 'blue', ...}) 
         (Required)
+
+    top_n_markers : int
+        The number of top markers to associate with each cluster
 
     cluster_key: str
         The key in sub_p_adata.obs to use for cluster assignments. By default, 
@@ -1649,13 +1643,40 @@ def find_markers_from_anndata(sub_p_adata, output_paths, groups_to_colors,
         cluster_order = pd.Series(list(range(centroids.shape[0])),
             index=centroids.index.values[cluster_order])
         # Find markers for each cluster
-        markers_df = marker_finder(input_df=anndata_to_df(sub_p_adata, 
+        r_df, p_df = marker_finder(input_df=anndata_to_df(sub_p_adata, 
                 use_raw_feature_names=False), groups=groups)
+        top_cluster = r_df.idxmax(axis=1)
+        top_r = r_df.max(axis=1)
+        # Provide each marker to its top scoring cluster
+        markers_df = pd.DataFrame({"marker": top_cluster.index.values,
+            "top_cluster": top_cluster.values,
+            "pearson_r": top_r.values,
+            "p_value": [p_df.loc[i, j] for i, j in \
+                zip(top_cluster.index.values, top_cluster.values)]})
+        markers_df = markers_df.sort_values(by=["top_cluster", "pearson_r"], 
+            ascending=[True, False])
+        # Associate top_n_markers to each cluster
+        top_n_df = []
+        for tmp_cluster in cluster_order.index.values:
+            top_markers = r_df[tmp_cluster].sort_values(\
+                ascending=False).head(top_n_markers).index.values
+            top_n_df.append(pd.DataFrame({\
+                "cluster": tmp_cluster,
+                "marker": top_markers,
+                "rank": list(range(1, top_n_markers+1)),
+                "pearson_r": r_df.loc[top_markers, tmp_cluster].values,
+                "p_value": p_df.loc[top_markers, tmp_cluster].values}))
+
+        top_n_df = pd.concat(top_n_df)
+        top_n_df.to_csv(os.path.join(output_dir, 
+                "top_{}_cluster_markers.csv".format(top_n_markers)), 
+            header=True, index=True, index_label="UID")
+        # Make top marker to top cluster df
         markers_df["sort_cluster"] = [cluster_order[item] for item in \
             markers_df["top_cluster"].values]
         markers_df = markers_df.sort_values(by=["sort_cluster", "pearson_r"], 
             ascending=[True, False]).drop("sort_cluster", axis=1)
-        markers_df.to_csv(os.path.join(output_paths["clustering"], 
+        markers_df.to_csv(os.path.join(output_dir, 
                 "cluster_markers.csv"), header=True, index=True, index_label="UID")
         printv(verbosity, prefix_debug=False, v1="Plotting markers...")
         # Identify cells closest to cluster centroids to prioritize which cells to plot
@@ -1691,7 +1712,7 @@ def find_markers_from_anndata(sub_p_adata, output_paths, groups_to_colors,
             ordered_markers_df=markers_df, 
             ordered_cells_df=cell_assignments, 
             groups_to_colors=pd.Series(groups_to_colors), 
-            path_to_save_figure=os.path.join(output_paths["clustering"],
+            path_to_save_figure=os.path.join(output_dir,
                 "cluster_markers.pdf"))
         return(markers_df, cell_assignments)
     except Exception as e:

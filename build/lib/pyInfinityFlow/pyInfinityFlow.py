@@ -349,7 +349,8 @@ def main():
             v1="Plotting Leiden clusters over UMAP...")
         plot_leiden_clusters_over_umap(\
             sub_p_adata=sub_p_adata, 
-            output_paths=output_paths, 
+            file_path=os.path.join(output_paths["clustering"], 
+                "Leiden_Clusters_over_UMAP.png"), 
             verbosity=VERBOSITY)
         
 
@@ -360,7 +361,7 @@ def main():
         t_find_markers_start = time.time()
         markers_df, cell_assignments = find_markers_from_anndata(\
             sub_p_adata=sub_p_adata, 
-            output_paths=output_paths, 
+            output_dir=output_paths["clustering"], 
             groups_to_colors=sub_p_adata.uns['groups_to_color'], 
             verbosity=VERBOSITY)
         sub_p_adata.uns['markers_df'] = markers_df

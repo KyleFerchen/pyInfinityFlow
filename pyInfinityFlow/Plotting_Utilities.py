@@ -1,4 +1,5 @@
 import os
+import traceback
 import pandas as pd
 import numpy as np
 from scipy.stats import zscore
@@ -302,7 +303,7 @@ def plot_markers_df(input_df, ordered_markers_df, ordered_cells_df,
 
 
 
-def plot_leiden_clusters_over_umap(sub_p_adata, output_paths, verbosity):
+def plot_leiden_clusters_over_umap(sub_p_adata, file_path=None, verbosity=0):
     """ Plots a 2D-UMAP colored by the values in the "leiden" field
 
     This function takes a pandas.DataFrame of values, a markers_df and 
@@ -328,9 +329,9 @@ def plot_leiden_clusters_over_umap(sub_p_adata, output_paths, verbosity):
             required to be in the sub_p_adata.obs pandas.DataFrame
             - sub_p_adata.uns['groups_to_color'] : (dict{str:str}) Dictionary of \
             cluster-names to assigned colors (hexadecimal value) (Required)
-    output_paths: dict
-        The output_paths dictionary created by the pyInfinityFlow.\
-        InfinityFlow_Utilities.setup_output_directories function (Required)
+    file_path: str
+        The path to save the umap image (png recommended) (Default=None, plot \
+            to screen instead of saving to file)
     verbosity: int (0|1|2|3) 
         Specifies to what verbosity level the function will output progress and \
         debugging statements. (Default=0)
@@ -345,6 +346,13 @@ def plot_leiden_clusters_over_umap(sub_p_adata, output_paths, verbosity):
         plt.close("all")
         fig, ax = plt.subplots(figsize=(12, 12))
         ax.grid(False)
+        # Assign colors if not already present in AnnData object
+        if 'groups_to_color' not in sub_p_adata.uns:
+            printv(verbosity, "Warning. sub_p_adata.uns does not contain a "\
+                "'groups_to_color' field. Generating with random rainbow colors.")
+            sub_p_adata.uns['groups_to_color'] = assign_rainbow_colors_to_groups(\
+                sub_p_adata.obs['leiden'].values)
+
         # Make UMAP scatter plot
         ax.scatter(sub_p_adata.obs['umap-x'].values, 
                     sub_p_adata.obs['umap-y'].values,
@@ -368,8 +376,10 @@ def plot_leiden_clusters_over_umap(sub_p_adata, output_paths, verbosity):
                 radius=0.5,
                 facecolor="#ffffff"))
             ax.text(c_pos["umap-x"],c_pos["umap-y"], c_name, ha="center", va="center")
-        plt.savefig(os.path.join(output_paths["clustering"], 
-            "Leiden_Clusters_over_UMAP.png"))
+        if file_path is None:
+            plt.show()
+        else:
+            plt.savefig(file_path)
     except Exception as e:
-        printv(verbosity, v3=str(e))
+        printv(verbosity=verbosity, v2=traceback.format_exc())
         print("Warning! Failed to plot Leiden clusters.")
