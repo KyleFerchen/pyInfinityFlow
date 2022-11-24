@@ -2,10 +2,12 @@ from setuptools import setup
 
 setup(name='pyInfinityFlow',
     python_requires=">=3.8",
-    version='0.1',
+    version='0.1.0.4',
     description='Impute Flow Cytometry values between overlapping panels with '\
     'XGBoost regression.',
-    url='http://github.com/',
+    long_description="""""",
+    long_description_content_type='text/markdown',
+    url='https://github.com/KyleFerchen/pyInfinityFlow',
     author='Kyle Ferchen',
     author_email='ferchenkyle@gmail.com',
     license='MIT',
