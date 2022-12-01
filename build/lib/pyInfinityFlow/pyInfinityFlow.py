@@ -99,7 +99,7 @@ def main():
             default=None)
     parser.add_argument('--n_events_combine', dest='n_events_combine', type=int,
         help='Integer to specify the number events from each file to pool into the final Infinity Flow object.',
-        default=None)
+        default=10000)
     parser.add_argument('--n_final', dest='n_final', type=int,
         help='Integer to specify the final number of events to include for the final \n'\
             'Infinity Flow object. If n_final is 0, then all available events from \n'\

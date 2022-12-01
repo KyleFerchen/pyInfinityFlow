@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyInfinityFlow"
-version = "0.1"
+version = "0.1.0.4"
 authors = [
   { name="Kyle Ferchen", email="ferchenkyle@gmail.com" },
 ]
@@ -18,8 +18,8 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/"
-"Bug Tracker" = "https://github.com/"
+"Homepage" = "https://github.com/KyleFerchen/pyInfinityFlow"
+"Bug Tracker" = "https://github.com/KyleFerchen/pyInfinityFlow/issues"
 
 [project.optional-dependencies]
 doc = [

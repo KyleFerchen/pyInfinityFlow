@@ -18,9 +18,9 @@ License-File: LICENSE
 
 # pyInfinityFlow
 
-**pyInfinityFlow** is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression. It is an adaptation of the [original implementation in R](https://github.com/ebecht/infinityFlow)[<sup>1</sup>](https://www.science.org/doi/full/10.1126/sciadv.abg0505) with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline. 
+**pyInfinityFlow** is a Python package that enables imputation of hundreds of features from Flow Cytometry using XGBoost regression[<sup>1</sup>](https://dl.acm.org/doi/abs/10.1145/2939672.2939785). It is an adaptation of the [original implementation in R](https://github.com/ebecht/infinityFlow)[<sup>2</sup>](https://www.science.org/doi/full/10.1126/sciadv.abg0505) with the goal of optimizing the workflow for large datasets by increasing the speed and memory efficiency of the analysis pipeline. 
 
-The package includes tools to read and write FCS files, following the FCS3.1 file standard, into AnnData objects, allowing for easy downstream analysis of single-cell data with [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html)[<sup>2</sup>](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com) and [UMAP](https://umap-learn.readthedocs.io/en/latest/index.html)[<sup>3</sup>](https://arxiv.org/abs/1802.03426).
+The package includes tools to read and write FCS files, following the FCS3.1 file standard, into AnnData objects, allowing for easy downstream analysis of single-cell data with [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html)[<sup>3</sup>](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com) and [UMAP](https://umap-learn.readthedocs.io/en/latest/index.html)[<sup>4</sup>](https://arxiv.org/abs/1802.03426).
 
 Read more about the pyInfinityFlow package on its [Read the Docs page](https://pyinfinityflow.readthedocs.io/en/latest/)!
 
@@ -53,8 +53,10 @@ pyInfinityFlow --data_dir /home/kyle/Documents/GitHub/pyInfinityFlow/example_dat
 ```
 
 ## Selected References
-[<font size="2"><sup>1</sup> Becht, E., Tolstrup, D., Dutertre, C. A., Morawski, P. A., Campbell, D. J., Ginhoux, F., ... & Headley, M. B. (2021). High-throughput single-cell quantification of hundreds of proteins using conventional flow cytometry and machine learning. Science advances, 7(39), eabg0505. </font>](https://www.science.org/doi/full/10.1126/sciadv.abg0505)
+[<font size="2"><sup>1</sup> Chen, T., Guestrin, C. XGBoost: A scalable tree boosting system, in Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (Association for Computing Machinery, 2016), pp. 785–794.</font>](https://dl.acm.org/doi/abs/10.1145/2939672.2939785)
 
-[<font size="2"><sup>2</sup> Wolf, F. A., Angerer, P., & Theis, F. J. (2018). SCANPY: large-scale single-cell gene expression data analysis. Genome biology, 19(1), 1-5. </font>](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com)
+[<font size="2"><sup>2</sup> Becht, E., Tolstrup, D., Dutertre, C. A., Morawski, P. A., Campbell, D. J., Ginhoux, F., ... & Headley, M. B. (2021). High-throughput single-cell quantification of hundreds of proteins using conventional flow cytometry and machine learning. Science advances, 7(39), eabg0505. </font>](https://www.science.org/doi/full/10.1126/sciadv.abg0505)
 
-[<font size="2"><sup>3</sup> McInnes, L., Healy, J., & Melville, J. (2018). Umap: Uniform manifold approximation and projection for dimension reduction. arXiv preprint arXiv:1802.03426. </font>](https://arxiv.org/abs/1802.03426)
+[<font size="2"><sup>3</sup> Wolf, F. A., Angerer, P., & Theis, F. J. (2018). SCANPY: large-scale single-cell gene expression data analysis. Genome biology, 19(1), 1-5. </font>](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-017-1382-0?ref=https://githubhelp.com)
+
+[<font size="2"><sup>4</sup> McInnes, L., Healy, J., & Melville, J. (2018). Umap: Uniform manifold approximation and projection for dimension reduction. arXiv preprint arXiv:1802.03426. </font>](https://arxiv.org/abs/1802.03426)
