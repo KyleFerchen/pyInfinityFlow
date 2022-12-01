@@ -21,8 +21,8 @@ from pyInfinityFlow.Debugging_Utilities import printv
 from pyInfinityFlow.Plotting_Utilities import plot_feature_over_x_y_coordinates_and_save_fig
 from pyInfinityFlow.Plotting_Utilities import plot_markers_df
 
-FREQUENT_LINEAR_CHANNELS = np.array(['FSC-W', 'FSC-H', 'FSC-A', 'SSC-B-W', 'SSC-B-H', 'SSC-B-A'
-                                     'SSC-W', 'SSC-H', 'SSC-A', 'umap-x', 'umap-y'])
+FREQUENT_LINEAR_CHANNELS = np.array(['FSC-W', 'FSC-H', 'FSC-A', 'SSC-B-W', 'SSC-B-H', 'SSC-B-A',
+                                     'SSC-W', 'SSC-H', 'SSC-A', 'umap-x', 'umap-y', 'Time'])
 
 
 
