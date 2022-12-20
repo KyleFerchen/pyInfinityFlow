@@ -271,6 +271,7 @@ def main():
                 cores_to_use = cores_to_use, 
                 verbosity = VERBOSITY)
     else:
+        background_corrected_data = None
         timings_4 = {}
 
     # Use only the features from the backbone and prediction channels for
