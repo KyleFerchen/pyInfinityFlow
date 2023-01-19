@@ -16,3 +16,8 @@ python:
       path: .
       extra_requirements: 
         - doc
+
+# Build PDF & ePub
+formats:
+  - epub
+  - pdf
