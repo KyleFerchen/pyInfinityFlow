@@ -100,6 +100,11 @@ def main():
     parser.add_argument('--n_events_combine', dest='n_events_combine', type=int,
         help='Integer to specify the number events from each file to pool into the final Infinity Flow object.',
         default=10000)
+    parser.add_argument('--require_n_events_combine', dest='require_n_events_combine', type=str,
+        help='Boolean to specify behavior if n_events_combine value is insufficient. \n'\
+            'If True, the program will stop if an FCS file does not have enough events. \n'\
+            'If False, n_events_combine will take the number of validation events.',
+        default="True")
     parser.add_argument('--n_final', dest='n_final', type=int,
         help='Integer to specify the final number of events to include for the final \n'\
             'Infinity Flow object. If n_final is 0, then all available events from \n'\
@@ -165,6 +170,7 @@ def main():
         ratio_for_validation = args.ratio_for_validation
         separate_backbone_reference = parse_none_string(args.separate_backbone_reference)
         n_events_combine = parse_none_string(args.n_events_combine)
+        require_n_events_combine = parse_boolean_string(args.require_n_events_combine)
         n_final = args.n_final
         add_umap = parse_boolean_string(args.add_umap)
         find_clusters = parse_boolean_string(args.find_clusters)
@@ -215,6 +221,7 @@ def main():
         n_events_train=n_events_train, 
         n_events_validate=n_events_validate, 
         n_events_combine=n_events_combine, 
+        require_n_events_combine=require_n_events_combine,
         ratio_for_validation=ratio_for_validation,
         separate_backbone_reference=separate_backbone_reference,
         random_state=RANDOM_STATE, 
