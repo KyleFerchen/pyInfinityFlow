@@ -1,3 +1,5 @@
+import sys
+
 """
 Print a list to the console, one element per line with no quotations.
 """
@@ -17,11 +19,11 @@ def printv(verbosity, prefix_debug=True, v1 = "", v2 = "", v3 = ""):
     v2_end = "" if v2 == "" else "\n"
     v3_end = "" if v3 == "" else "\n"
     if verbosity == 3:
-        if len(v1) > 0: print(v1, end=v1_end)
-        if len(v2) > 0: print(v2, end=v2_end)
-        if len(v3) > 0: print(debug_prefix + v3, end=v3_end)
+        if len(v1) > 0: print(v1, end=v1_end, file=sys.stderr)
+        if len(v2) > 0: print(v2, end=v2_end, file=sys.stderr)
+        if len(v3) > 0: print(debug_prefix + v3, end=v3_end, file=sys.stderr)
     elif verbosity == 2:
-        if len(v1) > 0: print(v1, end=v1_end)
-        if len(v2) > 0: print(v2, end=v2_end)
+        if len(v1) > 0: print(v1, end=v1_end, file=sys.stderr)
+        if len(v2) > 0: print(v2, end=v2_end, file=sys.stderr)
     elif verbosity == 1:
-        if len(v1) > 0: print(v1, end=v1_end)
+        if len(v1) > 0: print(v1, end=v1_end, file=sys.stderr)

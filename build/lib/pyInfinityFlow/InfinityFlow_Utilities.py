@@ -21,8 +21,8 @@ from pyInfinityFlow.Debugging_Utilities import printv
 from pyInfinityFlow.Plotting_Utilities import plot_feature_over_x_y_coordinates_and_save_fig
 from pyInfinityFlow.Plotting_Utilities import plot_markers_df
 
-FREQUENT_LINEAR_CHANNELS = np.array(['FSC-W', 'FSC-H', 'FSC-A', 'SSC-B-W', 'SSC-B-H', 'SSC-B-A'
-                                     'SSC-W', 'SSC-H', 'SSC-A', 'umap-x', 'umap-y'])
+FREQUENT_LINEAR_CHANNELS = np.array(['FSC-W', 'FSC-H', 'FSC-A', 'SSC-B-W', 'SSC-B-H', 'SSC-B-A',
+                                     'SSC-W', 'SSC-H', 'SSC-A', 'umap-x', 'umap-y', 'Time'])
 
 
 
@@ -747,7 +747,8 @@ def make_pca_elbo_plot(sub_p_adata, output_paths):
 
 def check_infinity_flow_annotation_dataframes(backbone_annotation, infinity_marker_annotation,
         n_events_train=0, n_events_validate=0, n_events_combine=0, ratio_for_validation=0.2,
-        separate_backbone_reference=None, random_state=None, input_fcs_dir=None, verbosity=0):
+        separate_backbone_reference=None, random_state=None, input_fcs_dir=None, 
+        require_n_events_combine=False, verbosity=0):
     """
     This function prepares the FileHandler object to control how the pipeline
     will handle each .fcs file for the indicated regression model. Both the 
@@ -800,6 +801,12 @@ def check_infinity_flow_annotation_dataframes(backbone_annotation, infinity_mark
         If true, the program will be forced to use separate events for training 
         and validation, n_events_combine will be taken from validation but 
         cannot be taken from training.
+
+    require_n_events_combine: bool
+        If True, require that the number of events specified by n_events_combine
+        is present in each of the input FCS files. If False, then 
+        n_events_combine will take the maximum number of events available from
+        the file, not already used for training.
 
     verbosity: int (0|1|2|3) 
         Specifies to what verbosity level the function will output progress and 
@@ -937,11 +944,14 @@ def check_infinity_flow_annotation_dataframes(backbone_annotation, infinity_mark
             elif n_events_combine <= tmp_n_events_validate:
                 tmp_n_events_combine = n_events_combine
             else:
-                raise ValueError(f"Invalid entry for n_events_combine: "\
-                    f"{n_events_combine}\n\tThere are {tmp_fcs_n_cells} events in "\
-                    f"the file, and {tmp_n_events_validate} events are being used for "\
-                    "validation. \n\tn_events_combine must be less than or equal "\
-                    "to n_events_validate.")
+                if not require_n_events_combine:
+                    tmp_n_events_combine = tmp_n_events_validate
+                else:
+                    raise ValueError(f"Invalid entry for n_events_combine: "\
+                        f"{n_events_combine}\n\tThere are {tmp_fcs_n_cells} events in "\
+                        f"the file, and {tmp_n_events_validate} events are being used for "\
+                        "validation. \n\tn_events_combine must be less than or equal "\
+                        "to n_events_validate.")
 
             # Set up indices from fcs file events
             printv(verbosity, v3 = f"Input file {tmp_file} was found to have "\
@@ -1119,6 +1129,12 @@ def single_chunk_training(file_handler, cores_to_use=1, random_state=None,
                                             obs_prefix=f"F{i}", 
                                             batch_key=marker)
         tmp_anndata = tmp_anndata[tmp_anndata.obs.index.values[tmp_indices],:]
+        # Only keep feature names if they are part of the backbone
+        tmp_backbone = file_handler.handles[marker]["backbone_channels"].values
+        tmp_backbone_names = tmp_anndata.var.loc[tmp_backbone, "name"].values
+        tmp_anndata.var["name"] = ""
+        tmp_anndata.var.loc[tmp_backbone, "name"] = tmp_backbone_names
+        # Pool or initiate pool
         if i == 0:
             sub_t_adata = tmp_anndata
         else:
