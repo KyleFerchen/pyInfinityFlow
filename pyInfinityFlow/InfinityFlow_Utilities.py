@@ -1129,6 +1129,12 @@ def single_chunk_training(file_handler, cores_to_use=1, random_state=None,
                                             obs_prefix=f"F{i}", 
                                             batch_key=marker)
         tmp_anndata = tmp_anndata[tmp_anndata.obs.index.values[tmp_indices],:]
+        # Only keep feature names if they are part of the backbone
+        tmp_backbone = file_handler.handles[marker]["backbone_channels"].values
+        tmp_backbone_names = tmp_anndata.var.loc[tmp_backbone, "name"].values
+        tmp_anndata.var["name"] = ""
+        tmp_anndata.var.loc[tmp_backbone, "name"] = tmp_backbone_names
+        # Pool or initiate pool
         if i == 0:
             sub_t_adata = tmp_anndata
         else:
