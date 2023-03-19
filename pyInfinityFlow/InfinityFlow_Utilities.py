@@ -1120,6 +1120,7 @@ def single_chunk_training(file_handler, cores_to_use=1, random_state=None,
     printv(verbosity, v1 = "Reading in data from .fcs files for model training...")
     ordered_markers = file_handler.list_infinity_markers
     ordered_files = [file_handler.handles[marker]["file_name"] for marker in ordered_markers]
+    sub_t_adata = []
     for i, marker in enumerate(ordered_markers):
         printv(verbosity, v3 = f"\t\tReading in the data for InfinityMarker {marker}...")
         tmp_path = os.path.join(file_handler.handles[marker]["directory"], 
@@ -1132,13 +1133,17 @@ def single_chunk_training(file_handler, cores_to_use=1, random_state=None,
         # Only keep feature names if they are part of the backbone
         tmp_backbone = file_handler.handles[marker]["backbone_channels"]
         tmp_backbone_names = tmp_anndata.var.loc[tmp_backbone, "name"].values
-        tmp_anndata.var["name"] = ""
+        tmp_anndata.var.loc[:,"name"] = ""
         tmp_anndata.var.loc[tmp_backbone, "name"] = tmp_backbone_names
-        # Pool or initiate pool
-        if i == 0:
-            sub_t_adata = tmp_anndata
-        else:
-            sub_t_adata = anndata.concat([sub_t_adata, tmp_anndata], merge='same')
+        # Add to list to concatenate later
+        sub_t_adata.append(tmp_anndata)
+        # # Pool or initiate pool
+        # if i == 0:
+        #     sub_t_adata = tmp_anndata
+        # else:
+        #     sub_t_adata = anndata.concat([sub_t_adata, tmp_anndata], merge='same')
+
+    sub_t_adata = anndata.concat(sub_t_adata, merge='same')
 
     sub_t_adata.uns["obs_file_origin"] = pd.DataFrame({"file": ordered_files,
                                                     "InfinityMarker": ordered_markers}, 
@@ -1266,6 +1271,7 @@ def single_chunk_testing(file_handler, regression_models, use_logicle_scaling=Tr
     ## Model testing
     t_start_file_read_2 = time.time()
     printv(verbosity, v1 = "Reading in data from .fcs files for model validation...")
+    sub_v_adata = []
     for i, marker in enumerate(ordered_markers):
         printv(verbosity, v3 = f"\t\tReading in the data for InfinityMarker {marker}...")
         tmp_path = os.path.join(file_handler.handles[marker]["directory"], 
@@ -1275,11 +1281,14 @@ def single_chunk_testing(file_handler, regression_models, use_logicle_scaling=Tr
                                             obs_prefix=f"F{i}", 
                                             batch_key=marker)
         tmp_anndata = tmp_anndata[tmp_anndata.obs.index.values[tmp_indices],:]
-        if i == 0:
-            sub_v_adata = tmp_anndata
-        else:
-            sub_v_adata = anndata.concat([sub_v_adata, tmp_anndata], merge='same')
-            
+        sub_v_adata.append(tmp_anndata)
+        # if i == 0:
+        #     sub_v_adata = tmp_anndata
+        # else:
+        #     sub_v_adata = anndata.concat([sub_v_adata, tmp_anndata], merge='same')
+
+    sub_v_adata = anndata.concat(sub_v_adata, merge='same')
+     
     t_end_file_read_2 = time.time()
     sub_v_adata.uns["obs_file_origin"] = pd.DataFrame({"file": ordered_files,
                                                     "InfinityMarker": ordered_markers}, 
@@ -1404,8 +1413,8 @@ def make_flow_regression_predictions(file_handler, regression_models,
                                             batch_key="Ref")
     else:
         ## Read in the events for pooling
-        
         printv(verbosity, v1 = "Reading in data from .fcs files for pooling into final InfinityFlow object...")
+        sub_p_adata = []
         for i, marker in enumerate(ordered_markers):
             printv(verbosity, v3 = f"\t\tReading in the data for InfinityMarker {marker}...")
             tmp_path = os.path.join(file_handler.handles[marker]["directory"], 
@@ -1415,11 +1424,19 @@ def make_flow_regression_predictions(file_handler, regression_models,
                                                 obs_prefix=f"F{i}", 
                                                 batch_key=marker)
             tmp_anndata = tmp_anndata[tmp_anndata.obs.index.values[tmp_indices],:]
-            if i == 0:
-                sub_p_adata = tmp_anndata
-            else:
-                sub_p_adata = anndata.concat([sub_p_adata, tmp_anndata], merge='same')
+            # Only keep feature names if they are part of the backbone
+            tmp_backbone = file_handler.handles[marker]["backbone_channels"]
+            tmp_backbone_names = tmp_anndata.var.loc[tmp_backbone, "name"].values
+            tmp_anndata.var.loc[:,"name"] = ""
+            tmp_anndata.var.loc[tmp_backbone, "name"] = tmp_backbone_names
+            sub_p_adata.append(tmp_anndata)
+            # if i == 0:
+            #     sub_p_adata = tmp_anndata
+            # else:
+            #     sub_p_adata = anndata.concat([sub_p_adata, tmp_anndata], merge='same')
             
+        sub_p_adata = anndata.concat(sub_p_adata, merge='same')
+        
         # Merge fcs event anndata objects into one validation anndata object
         sub_p_adata.uns["obs_file_origin"] = pd.DataFrame({"file": ordered_files,
                                                         "InfinityMarker": ordered_markers}, 
