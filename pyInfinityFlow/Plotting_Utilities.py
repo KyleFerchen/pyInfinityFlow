@@ -283,7 +283,8 @@ def plot_markers_df(input_df, ordered_markers_df, ordered_cells_df,
             cbar=False,
             ax=ax1)
         ax1.set_xticks(label_to_position.values)
-        ax1.set_xticklabels(label_to_position.index.values)
+        ax1.set_xticklabels(\
+            label_to_position.index.values, rotation=45, ha="left")
         ax1.xaxis.tick_top()
         heat2 = sns.heatmap(z_df, 
             vmin=-3, 

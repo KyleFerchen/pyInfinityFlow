@@ -1742,7 +1742,7 @@ def find_markers_from_anndata(sub_p_adata, output_dir, groups_to_colors,
             cell_assignments["cell"].isin(sampled_indices)]
         # Make the marker plot
         plot_markers_df(input_df=anndata_to_df(sub_p_adata, use_raw_feature_names=False), 
-            ordered_markers_df=markers_df, 
+            ordered_markers_df=top_n_df, 
             ordered_cells_df=cell_assignments, 
             groups_to_colors=pd.Series(groups_to_colors), 
             path_to_save_figure=os.path.join(output_dir,
