@@ -13,8 +13,16 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
-Provides-Extra: doc
 License-File: LICENSE
+Requires-Dist: umap-learn>=0.5
+Requires-Dist: xgboost>=1.6
+Requires-Dist: scanpy>=1.9
+Requires-Dist: pyarrow>=9.0
+Requires-Dist: leidenalg
+Provides-Extra: doc
+Requires-Dist: sphinx~=4.5.0; extra == "doc"
+Requires-Dist: myst-parser; extra == "doc"
+Requires-Dist: nbsphinx; extra == "doc"
 
 # pyInfinityFlow
 

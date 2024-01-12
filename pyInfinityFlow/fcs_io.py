@@ -137,7 +137,7 @@ class FCSFileObject:
                     for i in range(int(len(tmp_text_array) / 2)):
                         # Make the keyword uppercase (keywords are case insensitive)
                         tmp_keyword = tmp_text_array[(2*i)].replace(self.track_delimiter, self.delimiter).upper()
-                        tmp_value = tmp_text_array[((2*i) + 1)].replace(self.track_delimiter, self.delimiter).replace(" ", "")
+                        tmp_value = tmp_text_array[((2*i) + 1)].replace(self.track_delimiter, self.delimiter) #.replace(" ", "")
                         self.text_segment_values[tmp_keyword] = tmp_value
                 else:
                     raise ValueError("Error! Unequal keyword-value pairs in TEXT segment for {}...".format(self.file_path))
