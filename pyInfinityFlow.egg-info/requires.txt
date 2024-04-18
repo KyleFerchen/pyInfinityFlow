@@ -3,8 +3,3 @@ xgboost>=1.6
 scanpy>=1.9
 pyarrow>=9.0
 leidenalg
-
-[doc]
-sphinx~=4.5.0
-myst-parser
-nbsphinx

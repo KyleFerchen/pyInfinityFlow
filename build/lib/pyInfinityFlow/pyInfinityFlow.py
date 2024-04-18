@@ -99,7 +99,7 @@ def main():
             default=None)
     parser.add_argument('--n_events_combine', dest='n_events_combine', type=int,
         help='Integer to specify the number events from each file to pool into the final Infinity Flow object.',
-        default=10000)
+        default=None)
     parser.add_argument('--require_n_events_combine', dest='require_n_events_combine', type=str,
         help='Boolean to specify behavior if n_events_combine value is insufficient. \n'\
             'If True, the program will stop if an FCS file does not have enough events. \n'\

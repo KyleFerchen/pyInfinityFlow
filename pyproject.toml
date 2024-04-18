@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyInfinityFlow"
-version = "0.1.0.5"
+version = "0.1.0.7"
 authors = [
   { name="Kyle Ferchen", email="ferchenkyle@gmail.com" },
 ]
