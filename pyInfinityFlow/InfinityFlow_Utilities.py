@@ -1455,9 +1455,18 @@ def make_flow_regression_predictions(file_handler, regression_models,
             tmp_anno = regression_models.var_annotations
             tmp_logicle_features = ["USE_LOGICLE", "LOGICLE_T", "LOGICLE_W", "LOGICLE_M", "LOGICLE_A"]
             sub_p_adata.var.loc[ordered_backbone_channels, tmp_logicle_features] = \
-                tmp_anno.loc[ordered_backbone_channels, tmp_logicle_features]
+                tmp_anno.loc[regression_models.ordered_training_channels, tmp_logicle_features]
         except Exception as e:
             printv(verbosity, v3 = str(e))
+            printv(verbosity, v3 = "Here are reference index values: \n\t" + \
+                "\n\t".join(sub_p_adata.var.index.values) + "\n\n" + \
+                "Here are the tmp_anno index values: \n\t" + \
+                "\n\t".join(tmp_anno.index.values) + "\n\n" + \
+                "Here are the ordered_backbone_channels:\n\t" + \
+                "\n\t".join(ordered_backbone_channels) + "\n\n" + \
+                "Here are the regression_models.ordered_training_channels: \n\t" + \
+                "\n\t".join(regression_models.ordered_training_channels) + \
+                "\n\n")
             raise ValueError("Could not apply var annotation from training dataset to "\
                 "pooling dataset.\n\t(see above Exception for details...)\n\n")
 
