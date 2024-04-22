@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyInfinityFlow
-Version: 0.1.0.7
+Version: 0.1.0.8
 Summary: Impute Flow Cytometry values between overlapping panels with XGBoost regression.
 Home-page: https://github.com/KyleFerchen/pyInfinityFlow
 Author: Kyle Ferchen
