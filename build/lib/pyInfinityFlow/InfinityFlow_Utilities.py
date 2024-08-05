@@ -358,9 +358,11 @@ def read_fcs_into_anndata(fcs_file_path, obs_prefix="", batch_key=""):
     """
     try:
         tmp_fcs = FCSFileObject(fcs_file_path=fcs_file_path)
-        tmp_var_df = pd.DataFrame({"name": tmp_fcs.named_par,
-            "USE_LOGICLE": [False if item in FREQUENT_LINEAR_CHANNELS else True \
-                for item in tmp_fcs.named_par_channel],
+        tmp_var_df = pd.DataFrame({
+            "name": tmp_fcs.named_par,
+            "USE_LOGICLE": True,
+            # "USE_LOGICLE": [False if item in FREQUENT_LINEAR_CHANNELS else True \
+            #     for item in tmp_fcs.named_par_channel],
             "LOGICLE_T": 3000000,
             "LOGICLE_W": 0,
             "LOGICLE_M": 3,

@@ -33,7 +33,8 @@ from pyInfinityFlow.Plotting_Utilities import plot_leiden_clusters_over_umap
 
 COMMON_LINEAR_FEATURES = ["FSC-A", "FSC-H", "FSC-W", "SSC-A", "SSC-H", "SSC-W", "Time"]
 # UMAP_PARAMS = {"n_neighbors":15, "min_dist":0.75, "metric":"correlation"}
-UMAP_PARAMS = {}
+# UMAP_PARAMS = {}
+SCANPY_UMAP_PARAMS = {"min_dist":0.2, "maxiter":1000}
 XGB_PARAMS = {"n_estimators": 100, "learning_rate": 0.3}
 
 def parse_boolean_string(input_string):
@@ -329,7 +330,7 @@ def main():
     if add_umap:
         printv(VERBOSITY, v1="Adding umap to AnnData object...")
         t_add_umap_start = time.time()
-        sc.tl.umap(sub_p_adata, random_state=RANDOM_STATE)
+        sc.tl.umap(sub_p_adata, random_state=RANDOM_STATE, **SCANPY_UMAP_PARAMS)
         sub_p_adata.obs["umap-x"] = sub_p_adata.obsm['X_umap'][:,0]
         sub_p_adata.obs["umap-y"] = sub_p_adata.obsm['X_umap'][:,1]
         t_add_umap_end = time.time()

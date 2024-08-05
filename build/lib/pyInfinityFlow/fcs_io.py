@@ -225,6 +225,13 @@ class FCSFileObject:
                 except:
                     raise ValueError("Error! Unable to process DATA for {}...".format(self.file_path))
 
+    def __repr__(self):
+        tmp_repr_str = "FCSFileObject"
+        tmp_repr_str += "\nFCS file path: {}".format(self.file_path)
+        tmp_repr_str += "\n{} Parameters Collected".format(self.par_count)
+        tmp_repr_str += "\n\n"
+        return(tmp_repr_str)
+
     def _read_data(self):
         ### Read in the Data Matrix after the class instance is instantiated ###
         try:
