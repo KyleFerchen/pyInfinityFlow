@@ -3,8 +3,15 @@ requires = ["setuptools == 68.2.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
+dependencies = [
+  "umap-learn>=0.5",
+  "xgboost>=1.6",
+  "scanpy>=1.9",
+  "pyarrow>=9.0",
+  "leidenalg"
+]
 name = "pyInfinityFlow"
-version = "0.1.0.9"
+version = "1.0.0"
 authors = [
   { name="Kyle Ferchen", email="ferchenkyle@gmail.com" },
 ]
@@ -16,6 +23,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+license = { file = "LICENSE" }
+
+[project.scripts]
+pyInfinityFlow = "pyInfinityFlow.pyInfinityFlow:main"
+pyInfinityFlow-list_channels = "pyInfinityFlow.pyInfinityFlow_list_channels:main"
 
 [project.urls]
 "Homepage" = "https://github.com/KyleFerchen/pyInfinityFlow"

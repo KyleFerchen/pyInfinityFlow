@@ -8,13 +8,16 @@ Read more about the pyInfinityFlow package on its [Read the Docs page](https://p
 
 
 ## Graphical Summary
-![graphical summary of pyinfinityflow workflow](images/graphical_summary.png "Graphical Summary")
+<img src="https://github.com/KyleFerchen/pyInfinityFlow/blob/main/images/graphical_summary.png?raw=true"
+    style="width: 1600px"
+    alt="Graphical Summary" 
+    onerror="this.src='./images/graphical_summary.png';" />
 
 ## Recommended Installation
 It is recommended to set up a virtual environment to install the package.
 
 Creating a new conda environment and installing pyInfinityFlow:
-```console
+```BASH
 conda create -n pyInfinityFlow python=3.8
 conda activate pyInfinityFlow
 
@@ -27,7 +30,7 @@ Then pyInfinityFlow will be installed in a conda environment named 'pyInfinityFl
 ## Quickstart
 To run the pyInfinityFlow pipeline, we can use this command:
 
-```console
+```BASH
 pyInfinityFlow --data_dir /home/kyle/Documents/GitHub/pyInfinityFlow/example_data/mouse_lung_dataset_subset/ \
     --out_dir /media/kyle_ssd1/example_outputs/ \
     --backbone_annotation /home/kyle/Documents/GitHub/pyInfinityFlow/example_data/mouse_lung_dataset_subset_backbone_anno.csv \
